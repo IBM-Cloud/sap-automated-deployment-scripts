@@ -1,0 +1,11 @@
+---
+#611361 - Hostnames of SAP ABAP Platform servers
+- name: Get short hostname
+  command: hostname -s
+  register: sap_short_hostname
+
+- name: Check if hostname has 13 or less characters as per SAP requirement
+  fail:
+    msg: "Hostname {{ sap_short_hostname.stdout }} has more than 13 characters"
+  when:  sap_short_hostname.stdout|length > 13
+...
