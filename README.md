@@ -1,4 +1,4 @@
-#IBM SAP Cloud Solution Automated Deployment scripts: Virtual Private Cloud
+# IBM SAP Cloud Solution Automated Deployment scripts: Virtual Private Cloud
 
 The scripts in this repo are used to deploy different SAP scenarious like:
 
@@ -8,10 +8,12 @@ https://github.com/IBM-Cloud/sap-automated-deployment-scripts/tree/dev/sapsingle
 
 External references, how to..
 
-IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:
+# IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:
 
 - prepare your deployment server with terraform&ansible
+
 https://github.com/IBM-Cloud/terraform-provider-ibm
 
 - creating a bastion server in your VPC
+
 https://github.com/IBM-Cloud/vpc-tutorials/tree/master/vpc-secure-management-bastion-server
