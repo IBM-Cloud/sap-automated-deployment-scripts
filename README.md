@@ -11,9 +11,7 @@ External references, how to..
 # IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:
 
 - prepare your deployment server with terraform&ansible
-
 https://github.com/IBM-Cloud/terraform-provider-ibm
 
 - creating a bastion server in your VPC
-
 https://github.com/IBM-Cloud/vpc-tutorials/tree/master/vpc-secure-management-bastion-server
