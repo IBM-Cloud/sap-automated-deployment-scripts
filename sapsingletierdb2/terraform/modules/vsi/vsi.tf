@@ -14,7 +14,6 @@ data "ibm_is_image" "image" {
   name		= var.IMAGE
 }
 
-
 resource "ibm_is_instance" "vsi" {
   vpc		= data.ibm_is_vpc.vpc.id
   zone		= var.ZONE
@@ -27,13 +26,13 @@ resource "ibm_is_instance" "vsi" {
     subnet          = data.ibm_is_subnet.subnet.id
     security_groups = [ data.ibm_is_security_group.securitygroup.id ]
   }
-    volumes = var.VOLUMES_LIST
+  volumes = var.VOLUMES_LIST
 }
 
 resource "ibm_is_floating_ip" "fip" {
   name		= "${var.HOSTNAME}-fip"
   target	= ibm_is_instance.vsi.primary_network_interface[0].id
   provisioner "local-exec" {
-    command = "ansible-playbook -i ${ibm_is_instance.vsi.primary_network_interface[0].primary_ipv4_address}, /home/ansible/playback/ansible/sapnwdb2.yml -e 'sap_sid=pb2'"
+    command = "ansible-playbook -i ${ibm_is_instance.vsi.primary_network_interface[0].primary_ipv4_address}, ../ansible/sapnwdb2.yml -e 'sap_sid=${var.SAP_SID}'"
   }
 }

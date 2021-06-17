@@ -43,3 +43,7 @@ variable "VOLUMES_LIST" {
     description = "List of volumes"
 }
 
+variable "SAP_SID" {
+	type		= string
+	description = "SAP SID"
+}

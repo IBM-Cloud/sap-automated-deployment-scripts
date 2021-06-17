@@ -70,3 +70,7 @@ variable "VOL5" {
 	default		= "10"
 }
 
+variable "SAP_SID" {
+	type		= string
+	description = "SAP SID"
+}
