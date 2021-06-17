@@ -7,6 +7,7 @@ The scripts in this repo are used to deploy different SAP scenarious like:
 https://github.com/IBM-Cloud/sap-automated-deployment-scripts/tree/dev/sapsingletierdb2
 
 
+
 External references, how to..
 
 **IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:**
