@@ -9,7 +9,7 @@ https://github.com/IBM-Cloud/sap-automated-deployment-scripts/tree/dev/sapsingle
 
 
 
-**IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:**
+**References and IBM Cloud solution tutorials, preparation for SAP deployments in a Virtual Private Cloud:**
 
 - prepare your deployment server with terraform&ansible
 
