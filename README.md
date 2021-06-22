@@ -9,12 +9,12 @@ The main repo contains different directories with examples of using various SAP 
 To run any example, clone the repository and run terraform apply within the example's own directory.
 
 For example:
-
+```
 $ git clone git@github.com:IBM-Cloud/sap-automated-deployment-scripts.git
 $ cd sapsingletierdb2/terraform
 $ terraform apply
 ...
-
+```
 
 **References and IBM Cloud Solution tutorials that could be used for SAP deployments in a Virtual Private Cloud:**
 
