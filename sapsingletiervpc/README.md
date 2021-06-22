@@ -1,4 +1,4 @@
-# IBM Sample for VPC and VSI automatic deployment with SAP certified storage and network configuration 
+# IBM Sample for VPC and VSI automatic deployment with SAP certified storage and network configuration using Terraform
 
 This is a minimal terraform script for deploying a VPC and a VSI with SAP certified storage and network configuration.
 The VPC contains one subnet and one security group having three rules:
