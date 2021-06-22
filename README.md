@@ -1,4 +1,4 @@
-# IBM SAP Cloud Solution Automated Deployment scripts: Virtual Private Cloud
+#IBM SAP Cloud Solution Automated Deployment scripts: Virtual Private Cloud
 
 The templates in this repo are used to deploy different SAP scenarious like:
 
@@ -16,7 +16,7 @@ $ terraform apply
 ...
 ```
 
-**References and IBM Cloud Solution tutorials that could be used for SAP deployments in a Virtual Private Cloud:**
+#References and IBM Cloud Solution tutorials that could be used for SAP deployments in a Virtual Private Cloud:
 
 - [Preparing your deployment server with terraform&ansible](https://github.com/IBM-Cloud/terraform-provider-ibm)
 
