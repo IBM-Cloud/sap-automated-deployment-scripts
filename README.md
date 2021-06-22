@@ -16,7 +16,7 @@ $ terraform apply
 ...
 ```
 
-## References and IBM Cloud Solution tutorials that could be used for SAP deployments in a Virtual Private Cloud:
+## Related links:
 
 - [Preparing your deployment server with terraform&ansible](https://github.com/IBM-Cloud/terraform-provider-ibm)
 
