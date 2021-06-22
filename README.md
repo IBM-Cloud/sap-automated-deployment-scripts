@@ -11,7 +11,7 @@ To run any example, clone the repository and run terraform apply within the exam
 For example:
 ```
 $ git clone git@github.com:IBM-Cloud/sap-automated-deployment-scripts.git
-$ cd sapsingletierdb2/terraform
+$ cd sap-automated-deployment-scripts/sapsingletierdb2/terraform
 $ terraform apply
 ...
 ```
