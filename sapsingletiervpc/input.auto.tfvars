@@ -1,0 +1,10 @@
+ZONE			= "eu-gb-1"
+VPC				= "test-vpc"
+SECURITYGROUP	= "test-securitygroup"
+SUBNET			= "test-subnet"
+HOSTNAME		= "test-vsi"
+PROFILE			= "bx2-4x16"
+IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-1"
+SSH_KEYS		= [ "<SSH Key 1>" , "<SSH Key 2>" ]
+SWAP			= "16"
+VOL1			= "10"
