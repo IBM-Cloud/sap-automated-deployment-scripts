@@ -1,7 +1,0 @@
----
-#Required variables: sap_sid
-- hosts: all
-  gather_facts: yes
-  roles:
-    - sapnwdb2req
-...
