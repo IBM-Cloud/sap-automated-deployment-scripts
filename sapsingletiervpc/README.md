@@ -1,5 +1,7 @@
 # Creating single-tier virtual private cloud for SAP by using Terraform
 
+- [See full IBM Cloud docs for single-tier virtual private cloud for SAP](https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-single-tier-vpc-sap)
+
 This is a minimal terraform script for deploying a VPC and a VSI with SAP certified storage and network configuration.
 The VPC contains one subnet and one security group having three rules:
 - Allow all outbound traffic from the VSI
