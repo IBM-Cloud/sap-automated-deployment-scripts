@@ -14,8 +14,7 @@ For example:
 $ git clone git@github.com:IBM-Cloud/sap-automated-deployment-scripts.git
 $ cd sap-automated-deployment-scripts/sapsingletiervpc
 $ terraform plan
-$ terraform apply..
-
+$ terraform apply
 ...
 ```
 
