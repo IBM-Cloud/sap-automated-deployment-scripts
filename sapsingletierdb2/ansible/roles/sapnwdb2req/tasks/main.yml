@@ -2,9 +2,6 @@
 - name: Import OS distribution variables
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
-- name: Import storage configuration variables
-  include_vars: "storage_config.yml"
-
 - name: Import requierd package groups
   dnf:
     state: present

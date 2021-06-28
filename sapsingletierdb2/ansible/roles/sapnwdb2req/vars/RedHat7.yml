@@ -4,6 +4,8 @@ sapnw_required_packages:
   - uuidd
   - compat-libstdc++-33
   - lvm2
+  - tcsh
+  - ksh
 
 sapnw_required_package_groups:
   - "@large-systems"
@@ -20,4 +22,5 @@ sapnw_required_configurations:
   - "kernel_RedHat7"
   - "limits"
   - "tmpfiles"
+  - "services"
 ...  
