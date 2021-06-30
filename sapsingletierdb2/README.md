@@ -106,3 +106,8 @@ For destroy:
 ```shell
 terraform destroy
 ```
+
+
+## Related links:
+
+- [See full IBM Cloud Docs, single-tier virtual private cloud for SAP](https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-single-tier-vpc-sap)
