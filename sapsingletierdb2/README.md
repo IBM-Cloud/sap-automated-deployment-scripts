@@ -71,7 +71,6 @@ vi sapsingletierdb2/terraform/main.tf
 ```
 
 
-
 Files description and structure:
  - `modules` - directory containing the terraform modules
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
