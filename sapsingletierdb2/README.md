@@ -63,7 +63,22 @@ Files description and structure:
  - `versions.tf` - contains the minimum required versions for terraform and IBM Cloud provider.
  - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
 
+- edit the files sapsingletierdb2/terraform/main.tf in order to choose if you want to create a new VPC or to use an existing one.
 
+Example of the code on how to do it if you want to use and existing VPC and the VPC module is commented out:
+
+vi sapsingletierdb2/terraform/main.tf
+
+```shell
+/*module "vpc" {
+  source		= "./modules/vpc"
+  ZONE			= var.ZONE
+  VPC			= var.VPC
+  SECURITYGROUP = var.SECURITYGROUP
+  SUBNET		= var.SUBNET
+}
+*/
+```
 
 Steps to reproduce:
 
