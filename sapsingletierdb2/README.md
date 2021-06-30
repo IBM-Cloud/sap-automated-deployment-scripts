@@ -53,6 +53,24 @@ kit_db2client_dir = "/storage/NW75DB2/51051049"
 ```
 
 
+- edit the files sapsingletierdb2/terraform/main.tf in order to choose if you want to create a new VPC or to use an existing one.
+
+Example of the code on how to do it if you want to use and existing VPC and the VPC module is commented out:
+
+vi sapsingletierdb2/terraform/main.tf
+
+```shell
+/*module "vpc" {
+  source		= "./modules/vpc"
+  ZONE			= var.ZONE
+  VPC			= var.VPC
+  SECURITYGROUP = var.SECURITYGROUP
+  SUBNET		= var.SUBNET
+}
+*/
+```
+
+
 Files description and structure:
  - `modules` - directory containing the terraform modules
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
