@@ -1,11 +1,11 @@
-/*module "vpc" {
+module "vpc" {
   source		= "./modules/vpc"
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
 }
-*/
+
 
 module "volumes" {
   source		= "./modules/volumes"
@@ -21,8 +21,8 @@ module "volumes" {
 
 module "vsi" {
   source		= "./modules/vsi"
-#  depends_on	= [ module.vpc , module.volumes ]
-  depends_on	= [ module.volumes ]
+  depends_on	= [ module.vpc , module.volumes ]
+# depends_on	= [ module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
