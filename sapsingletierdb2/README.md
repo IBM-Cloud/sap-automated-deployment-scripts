@@ -53,7 +53,7 @@ kit_db2client_dir = "/storage/NW75DB2/51051049"
 ```
 
 
-- edit the files sapsingletierdb2/terraform/main.tf in order to choose if you want to create a new VPC or to use an existing one.
+- edit the files sapsingletierdb2/terraform/main.tf in order to choose like: 1. if you want to create a new VPC or 2. to use an existing one.
 
 Example of the code on how to do it if you want to use and existing VPC and the VPC module is commented out:
 
