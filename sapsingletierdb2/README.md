@@ -15,7 +15,7 @@ the file `input.auto.tfvars`
 ```shell
 #Infra VPC variables
 ZONE			= "eu-de-2"
-VPC				= "sap1"
+VPC			= "sap"
 SECURITYGROUP	= "sap-securitygroup"
 SUBNET			= "sap-subnet"
 HOSTNAME		= "db2saps1"
