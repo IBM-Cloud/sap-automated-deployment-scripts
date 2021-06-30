@@ -57,7 +57,7 @@ kit_db2client_dir = "/storage/NW75DB2/51051049"
 
 Example of the code on how to do it if you want to use and existing VPC and the VPC module is commented out:
 
-vi sapsingletierdb2/terraform/main.tf
+cat sapsingletierdb2/terraform/main.tf
 
 ```shell
 /*module "vpc" {
@@ -68,6 +68,35 @@ vi sapsingletierdb2/terraform/main.tf
   SUBNET		= var.SUBNET
 }
 */
+
+module "volumes" {
+  source		= "./modules/volumes"
+  ZONE			= var.ZONE
+  HOSTNAME		= var.HOSTNAME
+  VOL1			= var.VOL1
+  VOL2			= var.VOL2
+  VOL3			= var.VOL3
+  VOL4			= var.VOL4
+  VOL5			= var.VOL5
+}
+
+
+module "vsi" {
+  source		= "./modules/vsi"
+#  depends_on	= [ module.vpc , module.volumes ]
+  depends_on	= [ module.volumes ]
+  ZONE			= var.ZONE
+  VPC			= var.VPC
+  SECURITYGROUP = var.SECURITYGROUP
+  SUBNET		= var.SUBNET
+  HOSTNAME		= var.HOSTNAME
+  PROFILE		= var.PROFILE
+  IMAGE			= var.IMAGE
+  SSH_KEYS		= var.SSH_KEYS
+  VOLUMES_LIST	= module.volumes.volumes_list
+  SAP_SID		= var.sap_sid
+}
+
 ```
 
 
