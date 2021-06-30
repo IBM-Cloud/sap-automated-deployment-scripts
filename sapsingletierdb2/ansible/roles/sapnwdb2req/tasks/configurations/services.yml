@@ -1,0 +1,7 @@
+---
+- name: Comment fis 5912 port that will be used by DB2
+  replace:
+    path: /etc/services
+    regexp: '(.*5912.*)'
+    replace: '#\1'
+...
