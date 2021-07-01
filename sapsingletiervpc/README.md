@@ -16,8 +16,8 @@ For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 Then edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and disk sizes in `input.auto.tfvars` like so:
 ```shell
 ZONE			= Cloud Zone Default: eu-de-1
-VPC				= VPC name Default: test-vpc
-SECURITYGROUP	= Security group name Default: test-securitygroup
+VPC			= VPC name Default: test-vpc
+SECURITYGROUP		= Security group name Default: test-securitygroup
 SUBNET			= Subnet name Default: test-subnet
 HOSTNAME		= VSI Hostname Default: test-vsi
 PROFILE			= VSI Profile Default: bx2-4x16
