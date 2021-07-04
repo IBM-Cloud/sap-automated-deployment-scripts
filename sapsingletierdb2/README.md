@@ -1,4 +1,4 @@
-## Automation script for central SAP Netweaver and DB2 installation using Terraform and Ansible integration.
+# Automation script for central SAP Netweaver and DB2 installation using Terraform and Ansible integration.
 
 
 ### Description
@@ -11,7 +11,7 @@ The VPC contains one subnet and one security group having three rules:
 - Allow inbound SSH traffic (TCP port 22)
 
 ### Installation media
-SAP installation media used for this deplyment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
+SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
 ### Keys
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
@@ -38,7 +38,7 @@ VOL5			= "256"
 ```
 **Important:** The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
 
-Edit your SAP system configuration variabiles that will be passed to the ansible automated deployment:
+Edit your SAP system configuration variables that will be passed to the ansible automated deployment:
 
 ```shell
 ##SAP system configuration
@@ -134,7 +134,7 @@ Files description and structure:
  - `terraform.tfvars` - contains the IBM Cloud API key referenced in `provider.tf`
  - `variables.tf` - contains variables for the VPC and VSI
  - `versions.tf` - contains the minimum required versions for terraform and IBM Cloud provider.
- - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
+ - `integration.tf` - contains the integration code that brings the SAP variables from Terraform to Ansible.
 
 
 
