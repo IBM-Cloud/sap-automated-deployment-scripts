@@ -55,7 +55,7 @@ kit_db2client_dir = "/storage/NW75DB2/51051049"
 
 - edit the file sapsingletierdb2/terraform/main.tf in order to choose like: 1. if you want to create a new VPC or 2. to use an existing VPC.
 
-Example of the code on how to do it if you want to use and existing VPC and the VPC module is commented out:
+Example of the code on how to do it if you want to use an existing VPC is below. The VPC module is commented out and the depends_on from the vsi module is modified. 
 
 cat sapsingletierdb2/terraform/main.tf
 
@@ -83,17 +83,17 @@ module "volumes" {
 
 module "vsi" {
   source		= "./modules/vsi"
-#  depends_on	= [ module.vpc , module.volumes ]
-  depends_on	= [ module.volumes ]
+#  depends_on		= [ module.vpc , module.volumes ]
+  depends_on		= [ module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
-  SECURITYGROUP = var.SECURITYGROUP
+  SECURITYGROUP 	= var.SECURITYGROUP
   SUBNET		= var.SUBNET
   HOSTNAME		= var.HOSTNAME
   PROFILE		= var.PROFILE
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS
-  VOLUMES_LIST	= module.volumes.volumes_list
+  VOLUMES_LIST		= module.volumes.volumes_list
   SAP_SID		= var.sap_sid
 }
 
@@ -103,12 +103,13 @@ module "vsi" {
 Files description and structure:
  - `modules` - directory containing the terraform modules
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
+ - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
  - `main.tf` - contains the configuration of the VSI for SAP single tier deployment.
  - `provider.tf` - contains the IBM Cloud Provider data in order to run `terraform init` command.
  - `terraform.tfvars` - contains the IBM Cloud API key referenced in `provider.tf`
  - `variables.tf` - contains variables for the VPC and VSI
  - `versions.tf` - contains the minimum required versions for terraform and IBM Cloud provider.
- - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
+
 
 
 
