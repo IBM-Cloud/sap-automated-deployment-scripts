@@ -79,7 +79,9 @@ kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded
 kit_db2_dir | Path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 
-Edit the file sapsingletierdb2/terraform/main.tf in order to choose like: 1. if you want to create a new VPC or 2. to use an existing VPC.
+Edit the file sapsingletierdb2/terraform/main.tf in order to choose like: 
+  1. if you want to create a new VPC 
+  2. to use an existing VPC.
 
 Example of the code on how to do it if you want to use an existing VPC is below. The VPC module is commented out and the depends_on from the vsi module is modified. 
 
