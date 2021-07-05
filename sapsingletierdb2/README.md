@@ -90,7 +90,7 @@ cat sapsingletierdb2/terraform/main.tf
   source		= "./modules/vpc"
   ZONE			= var.ZONE
   VPC			= var.VPC
-  SECURITYGROUP = var.SECURITYGROUP
+  SECURITYGROUP 	= var.SECURITYGROUP
   SUBNET		= var.SUBNET
 }
 */
@@ -135,6 +135,7 @@ Files description and structure:
  - `terraform.tfvars` - contains the IBM Cloud API key referenced in `provider.tf`
  - `variables.tf` - contains variables for the VPC and VSI
  - `versions.tf` - contains the minimum required versions for terraform and IBM Cloud provider.
+
 
 
 
