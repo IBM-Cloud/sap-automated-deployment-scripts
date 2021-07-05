@@ -15,11 +15,13 @@ SAP installation media used for this deployment is the default one for **SAP Net
 ## IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
+## VSI Configuration
 The VSI is configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64), has two SSH keys configured to access as root user on SSH and five storage volumes as described below in 
 the file `input.auto.tfvars`
 
 ## Input parameter file
-Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes in `input.auto.tfvars` like so:
+The solution is configured by editing your variables in the file `input.auto.tfvars`
+Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes like so:
 ```shell
 #Infra VPC variables
 ZONE			= "eu-de-2"
