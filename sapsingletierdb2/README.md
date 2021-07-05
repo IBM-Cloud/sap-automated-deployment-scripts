@@ -4,20 +4,18 @@
 ### Description
 This solution will perform automated deployment of a single host with **SAP Netweaver** with **DB2** on top of **Red Hat Enterprise Linux 7.6 for SAP Applications**.
 
-It contains a terraform script for deploying a VPC and a VSI with SAP certified storage and network configuration.
-The VPC contains one subnet and one security group having three rules:
-- Allow all outbound traffic from the VSI
-- Allow inbound DNS traffic (UDP port 53)
-- Allow inbound SSH traffic (TCP port 22)
+It contains terraform scripts for deploying a VPC, Subnet, Security Group with rules and a VSI. And Ansible scripts to configure SAP Netweaver and DB2 installation.
+Please note that Ansible is started by Terraform and must be available on the same host.
 
 ### Installation media
 SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
-### Keys
+### IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
 The VSI is configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64), has two SSH keys configured to access as root user on SSH and five storage volumes as described below in 
 the file `input.auto.tfvars`
+
 ### Input parameter file
 Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes in `input.auto.tfvars` like so:
 ```shell
@@ -79,13 +77,11 @@ kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded
 kit_db2_dir | Path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 
-Edit the file sapsingletierdb2/terraform/main.tf in order to choose like: 
-  1. if you want to create a new VPC 
-  2. to use an existing VPC.
 
-Example of the code on how to do it if you want to use an existing VPC is below. The VPC module is commented out and the depends_on from the vsi module is modified. 
+### VPC Configuration
 
-cat sapsingletierdb2/terraform/main.tf
+The scripts create a new VPC with Subnet, Security Group and Security rules.
+If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapsingletierdb2/terraform/main.tf` file as below and add the names to `input.auto.tfvars`
 
 ```shell
 /*module "vpc" {
@@ -127,8 +123,14 @@ module "vsi" {
 
 ```
 
+The Security Rules are the following:
+- Allow all outbound traffic from the VSI
+- Allow inbound DNS traffic (UDP port 53)
+- Allow inbound SSH traffic (TCP port 22)
 
-Files description and structure:
+
+
+### Files description and structure:
  - `modules` - directory containing the terraform modules
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
  - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
@@ -142,6 +144,8 @@ Files description and structure:
 
 
 Steps to reproduce:
+
+For initializing terraform:
 
 ```shell
 terraform init
