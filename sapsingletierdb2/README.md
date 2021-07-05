@@ -4,7 +4,9 @@
 ## Description
 This solution will perform automated deployment of a single host with **SAP Netweaver** with **DB2** on top of **Red Hat Enterprise Linux 7.6 for SAP Applications**.
 
-It contains terraform scripts for deploying a VPC, Subnet, Security Group with rules and a VSI. And Ansible scripts to configure SAP Netweaver and DB2 installation.
+It contains:  
+- Terraform scripts for deploying a VPC, Subnet, Security Group with rules and a VSI.
+- Ansible scripts to configure SAP Netweaver and DB2 installation.
 Please note that Ansible is started by Terraform and must be available on the same host.
 
 ## Installation media
