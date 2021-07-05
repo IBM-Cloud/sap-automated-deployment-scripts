@@ -1,22 +1,22 @@
 # Automation script for central SAP Netweaver and DB2 installation using Terraform and Ansible integration.
 
 
-### Description
+## Description
 This solution will perform automated deployment of a single host with **SAP Netweaver** with **DB2** on top of **Red Hat Enterprise Linux 7.6 for SAP Applications**.
 
 It contains terraform scripts for deploying a VPC, Subnet, Security Group with rules and a VSI. And Ansible scripts to configure SAP Netweaver and DB2 installation.
 Please note that Ansible is started by Terraform and must be available on the same host.
 
-### Installation media
+## Installation media
 SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
-### IBM Cloud API Key
+## IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
 The VSI is configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64), has two SSH keys configured to access as root user on SSH and five storage volumes as described below in 
 the file `input.auto.tfvars`
 
-### Input parameter file
+## Input parameter file
 Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes in `input.auto.tfvars` like so:
 ```shell
 #Infra VPC variables
@@ -78,7 +78,7 @@ kit_db2_dir | Path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir | The archi
 kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 
 
-### VPC Configuration
+## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
 If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapsingletierdb2/terraform/main.tf` file as below and add the names to `input.auto.tfvars`
@@ -130,7 +130,7 @@ The Security Rules are the following:
 
 
 
-### Files description and structure:
+## Files description and structure:
  - `modules` - directory containing the terraform modules
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
  - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
@@ -143,7 +143,7 @@ The Security Rules are the following:
 
 
 
-### Steps to reproduce:
+## Steps to reproduce:
 
 For initializing terraform:
 
@@ -170,6 +170,6 @@ terraform destroy
 ```
 
 
-## Related links:
+### Related links:
 
 - [See full IBM Cloud Docs, single-tier virtual private cloud for SAP](https://cloud.ibm.com/docs/sap?topic=sap-create-terraform-single-tier-vpc-sap)
