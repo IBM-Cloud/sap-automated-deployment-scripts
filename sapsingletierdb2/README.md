@@ -38,7 +38,18 @@ VOL3			= "64"
 VOL4			= "128"
 VOL5			= "256"
 ```
-**Important:** The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
+
+Parameter | Description
+----------|------------
+ZONE | The cloud zone where to deploy the solution. Must match the Region defined in `provider.tf`. The zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+VPC | The name of the VPC
+SECURITYGROUP | The name of the Security Group
+SUBNET | The name of the Subnet
+HOSTNAME | The Hostname for the VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
+PROFILE | The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles)
+IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images)
+SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can contain one or more IDs. The Keys added to IBM Cloud can be found [here](https://cloud.ibm.com/vpc-ext/compute/sshKeys)
+VOL[number] | The sizes for the disks in GB to be attached to the VSI and used by SAP
 
 Edit your SAP system configuration variables that will be passed to the ansible automated deployment:
 
