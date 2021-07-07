@@ -15,11 +15,13 @@ SAP installation media used for this deployment is the default one for **SAP Net
 ## IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
+## VSI Configuration
 The VSI is configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64), has two SSH keys configured to access as root user on SSH and five storage volumes as described below in 
 the file `input.auto.tfvars`
 
 ## Input parameter file
-Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes in `input.auto.tfvars` like so:
+The solution is configured by editing your variables in the file `input.auto.tfvars`
+Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes like so:
 ```shell
 #Infra VPC variables
 ZONE			= "eu-de-2"
@@ -36,7 +38,18 @@ VOL3			= "64"
 VOL4			= "128"
 VOL5			= "256"
 ```
-**Important:** The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
+
+Parameter | Description
+----------|------------
+ZONE | The cloud zone where to deploy the solution. Must match the Region defined in `provider.tf`. The zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+VPC | The name of the VPC
+SECURITYGROUP | The name of the Security Group
+SUBNET | The name of the Subnet
+HOSTNAME | The Hostname for the VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
+PROFILE | The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles)
+IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images)
+SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can contain one or more IDs. The Keys added to IBM Cloud can be found [here](https://cloud.ibm.com/vpc-ext/compute/sshKeys)
+VOL[number] | The sizes for the disks in GB to be attached to the VSI and used by SAP
 
 Edit your SAP system configuration variables that will be passed to the ansible automated deployment:
 
