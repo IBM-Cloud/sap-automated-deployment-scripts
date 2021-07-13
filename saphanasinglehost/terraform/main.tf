@@ -11,8 +11,8 @@ module "volumes" {
   ZONE			= var.ZONE
   HOSTNAME		= var.HOSTNAME
   VOL1			= var.VOL1
-  VOL1			= var.VOL2
-  VOL1			= var.VOL3
+  VOL2			= var.VOL2
+  VOL3			= var.VOL3
 }
 
 module "vsi" {
