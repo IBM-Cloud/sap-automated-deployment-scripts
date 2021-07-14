@@ -2,6 +2,7 @@
 - name: Import OS distribution variables
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
-- name: Upgrade OS
-  include_tasks: "configurations/update.yml"
+- name: Make specific OS configurations as recommended by SAP for HANA DB
+  include_tasks: "configurations/{{ item }}.yml"
+  loop: "{{ saphana_required_configurations }}"
 ...
