@@ -3,5 +3,5 @@
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
 - name: Upgrade OS
-  include_tasks: "configurations/upgrade.yml"
+  include_tasks: "configurations/update.yml"
 ...
