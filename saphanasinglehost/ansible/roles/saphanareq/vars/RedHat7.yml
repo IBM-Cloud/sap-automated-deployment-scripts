@@ -26,7 +26,8 @@ saphana_required_packages:
   - bind-utils
   - net-tools
   - compat-sap-c++-9
-  - libatomic 
+  - libatomic
+  - chrony 
 
 saphana_required_package_groups:
   - "@base"
