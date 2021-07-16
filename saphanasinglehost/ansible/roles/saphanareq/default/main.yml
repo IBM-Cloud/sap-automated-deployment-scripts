@@ -1,5 +1,3 @@
 ---
-#Chrony ntp servers
-chrony_ntp_server1: "pool.ntp.org"
-chrony_ntp_server2: "time.nist.gov"
+
 ...

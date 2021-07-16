@@ -35,6 +35,7 @@ saphana_required_package_groups:
 saphana_required_configurations:
   - "reqpkggroups"
   - "reqpkg"
-  - "update_os"
+#  - "update_os"
   - "hostname"
+  - "tuned"
 ... 
