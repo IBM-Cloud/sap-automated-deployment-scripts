@@ -1,13 +1,13 @@
 # Terraform Framework,  2- and 3-tier for SAP VPC application stack deployments
 
-This is an Automatic Framework Terraform IAC deployment of SAP certified IaaS with necessary storage and network configurations and OS SAP prerequisites basic configs.
+This is an Automatic Framework Terraform IAC deployment of SAP certified IaaS with necessary storage, network configurations and OS SAP prerequisites basic configs.
 
 The VPC contains one subnet and one security group having three rules:
 - Allow all outbound traffic from the VSI
 - Allow inbound DNS traffic (UDP port 53)
 - Allow inbound SSH traffic (TCP port 22)
 
-The VSIs are configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64) and they have: at least two SSH keys configured to access as root user on SSH, the following storage volumes created for DB and SAP APP VSI:
+The VSIs are configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64) and they have: at least two SSH keys configured to access as root user on SSH and the following storage volumes created for DB and SAP APP VSI:
 
 DB VSI Disks:
 - 1 x 32 GB disk with 10 IOPS / GB - DATA (DB LOG)
@@ -30,8 +30,9 @@ HOSTNAME		= VSI Hostname Default: test-vsi
 PROFILE			= VSI Profile Default: bx2-4x16
 IMAGE			= VSI OS Image Default: ibm-redhat-7-6-amd64-sap-applications-1
 SSH_KEYS		= SSH Keys ID list to access the VSI
-SWAP			= SWAP Size Default: 16
+SWAP			= SWAP Size Default: 40
 VOL1			= Volume 1 Size Default: 10
+......
 ```
 
 Files description and structure:
