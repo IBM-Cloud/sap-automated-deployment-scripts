@@ -7,7 +7,7 @@ The VPC contains one subnet and one security group having three rules:
 - Allow inbound DNS traffic (UDP port 53)
 - Allow inbound SSH traffic (TCP port 22)
 
-The VSI is configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64), has two SSH keys configured to access as root user on SSH, the follwing storage volumes created for DB and SAP APP VSI:
+The VSIs are configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64) and they have: at least two SSH keys configured to access as root user on SSH, the following storage volumes created for DB and SAP APP VSI:
 
 DB VSI Disks:
 - 1 x 32 GB disk with 10 IOPS / GB - DATA (DB LOG)
