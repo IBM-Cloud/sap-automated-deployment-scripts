@@ -3,6 +3,11 @@ variable "ZONE" {
 	description	= "Cloud Zone"
 }
 
+variable "REGION" {
+	type		= string
+	description	= "REGION Cloud Zone"
+}
+
 variable "VPC" {
 	type		= string
 	description = "VPC name"
@@ -18,9 +23,9 @@ variable "SECURITYGROUP" {
 	description = "Security group name"
 }
 
-variable "HOSTNAME" {
+variable "HOSTNAME-DB" {
 	type		= string
-	description = "VSI Hostname"
+	description = "VSI DB Hostname"
 }
 
 
@@ -50,24 +55,36 @@ variable "SSH_KEYS" {
 variable "SWAP-DB" {
 	type		= string
 	description = "SWAP Size"
-	default		= "48"
+	default		= "40"
 }
 
 variable "VOL1-DB" {
 	type		= string
 	description = "Volume 1 Size"
-	default		= "10"
+	default		= "32"
 }
 
+variable "VOL2-DB" {
+	type		= string
+	description = "Volume 1 Size"
+	default		= "64"
+}
+
+
+variable "VOL3-DB" {
+	type		= string
+	description = "Volume 1 Size"
+	default		= "128"
+}
 
 variable "SWAP-APP" {
 	type		= string
 	description = "SWAP Size"
-	default		= "48"
+	default		= "40"
 }
 
 variable "VOL1-APP" {
 	type		= string
 	description = "Volume 1 Size"
-	default		= "10"
+	default		= "128"
 }

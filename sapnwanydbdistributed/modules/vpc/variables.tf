@@ -3,6 +3,12 @@ variable "ZONE" {
     description = "Cloud Zone"
 }
 
+
+variable "REGION" {
+    type = string
+    description = "REGION Zone"
+}
+
 variable "VPC" {
     type = string
     description = "VPC name"

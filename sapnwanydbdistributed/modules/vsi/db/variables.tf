@@ -18,9 +18,9 @@ variable "SECURITYGROUP" {
     description = "Security group name"
 }
 
-variable "HOSTNAME" {
+variable "HOSTNAME-DB" {
     type = string
-    description = "VSI Hostname"
+    description = "VSI DB Hostname"
 }
 
 variable "PROFILE" {

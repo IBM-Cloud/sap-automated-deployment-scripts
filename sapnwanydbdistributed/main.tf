@@ -10,12 +10,14 @@
 module "volumes" {
   source		= "./modules/volumes"
   ZONE			= var.ZONE
-  HOSTNAME		= var.HOSTNAME
+  HOSTNAME-DB		= var.HOSTNAME-DB
   HOSTNAME-APP		= var.HOSTNAME-APP
   SWAP-DB			= var.SWAP-DB
   VOL1-DB		= var.VOL1-DB
-  SWAP-APP			= var.SWAP-DB
-  VOL1-APP		= var.VOL1-DB
+  VOL2-DB		= var.VOL2-DB
+  VOL3-DB		= var.VOL3-DB
+  SWAP-APP			= var.SWAP-APP
+  VOL1-APP		= var.VOL1-APP
 }
 
 module "vsi" {
@@ -26,7 +28,7 @@ module "vsi" {
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
-  HOSTNAME		= var.HOSTNAME
+  HOSTNAME-DB		= var.HOSTNAME-DB
   PROFILE		= var.PROFILE
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS

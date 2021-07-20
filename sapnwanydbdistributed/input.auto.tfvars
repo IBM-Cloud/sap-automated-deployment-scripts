@@ -1,4 +1,5 @@
 # General VPC variables:
+REGION		= "eu-de"
 ZONE			= "eu-de-2"
 VPC				= "ic4sap"
 SECURITYGROUP	= "ic4sap-securitygroup"
@@ -8,12 +9,14 @@ PROFILE			= "bx2-4x16"
 IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-1"
 
 # SAP Database VSI variables:
-HOSTNAME		= "ep12m1"
+HOSTNAME-DB		= "ep12db"
 SWAP-DB			= "40"
-VOL1-DB			= "10"
+VOL1-DB			= "32"
+VOL2-DB			= "64"
+VOL3-DB			= "128"
 
 
 # SAP APPs VSI variables:
-HOSTNAME-APP	= "ep12app1"
+HOSTNAME-APP	= "ep12app"
 SWAP-APP			= "40"
-VOL1-APP			= "10"
+VOL1-APP			= "128"
