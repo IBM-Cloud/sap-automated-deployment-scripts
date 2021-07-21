@@ -46,6 +46,7 @@ resource "ibm_is_volume" "vol1-app" {
 
 output "volumes_list_db" {
   value       = [ ibm_is_volume.swap-db.id , ibm_is_volume.vol1-db.id, ibm_is_volume.vol2-db.id, ibm_is_volume.vol3-db.id ]
+#  value       = [ ibm_is_volume.swap-db.id , ibm_is_volume.vol1-db.id, ibm_is_volume.vol2-db.id ]
 }
 
 
