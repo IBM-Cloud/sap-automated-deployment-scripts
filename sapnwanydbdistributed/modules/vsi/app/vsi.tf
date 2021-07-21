@@ -15,11 +15,11 @@ data "ibm_is_image" "image" {
   name		= var.IMAGE
 }
 
-resource "ibm_is_instance" "vsi-db" {
+resource "ibm_is_instance" "vsi-app" {
   vpc		= data.ibm_is_vpc.vpc.id
   zone		= var.ZONE
   keys		= var.SSH_KEYS
-  name		= var.HOSTNAME-DB
+  name		= var.HOSTNAME-APP
   profile	= var.PROFILE
   image		= data.ibm_is_image.image.id
 
@@ -27,10 +27,10 @@ resource "ibm_is_instance" "vsi-db" {
     subnet          = data.ibm_is_subnet.subnet.id
     security_groups = [data.ibm_is_security_group.securitygroup.id]
   }
-  volumes = var.VOLUMES_LIST_DB
+  volumes = var.VOLUMES_LIST_APP
 }
 
 resource "ibm_is_floating_ip" "fip" {
-  name		= "${var.HOSTNAME-DB}-fip"
-  target	= ibm_is_instance.vsi-db.primary_network_interface[0].id
+  name		= "${var.HOSTNAME-APP}-fip"
+  target	= ibm_is_instance.vsi-app.primary_network_interface[0].id
 }

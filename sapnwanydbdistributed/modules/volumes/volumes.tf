@@ -12,14 +12,12 @@ resource "ibm_is_volume" "vol1-db" {
   capacity	= var.VOL1-DB
 }
 
-
 resource "ibm_is_volume" "vol2-db" {
   name		= "${var.HOSTNAME-DB}-vol2-db"
   profile	= "10iops-tier"
   zone		= var.ZONE
   capacity	= var.VOL2-DB
 }
-
 
 resource "ibm_is_volume" "vol3-db" {
   name		= "${var.HOSTNAME-DB}-vol3-db"
@@ -43,12 +41,9 @@ resource "ibm_is_volume" "vol1-app" {
   capacity	= var.VOL1-APP
 }
 
-
 output "volumes_list_db" {
   value       = [ ibm_is_volume.swap-db.id , ibm_is_volume.vol1-db.id, ibm_is_volume.vol2-db.id, ibm_is_volume.vol3-db.id ]
-#  value       = [ ibm_is_volume.swap-db.id , ibm_is_volume.vol1-db.id, ibm_is_volume.vol2-db.id ]
 }
-
 
 output "volumes_list_app" {
   value       = [ ibm_is_volume.swap-app.id , ibm_is_volume.vol1-app.id ]

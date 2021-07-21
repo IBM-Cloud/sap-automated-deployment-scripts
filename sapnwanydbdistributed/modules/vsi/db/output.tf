@@ -1,6 +1,6 @@
 
 output "DB-HOSTNAME" {
-  value		= ibm_is_instance.vsi.name
+  value		= ibm_is_instance.vsi-db.name
 }
 
 output "DB-FLOATING-IP" {
@@ -8,5 +8,5 @@ output "DB-FLOATING-IP" {
 }
 
 output "DB-PRIVATE-IP" {
-  value		= ibm_is_instance.vsi.primary_network_interface[0].primary_ipv4_address
+  value		= ibm_is_instance.vsi-db.primary_network_interface[0].primary_ipv4_address
 }
