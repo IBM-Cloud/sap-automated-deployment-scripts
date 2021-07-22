@@ -1,11 +1,11 @@
-/*module "vpc" {
-  source		= "./modules/vpc"
+
+module "vpc" {
+  source		= "./modules/vpc/existing"
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
 }
-*/
 
 module "volumes" {
   source		= "./modules/volumes"
@@ -22,8 +22,7 @@ module "volumes" {
 
 module "vsi-db" {
   source		= "./modules/vsi/db"
-#  depends_on	= [ module.vpc , module.volumes ]
-  depends_on	= [ module.volumes ]
+  depends_on	= [ module.vpc , module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
@@ -38,8 +37,7 @@ module "vsi-db" {
 
 module "vsi-app" {
   source		= "./modules/vsi/app"
-#  depends_on	= [ module.vpc , module.volumes ]
-  depends_on	= [ module.volumes ]
+  depends_on	= [ module.vpc , module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
