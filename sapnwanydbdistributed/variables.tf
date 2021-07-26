@@ -48,6 +48,7 @@ variable "DB-HOSTNAME" {
 variable "DB-VOLUME_SIZES" {
 	type		= list(string)
 	description = "DB list of volume sizes in GB to be created"
+	default		= [ "32" , "64" ]
 }
 
 variable "APP-HOSTNAME" {
