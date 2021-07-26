@@ -1,4 +1,3 @@
-
 module "vpc" {
   source		= "./modules/vpc/existing"
   ZONE			= var.ZONE
@@ -7,44 +6,30 @@ module "vpc" {
   SUBNET		= var.SUBNET
 }
 
-module "volumes" {
-  source		= "./modules/volumes"
-  ZONE			= var.ZONE
-  HOSTNAME-DB		= var.HOSTNAME-DB
-  HOSTNAME-APP		= var.HOSTNAME-APP
-  SWAP-DB			= var.SWAP-DB
-  VOL1-DB		= var.VOL1-DB
-  VOL2-DB		= var.VOL2-DB
-  VOL3-DB		= var.VOL3-DB
-  SWAP-APP			= var.SWAP-APP
-  VOL1-APP		= var.VOL1-APP
-}
-
-module "vsi-db" {
-  source		= "./modules/vsi/db"
-  depends_on	= [ module.vpc , module.volumes ]
+module "db-vsi" {
+  source		= "./modules/vsi"
+  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
-  HOSTNAME-DB		= var.HOSTNAME-DB
+  HOSTNAME		= var.DB-HOSTNAME
   PROFILE		= var.PROFILE
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS
-  VOLUMES_LIST_DB	= module.volumes.volumes_list_db
+  VOLUME_SIZES	= var.DB-VOLUME_SIZES
 }
 
-
-module "vsi-app" {
-  source		= "./modules/vsi/app"
-  depends_on	= [ module.vpc , module.volumes ]
+module "app-vsi" {
+  source		= "./modules/vsi"
+  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
-  HOSTNAME-APP		= var.HOSTNAME-APP
+  HOSTNAME		= var.APP-HOSTNAME
   PROFILE		= var.PROFILE
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS
-  VOLUMES_LIST_APP	= module.volumes.volumes_list_app
+  VOLUME_SIZES	= var.APP-VOLUME_SIZES
 }

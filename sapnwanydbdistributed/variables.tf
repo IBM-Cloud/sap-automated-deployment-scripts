@@ -1,11 +1,11 @@
+variable "REGION" {
+	type		= string
+	description	= "Cloud Region"
+}
+
 variable "ZONE" {
 	type		= string
 	description	= "Cloud Zone"
-}
-
-variable "REGION" {
-	type		= string
-	description	= "REGION Cloud Zone"
 }
 
 variable "VPC" {
@@ -22,18 +22,6 @@ variable "SECURITYGROUP" {
 	type		= string
 	description = "Security group name"
 }
-
-variable "HOSTNAME-DB" {
-	type		= string
-	description = "VSI DB Hostname"
-}
-
-
-variable "HOSTNAME-APP" {
-	type		= string
-	description = "VSI APP Hostname"
-}
-
 
 variable "PROFILE" {
 	type		= string
@@ -52,39 +40,22 @@ variable "SSH_KEYS" {
 	description = "SSH Keys ID list to access the VSI"
 }
 
-variable "SWAP-DB" {
+variable "DB-HOSTNAME" {
 	type		= string
-	description = "SWAP Size"
-	default		= "40"
+	description = "DB VSI Hostname"
 }
 
-variable "VOL1-DB" {
-	type		= string
-	description = "Volume 1 Size"
-	default		= "32"
+variable "DB-VOLUME_SIZES" {
+	type		= list(string)
+	description = "DB list of volume sizes in GB to be created"
 }
 
-variable "VOL2-DB" {
+variable "APP-HOSTNAME" {
 	type		= string
-	description = "Volume 1 Size"
-	default		= "64"
+	description = "APP VSI Hostname"
 }
 
-
-variable "VOL3-DB" {
-	type		= string
-	description = "Volume 1 Size"
-	default		= "128"
-}
-
-variable "SWAP-APP" {
-	type		= string
-	description = "SWAP Size"
-	default		= "40"
-}
-
-variable "VOL1-APP" {
-	type		= string
-	description = "Volume 1 Size"
-	default		= "128"
+variable "APP-VOLUME_SIZES" {
+	type		= list(string)
+	description = "APP list of volume sizes in GB to be created"
 }

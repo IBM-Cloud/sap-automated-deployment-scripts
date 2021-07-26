@@ -33,7 +33,7 @@ PROFIL        = "bx2-4x16" # default value
 IMAGE         = "ibm-redhat-7-6-amd64-sap-applications-1" # default value
 
 # SAP Database VSI variables:
-HOSTNAME-DB   = "ep12db"
+DB-HOSTNAME   = "ep12db"
 SWAP-DB       = "40"  # default value
 VOL1-DB       = "32"  # default value
 VOL2-DB       = "64"  # default value
@@ -41,7 +41,7 @@ VOL3-DB       = "128" # default value
 
 
 # SAP APPs VSI variables:
-HOSTNAME-AP   = "ep12app" # default value
+APP-HOSTNAME  = "ep12app" # default value
 SWAP-APP      = "40"        # default value
 VOL1-APP      = "128"       # default value
 ......

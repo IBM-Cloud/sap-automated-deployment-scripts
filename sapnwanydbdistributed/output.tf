@@ -1,23 +1,23 @@
 output "DB-HOSTNAME" {
-  value		= module.vsi-db.DB-HOSTNAME
+  value		= module.db-vsi.HOSTNAME
 }
 
 output "DB-FLOATING-IP" {
-  value		= module.vsi-db.DB-FLOATING-IP
+  value		= module.db-vsi.FLOATING-IP
 }
 
 output "DB-PRIVATE-IP" {
-  value		= module.vsi-db.DB-PRIVATE-IP
+  value		= module.db-vsi.PRIVATE-IP
 }
 
 output "APP-HOSTNAME" {
-  value		= module.vsi-app.APP-HOSTNAME
+  value		= module.app-vsi.HOSTNAME
 }
 
 output "APP-FLOATING-IP" {
-  value		= module.vsi-app.APP-FLOATING-IP
+  value		= module.app-vsi.FLOATING-IP
 }
 
 output "APP-PRIVATE-IP" {
-  value		= module.vsi-app.APP-PRIVATE-IP
+  value		= module.app-vsi.PRIVATE-IP
 }

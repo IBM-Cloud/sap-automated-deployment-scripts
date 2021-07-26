@@ -18,9 +18,9 @@ variable "SECURITYGROUP" {
     description = "Security group name"
 }
 
-variable "HOSTNAME-APP" {
+variable "HOSTNAME" {
     type = string
-    description = "VSI app Hostname"
+    description = "VSI Hostname"
 }
 
 variable "PROFILE" {
@@ -38,7 +38,7 @@ variable "SSH_KEYS" {
     description = "List of SSH Keys to access the VSI"
 }
 
-variable "VOLUMES_LIST_APP" {
+variable "VOLUME_SIZES" {
     type = list(string)
-    description = "List of volumes"
+    description = "List of volume sizes in GB to be created"
 }

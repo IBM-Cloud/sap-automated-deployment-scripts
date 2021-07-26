@@ -15,11 +15,20 @@ data "ibm_is_image" "image" {
   name		= var.IMAGE
 }
 
-resource "ibm_is_instance" "vsi-db" {
+resource "ibm_is_volume" "vol" {
+
+count = length( var.VOLUME_SIZES )
+  name		= "${var.HOSTNAME}-vol${count.index}"
+  profile	= "10iops-tier"
+  zone		= var.ZONE
+  capacity	= var.VOLUME_SIZES[count.index]
+}
+
+resource "ibm_is_instance" "vsi" {
   vpc		= data.ibm_is_vpc.vpc.id
   zone		= var.ZONE
   keys		= var.SSH_KEYS
-  name		= var.HOSTNAME-DB
+  name		= var.HOSTNAME
   profile	= var.PROFILE
   image		= data.ibm_is_image.image.id
 
@@ -27,10 +36,10 @@ resource "ibm_is_instance" "vsi-db" {
     subnet          = data.ibm_is_subnet.subnet.id
     security_groups = [data.ibm_is_security_group.securitygroup.id]
   }
-  volumes = var.VOLUMES_LIST_DB
+  volumes = ibm_is_volume.vol[*].id
 }
 
 resource "ibm_is_floating_ip" "fip" {
-  name		= "${var.HOSTNAME-DB}-fip"
-  target	= ibm_is_instance.vsi-db.primary_network_interface[0].id
+  name		= "${var.HOSTNAME}-fip"
+  target	= ibm_is_instance.vsi.primary_network_interface[0].id
 }
