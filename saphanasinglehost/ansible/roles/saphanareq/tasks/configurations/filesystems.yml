@@ -13,5 +13,5 @@
 
 - name: Check if the required storage device for HANA VG is found
   debug:
-    var: "{{ hana_disk_size }}"
+    var: swap_lv_size
 ...
