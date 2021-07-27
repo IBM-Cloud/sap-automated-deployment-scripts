@@ -1,26 +1,26 @@
 ---
-- name: Get available storage devices for HANA VG
-  set_fact: 
-    data_disk: "{{ data_disk|default([]) + ['/dev/' + device.key] }}"
-  when:
-     - not device.value.partitions
-     - not device.value.holders
-     - device.key is search('vd')
-     - device.value.size == hana_disk_size
-  loop: "{{ ansible_devices | dict2items }}"
-  loop_control:
-    loop_var: device
+# - name: Get available storage devices for HANA VG
+#   set_fact: 
+#     data_disk: "{{ data_disk|default([]) + ['/dev/' + device.key] }}"
+#   when:
+#      - not device.value.partitions
+#      - not device.value.holders
+#      - device.key is search('vd')
+#      - device.value.size == hana_disk_size
+#   loop: "{{ ansible_devices | dict2items }}"
+#   loop_control:
+#     loop_var: device
 
-- name: Check if the required storage device for HANA VG is found
-  fail:
-    msg: "Could not find the required free {{ hana_disk_size }} storage devices for HANA VG"
-  when:  data_disk|length < 3
+# - name: Check if the required storage device for HANA VG is found
+#   fail:
+#     msg: "Could not find the required free {{ hana_disk_size }} storage devices for HANA VG"
+#   when:  data_disk|length < 3
 
-- name: Create a volume group for HANA DB
-  lvg:
-    vg: "{{ hana_sid|lower }}_hana_vg"
-    pvs: "{{ data_disk }}"
-    pesize: "32"
+# - name: Create a volume group for HANA DB
+#   lvg:
+#     vg: "{{ hana_sid|lower }}_hana_vg"
+#     pvs: "{{ data_disk }}"
+#     pesize: "32"
 
 - name: Create a logical volume for swap
   lvol:
