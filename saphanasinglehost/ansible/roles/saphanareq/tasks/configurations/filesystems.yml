@@ -12,6 +12,7 @@
     loop_var: device
 
 - name: Check if the required storage device for HANA VG is found
-  debug:
-    var: data_disk
+  fail:
+    msg: "Could not find the required free {{ hana_disk_size }} storage devices for HANA VG"
+  when:  data_disk|length < 4
 ...
