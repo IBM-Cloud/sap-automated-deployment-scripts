@@ -29,10 +29,17 @@
 #     size: "{{ swap_lv_size }}"
 #     opts: -i3
 
-- name: Create a logical volume for data
+# - name: Create a logical volume for HANA data
+#   lvol:
+#     vg: "{{ hana_sid|lower }}_hana_vg"
+#     lv: "{{ hana_sid|lower }}_hana_data_lv"
+#     size: "{{ hana_data_lv_size }}"
+#     opts: -i3 -I256
+
+- name: Create a logical volume for HANA log 
   lvol:
     vg: "{{ hana_sid|lower }}_hana_vg"
-    lv: "{{ hana_sid|lower }}_hana_data_lv"
-    size: "{{ hana_data_lv_size }}"
-    opts: -i3 -I256    
+    lv: "{{ hana_sid|lower }}_hana_log_lv"
+    size: "{{ hana_log_lv_size }}"
+    opts: -i3 -I 64
 ...
