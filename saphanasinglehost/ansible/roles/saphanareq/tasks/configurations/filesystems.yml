@@ -14,5 +14,5 @@
 - name: Check if the required storage device for HANA VG is found
   fail:
     msg: "Could not find the required free {{ hana_disk_size }} storage devices for HANA VG"
-  when:  data_disk|length < 4
+  when:  data_disk|length < 3
 ...
