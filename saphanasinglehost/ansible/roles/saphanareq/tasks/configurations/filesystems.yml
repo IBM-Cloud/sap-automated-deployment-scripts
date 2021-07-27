@@ -36,10 +36,17 @@
 #     size: "{{ hana_data_lv_size }}"
 #     opts: -i3 -I256
 
-- name: Create a logical volume for HANA log 
+# - name: Create a logical volume for HANA log 
+#   lvol:
+#     vg: "{{ hana_sid|lower }}_hana_vg"
+#     lv: "{{ hana_sid|lower }}_hana_log_lv"
+#     size: "{{ hana_log_lv_size }}"
+#     opts: -i3 -I64
+
+- name: Create a logical volume for HANA shared 
   lvol:
     vg: "{{ hana_sid|lower }}_hana_vg"
-    lv: "{{ hana_sid|lower }}_hana_log_lv"
-    size: "{{ hana_log_lv_size }}"
-    opts: -i3 -I 64
+    lv: "{{ hana_sid|lower }}_hana_shared_lv"
+    size: "{{ hana_shared_lv_size }}"
+    opts: -i3
 ...
