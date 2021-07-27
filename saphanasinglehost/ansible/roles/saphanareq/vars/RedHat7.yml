@@ -33,9 +33,10 @@ saphana_required_package_groups:
   - "@base"
 
 saphana_required_configurations:
-  - "reqpkggroups"
-  - "reqpkg"
+#  - "reqpkggroups"
+#  - "reqpkg"
 #  - "update_os"
-  - "hostname"
-  - "tuned"
+#  - "hostname"
+#  - "tuned"
+  - "filesystems"
 ... 
