@@ -21,4 +21,11 @@
     vg: "{{ hana_sid|lower }}_hana_vg"
     pvs: "{{ data_disk }}"
     pesize: "32"
+
+- name: Create a logical volume for swap
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_swap_lv"
+    size: "{{ swap_lv_size }}"
+    opts: -i3
 ...
