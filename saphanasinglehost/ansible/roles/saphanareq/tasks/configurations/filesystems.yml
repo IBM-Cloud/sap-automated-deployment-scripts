@@ -19,6 +19,6 @@
 - name: Create a volume group for HANA DB
   lvg:
     vg: "{{ hana_sid|lower }}_hana_vg"
-    pvs: data_disk
+    pvs: "{{ data_disk }}"
     pesize: "32"
 ...
