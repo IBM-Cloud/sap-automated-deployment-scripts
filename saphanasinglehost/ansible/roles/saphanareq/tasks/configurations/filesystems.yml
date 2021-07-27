@@ -1,17 +1,17 @@
 ---
-- name: Get available storage devices for hana VG
-  set_fact: 
-    data_disk: "{{ data_disk|default([]) + [device.key] }}"
-  when:
-     - not device.value.partitions
-     - not device.value.holders
-     - device.key is search('vd')
-     - device.value.size == hana_disk_size
-  loop: "{{ ansible_devices | dict2items }}"
-  loop_control:
-    loop_var: device
+# - name: Get available storage devices for HANA VG
+#   set_fact: 
+#     data_disk: "{{ data_disk|default([]) + [device.key] }}"
+#   when:
+#      - not device.value.partitions
+#      - not device.value.holders
+#      - device.key is search('vd')
+#      - device.value.size == hana_disk_size
+#   loop: "{{ ansible_devices | dict2items }}"
+#   loop_control:
+#     loop_var: device
 
-- name: Check if the required storage device for hana VG is found
+- name: Check if the required storage device for HANA VG is found
   debug:
-    var: data_disk
+    var: hana_disk_size
 ...
