@@ -43,10 +43,17 @@
 #     size: "{{ hana_log_lv_size }}"
 #     opts: -i3 -I64
 
-- name: Create a logical volume for HANA shared 
+# - name: Create a logical volume for HANA shared 
+#   lvol:
+#     vg: "{{ hana_sid|lower }}_hana_vg"
+#     lv: "{{ hana_sid|lower }}_hana_shared_lv"
+#     size: "{{ hana_shared_lv_size }}"
+#     opts: -i3
+
+- name: Create a logical volume for /usr/sap 
   lvol:
     vg: "{{ hana_sid|lower }}_hana_vg"
-    lv: "{{ hana_sid|lower }}_hana_shared_lv"
-    size: "{{ hana_shared_lv_size }}"
-    opts: -i3
+    lv: "{{ hana_sid|lower }}_sap_lv"
+    size: "{{ sap_lv_size }}"
+    opts: -i3    
 ...
