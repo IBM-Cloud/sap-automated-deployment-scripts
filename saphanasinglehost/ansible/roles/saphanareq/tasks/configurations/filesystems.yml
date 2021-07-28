@@ -77,8 +77,14 @@
 #     fstype: xfs
 #     dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
 
-- name: Create filesystem for /usr/sap
-  filesystem:
-    fstype: xfs
-    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
+# - name: Create filesystem for /usr/sap
+#   filesystem:
+#     fstype: xfs
+#     dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
+
+- name: Add swap device to /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: "^/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
+    line: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
 ...
