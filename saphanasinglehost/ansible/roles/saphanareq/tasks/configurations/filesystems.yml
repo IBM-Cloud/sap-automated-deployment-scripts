@@ -88,6 +88,13 @@
 #     regexp: "^/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
 #     line: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
 
-- name: Mount swap volume
-  command: swapon -a
+# - name: Mount swap volume
+#   command: swapon -a
+
+- name: Mount /hana/data and add it to /etc/fstab
+  mount:
+    path: "/hana/data"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_data_lv"
+    fstype: xfs
+    state: mounted
 ...
