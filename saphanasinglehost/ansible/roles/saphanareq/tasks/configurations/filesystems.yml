@@ -50,10 +50,15 @@
 #     size: "{{ hana_shared_lv_size }}"
 #     opts: -i3
 
-- name: Create a logical volume for /usr/sap 
-  lvol:
-    vg: "{{ hana_sid|lower }}_hana_vg"
-    lv: "{{ hana_sid|lower }}_sap_lv"
-    size: "{{ sap_lv_size }}"
-    opts: -i3    
+# - name: Create a logical volume for /usr/sap 
+#   lvol:
+#     vg: "{{ hana_sid|lower }}_hana_vg"
+#     lv: "{{ hana_sid|lower }}_sap_lv"
+#     size: "{{ sap_lv_size }}"
+#     opts: -i3    
+
+- name: Create a swap filesystem
+  filesystem:
+    fstype: swap
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
 ...
