@@ -82,9 +82,12 @@
 #     fstype: xfs
 #     dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
 
-- name: Add swap device to /etc/fstab
-  lineinfile:
-    path: /etc/fstab
-    regexp: "^/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
-    line: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+# - name: Add swap device to /etc/fstab
+#   lineinfile:
+#     path: /etc/fstab
+#     regexp: "^/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
+#     line: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+
+- name: Mount swap volume
+  command: swapon -a
 ...
