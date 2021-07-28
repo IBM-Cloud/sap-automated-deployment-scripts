@@ -72,8 +72,13 @@
 #     fstype: xfs
 #     dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
 
-- name: Create filesystem for /hana/shared
+# - name: Create filesystem for /hana/shared
+#   filesystem:
+#     fstype: xfs
+#     dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+
+- name: Create filesystem for /usr/sap
   filesystem:
     fstype: xfs
-    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
 ...
