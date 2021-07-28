@@ -105,10 +105,17 @@
 #     fstype: xfs
 #     state: mounted
 
-- name: Mount /hana/shared and add it to /etc/fstab
+# - name: Mount /hana/shared and add it to /etc/fstab
+#   mount:
+#     path: "/hana/shared"
+#     src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+#     fstype: xfs
+#     state: mounted
+
+- name: Mount /usr/sap and add it to /etc/fstab
   mount:
-    path: "/hana/shared"
-    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+    path: "/usr/sap"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
     fstype: xfs
     state: mounted
 ...
