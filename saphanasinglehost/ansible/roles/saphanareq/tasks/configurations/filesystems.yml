@@ -91,10 +91,17 @@
 # - name: Mount swap volume
 #   command: swapon -a
 
-- name: Mount /hana/data and add it to /etc/fstab
+# - name: Mount /hana/data and add it to /etc/fstab
+#   mount:
+#     path: "/hana/data"
+#     src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_data_lv"
+#     fstype: xfs
+#     state: mounted
+
+- name: Mount /hana/log and add it to /etc/fstab
   mount:
-    path: "/hana/data"
-    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_data_lv"
+    path: "/hana/log"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
     fstype: xfs
     state: mounted
 ...
