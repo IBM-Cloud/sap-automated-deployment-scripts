@@ -98,10 +98,17 @@
 #     fstype: xfs
 #     state: mounted
 
-- name: Mount /hana/log and add it to /etc/fstab
+# - name: Mount /hana/log and add it to /etc/fstab
+#   mount:
+#     path: "/hana/log"
+#     src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
+#     fstype: xfs
+#     state: mounted
+
+- name: Mount /hana/shared and add it to /etc/fstab
   mount:
-    path: "/hana/log"
-    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
+    path: "/hana/shared"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
     fstype: xfs
     state: mounted
 ...
