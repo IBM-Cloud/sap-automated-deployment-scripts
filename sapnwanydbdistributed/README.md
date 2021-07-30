@@ -10,17 +10,20 @@ The VPC contains one subnet and one security group having three rules:
 The VSIs are configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64) and they have: at least two SSH keys configured to access as root user and the following storage volumes created for DB and SAP APP VSI:
 
 DB VSI Disks:
+- 1x 40 GB disk with 10 IOPS / GB - SWAP
 - 1 x 32 GB disk with 10 IOPS / GB - DATA (DB LOG)
 - 1x 64 GB disk with 10 IOPS / GB - DATA (DB ARCHIVE LOG)
 - 1 x 128/256 GB disk with 10 IOPS / GB - DATA
-- 1x 40 GB disk with 10 IOPS / GB - SWAP
 
 SAP APPs VSI Disks:
-- 1 x 128 GB disk with 10 IOPS / GB - DATA
 - 1x 40 GB disk with 10 IOPS / GB - SWAP
+- 1 x 128 GB disk with 10 IOPS / GB - DATA
+
 
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 Then edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and disk sizes in `input.auto.tfvars` like so:
+Volumes are created with the required size and are attached to the VSIs. The size for the volumes is defined as a list in the VOLUME_SIZES variable with each value specifing capacity for a volume in Gb.
+
 ```shell
 # General VPC variables:
 REGION        = "eu-de" # default value
@@ -34,16 +37,12 @@ IMAGE         = "ibm-redhat-7-6-amd64-sap-applications-1" # default value
 
 # SAP Database VSI variables:
 DB-HOSTNAME   = "ep12db"
-SWAP-DB       = "40"  # default value
-VOL1-DB       = "32"  # default value
-VOL2-DB       = "64"  # default value
-VOL3-DB       = "128" # default value
+DB-VOLUME_SIZES = [ "40" , "32" , "64" , "128" ]
 
 
 # SAP APPs VSI variables:
 APP-HOSTNAME  = "ep12app" # default value
-SWAP-APP      = "40"        # default value
-VOL1-APP      = "128"       # default value
+APP-VOLUME_SIZES= [ "40" , "128" ]
 ......
 ```
 

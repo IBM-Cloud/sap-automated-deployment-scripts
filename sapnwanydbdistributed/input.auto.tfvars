@@ -10,9 +10,9 @@ IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-1"
 
 # SAP Database VSI variables:
 DB-HOSTNAME		= "ep12db"
-DB-VOLUME_SIZES = [ "11" , "12" ]
+DB-VOLUME_SIZES = [ "40" , "32" , "64" , "128" ]
 
 # SAP APPs VSI variables:
 APP-HOSTNAME	= "ep12app"
-APP-VOLUME_SIZES= [ "13" , "14" , "15" ]
+APP-VOLUME_SIZES= [ "40" , "128" ]
 
