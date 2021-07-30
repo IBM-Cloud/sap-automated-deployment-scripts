@@ -22,7 +22,7 @@ SAP APPs VSI Disks:
 
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 Then edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and disk sizes in `input.auto.tfvars` like so:
-Volumes are created with the required size and are attached to the VSIs. The size for the volumes is defined as a list in the VOLUME_SIZES variable with each value specifing capacity for a volume in Gb.
+Volumes are created with the required size and are attached to the VSIs. The size for the volumes is defined as a list in the VOLUME_SIZES variable with each value specifing capacity for a volume in GB.
 
 ```shell
 # General VPC variables:
