@@ -1,5 +1,7 @@
 module "vpc" {
-  source		= "./modules/vpc/existing"
+# source		= "./modules/vpc/existing" # Uncomment out only this line to use an Existing IBM VPC #
+  source		= "./modules/vpc"   # Uncomment out only this line  for creating a NEW IBM VPC #
+
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP

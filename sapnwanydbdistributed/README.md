@@ -56,6 +56,19 @@ Files description and structure:
  - `versions.tf` - contains the minimum required versions for terraform and IBM Cloud provider.
 
 
+ ## VPC Configuration
+
+ The scripts create a new VPC with Subnet, Security Group and Security rules.
+ If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/main.tf` file as below and add the names to `input.auto.tfvars`
+
+ ```shell
+ module "vpc" {
+  source		= "./modules/vpc/existing" # Uncomment out only this line to use an Existing IBM VPC #
+ # source		= "./modules/vpc"   # Uncomment out only this line  for creating a NEW IBM VPC #
+
+ ```
+
+
 Steps to reproduce:
 
 ```shell
