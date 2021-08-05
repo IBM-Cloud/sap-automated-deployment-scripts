@@ -37,6 +37,6 @@ saphana_required_configurations:
   - "reqpkg"
   - "update_os"
   - "hostname"
-#  - "tuned"
+  - "tuned"
   - "filesystems"
 ... 
