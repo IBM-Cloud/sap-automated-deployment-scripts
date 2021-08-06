@@ -43,5 +43,6 @@ saphana_required_configurations:
   #- "symlinks"
   #- "firewalld"
   #- "abrtd"
-  - "limits"
+  - "kdump"
+  #- "limits"
 ... 
