@@ -28,8 +28,10 @@
 - name: Set core limits 
   lineinfile:
     path: /etc/security/limits.conf
-    line: "{{ item }}"
+    line: "{{ corelimit }}"
   loop:
     - "* soft core 0"
     - "* hard core 0"
+  loop_control:
+    loop_var: corelimit
 ...
