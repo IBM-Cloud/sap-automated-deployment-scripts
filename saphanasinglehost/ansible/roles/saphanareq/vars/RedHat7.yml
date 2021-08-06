@@ -43,6 +43,7 @@ saphana_required_configurations:
   #- "symlinks"
   #- "firewalld"
   #- "abrtd"
-  - "kdump"
+  #- "kdump"
   #- "limits"
+  - "kernel_RedHat7"
 ... 
