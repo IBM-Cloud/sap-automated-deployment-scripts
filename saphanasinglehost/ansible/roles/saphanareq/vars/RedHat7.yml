@@ -39,5 +39,6 @@ saphana_required_configurations:
   #- "hostname"
   #- "filesystems"
   #- "tuned"
-  - "SELinux"
+  #- "SELinux"
+  - "symlinks"
 ... 

@@ -1,0 +1,4 @@
+---
+- name: Create link to ssl lib
+  command: ln -s /usr/lib64/libssl.so.10 /usr/lib64/libssl.so.1.0.1
+...
