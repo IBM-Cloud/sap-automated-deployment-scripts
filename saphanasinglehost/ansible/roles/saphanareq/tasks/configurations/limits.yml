@@ -25,4 +25,11 @@
   loop_control:
     loop_var: ltype
 
+- name: Set core limits 
+  lineinfile:
+    path: /etc/security/limits.conf
+    line: "{{ item }}"
+  loop:
+    - "* soft core 0"
+    - "* hard core 0"
 ...
