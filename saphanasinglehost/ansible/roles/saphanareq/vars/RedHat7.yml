@@ -40,5 +40,6 @@ saphana_required_configurations:
   #- "filesystems"
   #- "tuned"
   #- "SELinux"
-  - "symlinks"
+  #- "symlinks"
+  - "firewalld"
 ... 
