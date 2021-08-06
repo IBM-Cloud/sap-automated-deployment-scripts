@@ -42,5 +42,6 @@ saphana_required_configurations:
   #- "SELinux"
   #- "symlinks"
   #- "firewalld"
-  - "abrtd"
+  #- "abrtd"
+  - "limits"
 ... 
