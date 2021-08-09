@@ -29,7 +29,8 @@ VPC           = "ic4sap"
 SECURITYGROUP = "ic4sap-securitygroup"
 SUBNET        = "ic4sap-subnet"
 SSH_KEYS      = [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
-PROFIL        = "bx2-4x16" # default recommended value; For any manual change in the terraform code, you have to make sure that you use a certified image based on the SAP NOTE: 2927211.
+PROFIL        = "bx2-4x16" # default recommended value; For any manual change in the 
+#terraform code, you have to make sure that you use a certified image based on the SAP NOTE: 2927211.
 IMAGE         = "ibm-redhat-7-6-amd64-sap-applications-1" # default recommended value
 
 # SAP Database VSI variables:
