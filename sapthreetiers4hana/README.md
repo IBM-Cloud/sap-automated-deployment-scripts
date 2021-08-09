@@ -1,4 +1,4 @@
-# Three Tier SAP S/4 Hana on Hana 2.0 application Terraform Framework Stack Deployment
+# Three Tier SAP S/4 Hana Terraform Framework with Hana 2.0 application  Stack Deployment
 
 This is an Automatic Framework Terraform IAC deployment of SAP certified IaaS with necessary storage, network configurations and OS SAP prerequisites basic configs.
 
