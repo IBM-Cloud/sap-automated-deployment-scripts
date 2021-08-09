@@ -7,10 +7,13 @@ module "vpc" {
   SUBNET		= var.SUBNET
 }
 */
+
 module "volumes" {
   source		= "./modules/volumes"
   ZONE			= var.ZONE
   HOSTNAME		= var.HOSTNAME
+  VOL_PROFILE	= var.VOL_PROFILE
+  VOL_IOPS		= var.VOL_IOPS
   VOL1			= var.VOL1
   VOL2			= var.VOL2
   VOL3			= var.VOL3
