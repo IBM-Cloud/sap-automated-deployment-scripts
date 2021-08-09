@@ -34,7 +34,7 @@ IMAGE         = "ibm-redhat-7-6-amd64-sap-applications-1" # default value
 
 # SAP Database VSI variables:
 DB-HOSTNAME   = "is110db"
-DB-VOLUME_SIZES = [ "500" , "500" , "500"
+DB-VOLUME_SIZES = [ "500" , "500" , "500" ]
 
 
 # SAP APPs VSI variables:
