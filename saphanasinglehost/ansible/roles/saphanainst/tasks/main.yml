@@ -1,2 +1,4 @@
 ---
+- name: Import install kit
+  include_tasks: "install_kit.yml"
 ...

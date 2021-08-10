@@ -1,0 +1,8 @@
+---
+- name: Create /usr/sap/kit directory
+  file:
+    path: "{{ hana_kit }}"
+    state: directory
+    mode: 0777
+
+...   
