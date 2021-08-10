@@ -6,5 +6,5 @@
 hana_sid: "HDB"
 
 #SAP HANA Installation kit path
-kit_saphana_file: "/storage/HANA/Server/H20SPS05rev52/51054623.ZIP"
+kit_saphana_file: "/storage/HANADB/51054623.ZIP"
 ...
