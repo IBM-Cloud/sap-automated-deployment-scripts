@@ -5,17 +5,17 @@
     state: directory
     mode: 0777
 
-# - name: Copy "{{ kit_saphana_file }}" kit to target
-#   copy:
-#     src: "{{ kit_saphana_file }}"
-#     dest: "{{ hana_kit }}"
-#     owner: root
-#     group: root
-#     mode: 0777
-
-- name: Extract "{{ kit_saphana_file }}" to target
-  unarchive:
+- name: Copy "{{ kit_saphana_file }}" kit to target
+  copy:
     src: "{{ kit_saphana_file }}"
     dest: "{{ hana_kit }}"
-    remote_src: no
+    owner: root
+    group: root
+    mode: 0777
+
+# - name: Extract "{{ kit_saphana_file }}" to target
+#   unarchive:
+#     src: "{{ kit_saphana_file }}"
+#     dest: "{{ hana_kit }}"
+#     remote_src: no
 ...
