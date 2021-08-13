@@ -1,6 +1,6 @@
 ---
-- name: Import install kit
-  include_tasks: "install_kit.yml"
+# - name: Import install kit
+#   include_tasks: "install_kit.yml"
 
 - name: Generate parameter file for hdblcm
   template:
