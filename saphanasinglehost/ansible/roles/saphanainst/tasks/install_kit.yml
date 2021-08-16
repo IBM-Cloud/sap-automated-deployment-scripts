@@ -13,9 +13,9 @@
     group: root
     mode: 0777
 
-# - name: Extract "{{ kit_saphana_file }}" to target
-#   unarchive:
-#     src: "{{ kit_saphana_file }}"
-#     dest: "{{ hana_kit }}"
-#     remote_src: no
+- name: Extract "{{ kit_saphana_file }}" to target
+  unarchive:
+    src: "{{ kit_saphana_file }}"
+    dest: "{{ hana_kit }}"
+    remote_src: no
 ...
