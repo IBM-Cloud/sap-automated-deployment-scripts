@@ -5,9 +5,9 @@
 #HANA DB configuration
 hana_sid: "HDB"
 hana_sysno: "00"
-hana_use_master_password: "y"
+#hana_use_master_password: "y"
 hana_master_password: ""
-hana_system_password: ""
+#hana_system_password: ""
 
 #SAP HANA Installation kit path
 kit_saphana_file: "/storage/HANADB/DATA_UNITS/HDB_SERVER_LINUX_X86_64"
