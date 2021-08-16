@@ -6,4 +6,7 @@
   template:
       src: hanaconfig.cfg
       dest: "{{ hana_kit }}/hanaconfig.cfg"
+
+- name: Start SAP HANA DB installation
+  shell: "{{ hana_kit }}/HDB_SERVER_LINUX_X86_64/hdblcm --configfile={{ hana_kit }}/hanaconfig.cfg -b"
 ...
