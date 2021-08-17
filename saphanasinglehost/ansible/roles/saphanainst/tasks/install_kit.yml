@@ -13,9 +13,14 @@
 #     group: root
 #     mode: 0777
 
-- name: Extract "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}" to target
-  unarchive:
-    src: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
-    dest: "{{ hana_kit }}"
-    remote_src: yes
+# - name: Extract "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}" to target
+#   unarchive:
+#     src: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
+#     dest: "{{ hana_kit }}"
+#     remote_src: yes
+
+- name: Cleanup
+  file:
+    path: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
+    state: absent
 ...
