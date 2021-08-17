@@ -9,4 +9,9 @@
 
 - name: Start SAP HANA DB installation
   shell: "{{ hana_kit }}/DATA_UNITS/HDB_SERVER_LINUX_X86_64/hdblcm --configfile={{ hana_kit }}/hanaconfig.cfg -b"
+
+- name: Cleanup
+  file:
+    path: "{{ hana_kit }}"
+    state: absent
 ...
