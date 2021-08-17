@@ -6,6 +6,8 @@
 hana_sid: "HDB"
 hana_sysno: "00"
 hana_master_password: ""
+hana_system_usage: "custom"
+hana_components: "server"
 
 #SAP HANA Installation kit path
 kit_saphana_file: "/storage/HANADB/51054623.ZIP"
