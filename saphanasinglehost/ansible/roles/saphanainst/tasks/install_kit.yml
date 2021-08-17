@@ -12,4 +12,9 @@
     owner: root
     group: root
     mode: 0777
+  register: hana_file
+
+- name: Print debug
+  debug:
+    var: hana_file
 ...
