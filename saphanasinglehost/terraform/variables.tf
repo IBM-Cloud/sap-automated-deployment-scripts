@@ -40,18 +40,6 @@ variable "SSH_KEYS" {
 	description = "SSH Keys ID list to access the VSI"
 }
 
-variable "VOL_PROFILE" {
-	type		= string
-	description = "Volume Profile"
-	default		= "custom"
-}
-
-variable "VOL_IOPS" {
-	type		= string
-	description = "Volume IOPS"
-	default		= "2000"
-}
-
 variable "VOL1" {
 	type		= string
 	description = "Volume 1 Size"

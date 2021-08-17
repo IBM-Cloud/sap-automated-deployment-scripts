@@ -12,8 +12,8 @@ module "volumes" {
   source		= "./modules/volumes"
   ZONE			= var.ZONE
   HOSTNAME		= var.HOSTNAME
-  VOL_PROFILE	= var.VOL_PROFILE
-  VOL_IOPS		= var.VOL_IOPS
+  VOL_PROFILE	= "custom"
+  VOL_IOPS		= "10000"
   VOL1			= var.VOL1
   VOL2			= var.VOL2
   VOL3			= var.VOL3
