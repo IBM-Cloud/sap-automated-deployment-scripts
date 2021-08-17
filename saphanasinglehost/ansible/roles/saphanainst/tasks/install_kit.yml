@@ -1,20 +1,19 @@
 ---
-- name: Create /usr/sap/kit directory
-  file:
-    path: "{{ hana_kit }}"
-    state: directory
-    mode: 0777
+# - name: Create /usr/sap/kit directory
+#   file:
+#     path: "{{ hana_kit }}"
+#     state: directory
+#     mode: 0777
 
-- name: Copy "{{ kit_saphana_file }}" kit to target
-  copy:
-    src: "{{ kit_saphana_file }}"
-    dest: "{{ hana_kit }}"
-    owner: root
-    group: root
-    mode: 0777
-  register: hana_file
+# - name: Copy "{{ kit_saphana_file }}" kit to target
+#   copy:
+#     src: "{{ kit_saphana_file }}"
+#     dest: "{{ hana_kit }}"
+#     owner: root
+#     group: root
+#     mode: 0777
 
 - name: Print debug
   debug:
-    var: hana_file
+    msg: "{{ hana_kit }}"
 ...
