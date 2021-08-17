@@ -15,5 +15,5 @@
 
 - name: Print debug
   debug:
-    msg: "{{ kit_saphana_file.split('/')[-1] }}"
+    msg: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
 ...
