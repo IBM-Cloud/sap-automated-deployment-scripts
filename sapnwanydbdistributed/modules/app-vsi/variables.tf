@@ -42,3 +42,8 @@ variable "VOLUME_SIZES" {
     type = list(string)
     description = "List of volume sizes in GB to be created"
 }
+
+variable "VOL_PROFILE" {
+    type = string
+    description = "Volume profile"
+}

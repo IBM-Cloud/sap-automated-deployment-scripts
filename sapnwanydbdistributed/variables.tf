@@ -45,19 +45,7 @@ variable "DB-HOSTNAME" {
 	description = "DB VSI Hostname"
 }
 
-variable "DB-VOLUME_SIZES" {
-	type		= list(string)
-	description = "DB list of volume sizes in GB to be created"
-	default		= [ "40" , "32" , "64" , "128" ]
-}
-
 variable "APP-HOSTNAME" {
 	type		= string
 	description = "APP VSI Hostname"
-}
-
-variable "APP-VOLUME_SIZES" {
-	type		= list(string)
-	description = "APP list of volume sizes in GB to be created"
-	default		= [ "40" , "128" ]
 }
