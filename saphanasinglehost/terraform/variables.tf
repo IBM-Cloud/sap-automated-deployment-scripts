@@ -58,3 +58,34 @@ variable "VOL3" {
 	default		= "10"
 }
 
+variable "hana_sid" {
+	type		= string
+	description = "hana_sid"
+}
+
+variable "hana_sysno" {
+	type		= string
+	description = "hana_sysno"
+}
+
+variable "hana_master_password" {
+	type		= string
+	description = "hana_master_password"
+}
+
+variable "hana_system_usage" {
+	type		= string
+	description = "hana_system_usage"
+	default		= "custom"
+}
+
+variable "hana_components" {
+	type		= string
+	description = "hana_components"
+	default		= "server"
+}
+
+variable "kit_saphana_file" {
+	type		= string
+	description = "kit_saphana_file"
+}
