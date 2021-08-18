@@ -6,22 +6,12 @@ data "ibm_is_security_group" "securitygroup" {
   name		= var.SECURITYGROUP
 }
 
-
 data "ibm_is_subnet" "subnet" {
   name		= var.SUBNET
 }
 
 data "ibm_is_image" "image" {
   name		= var.IMAGE
-}
-
-resource "ibm_is_volume" "vol" {
-
-count = length( var.VOLUME_SIZES )
-  name		= "${var.HOSTNAME}-vol${count.index}"
-  profile	= "10iops-tier"
-  zone		= var.ZONE
-  capacity	= var.VOLUME_SIZES[count.index]
 }
 
 resource "ibm_is_instance" "vsi" {
