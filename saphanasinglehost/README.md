@@ -16,7 +16,7 @@ TBD
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
 ## VSI Configuration
-The VSI is configured with Red Hat Enterprise Linux 7.6 for SAP HANA (amd64), has two SSH keys configured to access as root user on SSH and 3 storage volumes as described below in 
+The VSI is configured with Red Hat Enterprise Linux 7.6 for SAP HANA (amd64), has two SSH keys configured to access as root user on SSH and 3 storage volumes as described below in
 the file `input.auto.tfvars`
 
 ## Input parameter file
@@ -25,10 +25,10 @@ Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and st
 ```shell
 #Infra VPC variables
 ZONE			= "eu-de-2"
-VPC			= "sap"
-SECURITYGROUP		= "sap-securitygroup"
-SUBNET			= "sap-subnet"
-HOSTNAME		= "db2saps1"
+VPC				= "ic4sap"
+SECURITYGROUP	= "ic4sap-securitygroup"
+SUBNET			= "ic4sap-subnet"
+HOSTNAME		= "saphanamr1"
 PROFILE			= "mx2-16x128"
 IMAGE			= "ibm-redhat-7-6-amd64-sap-hana-1"
 SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
@@ -52,30 +52,22 @@ VOL[number] | The sizes for the disks in GB to be attached to the VSI and used b
 Edit your SAP system configuration variables that will be passed to the ansible automated deployment: TBD
 
 ```shell
-##SAP system configuration
-sap_sid	= "NWS"
-sap_ci_instance_number = "00"
-sap_ascs_instance_number = "01"
-sap_master_password = "Password#1"
+#HANA DB configuration
+hana_sid = "MR1"
+hana_sysno = "00"
+hana_master_password = ""
+hana_system_usage = "custom"  # default	value is: "custom"
+hana_components = "server"    # default	value is: "server"
 
-#Kits paths
-kit_sapcar_file = "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"
-kit_swpm_file =  "/storage/NW75DB2/SWPM10SP31_7-20009701.SAR"
-kit_saphostagent_file = "/storage/NW75DB2/SAPHOSTAGENT51_51-20009394.SAR"
-kit_sapexe_file = "/storage/NW75DB2/SAPEXE_800-80002573.SAR"
-kit_sapexedb_file = "/storage/NW75DB2/SAPEXEDB_800-80002603.SAR"
-kit_igsexe_file = "/storage/NW75DB2/igsexe_13-80003187.sar"
-kit_igshelper_file = "/storage/NW75DB2/igshelper_17-10010245.sar"
-kit_export_dir = "/storage/NW75DB2/51050829"
-kit_db2_dir = "/storage/NW75DB2/51051007/DB2_FOR_LUW_10.5_FP7SAP2_LINUX_"
-kit_db2client_dir = "/storage/NW75DB2/51051049"
+#SAP HANA Installation kit path
+kit_saphana_file = "/storage/HANADB/51054623.ZIP"
 
 ```
 **SAP input parameters:**
 
 Parameter | Description | Requirements
 ----------|-------------|-------------
-sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>| 
+sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>|
 sap_ci_instance_number | Technical identifier for internal processes of CI| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
 sap_ascs_instance_number | Technical identifier for internal processes of ASCS| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
 sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
