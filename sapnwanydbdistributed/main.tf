@@ -1,6 +1,6 @@
 module "vpc" {
-# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
-  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
+  source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
+# source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
 
   ZONE			= var.ZONE
   VPC			= var.VPC

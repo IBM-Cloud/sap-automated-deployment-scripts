@@ -23,18 +23,6 @@ variable "SECURITYGROUP" {
 	description = "Security group name"
 }
 
-variable "PROFILE" {
-	type		= string
-	description = "VSI Profile"
-	default		= "bx2-4x16"
-}
-
-variable "IMAGE" {
-	type		= string
-	description = "VSI OS Image"
-	default		= "ibm-redhat-7-6-amd64-sap-applications-1"
-}
-
 variable "SSH_KEYS" {
 	type		= list(string)
 	description = "SSH Keys ID list to access the VSI"
@@ -45,7 +33,32 @@ variable "DB-HOSTNAME" {
 	description = "DB VSI Hostname"
 }
 
+variable "DB-PROFILE" {
+	type		= string
+	description = "DB VSI Profile"
+	default		= "mx2-16x128"
+}
+
+variable "DB-IMAGE" {
+	type		= string
+	description = "DB VSI OS Image"
+	default		= "ibm-redhat-7-6-amd64-sap-hana-1"
+}
+
 variable "APP-HOSTNAME" {
 	type		= string
 	description = "APP VSI Hostname"
 }
+
+variable "APP-PROFILE" {
+	type		= string
+	description = "VSI Profile"
+	default		= "bx2-4x16"
+}
+
+variable "APP-IMAGE" {
+	type		= string
+	description = "VSI OS Image"
+	default		= "ibm-redhat-7-6-amd64-sap-applications-1"
+}
+

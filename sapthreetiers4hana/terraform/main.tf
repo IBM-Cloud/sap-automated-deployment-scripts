@@ -16,8 +16,8 @@ module "db-vsi" {
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
   HOSTNAME		= var.DB-HOSTNAME
-  PROFILE		= var.PROFILE
-  IMAGE			= var.IMAGE
+  PROFILE		= var.DB-PROFILE
+  IMAGE			= var.DB-IMAGE
   SSH_KEYS		= var.SSH_KEYS
   VOLUME_SIZES	= [ "500" , "500" , "500" ]
   VOL_PROFILE	= "custom"
@@ -32,8 +32,8 @@ module "app-vsi" {
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
   HOSTNAME		= var.APP-HOSTNAME
-  PROFILE		= var.PROFILE
-  IMAGE			= var.IMAGE
+  PROFILE		= var.APP-PROFILE
+  IMAGE			= var.APP-IMAGE
   SSH_KEYS		= var.SSH_KEYS
   VOLUME_SIZES	= [ "40" , "128" ]
   VOL_PROFILE	= "10iops-tier"
