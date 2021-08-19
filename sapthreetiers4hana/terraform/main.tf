@@ -8,6 +8,7 @@ module "vpc" {
   SUBNET		= var.SUBNET
 }
 
+/*
 module "db-vsi" {
   source		= "./modules/db-vsi"
   depends_on	= [ module.vpc ]
@@ -23,6 +24,7 @@ module "db-vsi" {
   VOL_PROFILE	= "custom"
   VOL_IOPS		= "10000"
 }
+*/
 
 module "app-vsi" {
   source		= "./modules/app-vsi"
