@@ -1,3 +1,4 @@
+/*
 output "DB-HOSTNAME" {
   value		= module.db-vsi.HOSTNAME
 }
@@ -9,6 +10,8 @@ output "DB-FLOATING-IP" {
 output "DB-PRIVATE-IP" {
   value		= module.db-vsi.PRIVATE-IP
 }
+*/
+
 
 output "APP-HOSTNAME" {
   value		= module.app-vsi.HOSTNAME
