@@ -1,2 +1,8 @@
 ---
+s4app_required_packages:
+s4app_required_package_groups:
+s4app_required_configurations:
+  - "reqpkggroups"
+  - "reqpkg"
+  - "update_os"
 ...

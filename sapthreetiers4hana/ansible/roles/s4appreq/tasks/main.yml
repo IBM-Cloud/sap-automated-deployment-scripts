@@ -1,4 +1,8 @@
 ---
 - name: Import OS distribution variables
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: Make specific OS configurations as recommended by SAP for S4HANA APP
+  include_tasks: "configurations/{{ item }}.yml"
+  loop: "{{ s4app_required_configurations }}"
 ...
