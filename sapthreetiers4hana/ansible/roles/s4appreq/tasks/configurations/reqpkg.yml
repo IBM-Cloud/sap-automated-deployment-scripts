@@ -1,0 +1,6 @@
+---
+- name: Import required packages
+  package:
+    state: present
+    name: "{{ s4app_required_packages }}"
+...
