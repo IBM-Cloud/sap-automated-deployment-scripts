@@ -60,9 +60,9 @@ Files description and structure:
  If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/main.tf` file as below and add the names to `input.auto.tfvars`
 
  ```shell
- module "vpc" {
-  source		= "./modules/vpc/existing" # Uncomment out only this line to use an Existing IBM VPC #
- # source		= "./modules/vpc"   # Uncomment out only this line  for creating a NEW IBM VPC #
+module "vpc" {
+# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
+  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
 
  ```
 
