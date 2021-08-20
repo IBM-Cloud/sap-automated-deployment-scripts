@@ -1,5 +1,10 @@
 ---
 s4app_required_packages:
+  - uuidd
+  - compat-libstdc++-33
+  - lvm2
+  - tcsh
+  - ksh
 s4app_required_package_groups:
   - "@large-systems"
   - "@network-file-system-client"
