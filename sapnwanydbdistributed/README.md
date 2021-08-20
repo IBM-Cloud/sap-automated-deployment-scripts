@@ -23,7 +23,6 @@ SAP APPs VSI Disks:
 
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 Then edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and disk sizes in `input.auto.tfvars` like so:
-Volumes are created with the required size and are attached to the VSIs. The size for the volumes is defined as a list in the VOLUME_SIZES variable with each value specifing capacity for a volume in GB.
 
 ```shell
 # General VPC variables:
@@ -33,17 +32,15 @@ VPC           = "ic4sap"
 SECURITYGROUP = "ic4sap-securitygroup"
 SUBNET        = "ic4sap-subnet"
 SSH_KEYS      = [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
-PROFIL        = "bx2-4x16" # default value
+PROFILE        = "bx2-4x16" # default value
 IMAGE         = "ibm-redhat-7-6-amd64-sap-applications-1" # default value
 
 # SAP Database VSI variables:
 DB-HOSTNAME   = "ep12db"
-DB-VOLUME_SIZES = [ "40" , "32" , "64" , "128" ]
 
 
 # SAP APPs VSI variables:
 APP-HOSTNAME  = "ep12app" # default value
-APP-VOLUME_SIZES= [ "40" , "128" ]
 ......
 ```
 
