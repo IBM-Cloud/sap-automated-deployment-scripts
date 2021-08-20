@@ -1,6 +1,10 @@
 ---
 s4app_required_packages:
 s4app_required_package_groups:
+  - "@large-systems"
+  - "@network-file-system-client"
+  - "@performance"
+  - "@compat-libraries"
 s4app_required_configurations:
   - "reqpkggroups"
   - "reqpkg"
