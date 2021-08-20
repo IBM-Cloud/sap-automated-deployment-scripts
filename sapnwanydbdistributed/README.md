@@ -2,8 +2,9 @@
 
 This is an Automatic Framework Terraform IAC deployment of SAP certified IaaS with necessary storage, network configurations and OS SAP prerequisites basic configs.
 
-The VPC contains one subnet and one security group having three rules:
-- Allow all outbound traffic from the VSI
+The VPC contains one subnet and one security group having these rules:
+- Allow all traffic in the Security group
+- Allow all outbound traffic
 - Allow inbound DNS traffic (UDP port 53)
 - Allow inbound SSH traffic (TCP port 22)
 
