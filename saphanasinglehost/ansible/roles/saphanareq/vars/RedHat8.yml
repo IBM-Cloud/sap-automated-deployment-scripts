@@ -45,4 +45,5 @@ saphana_required_configurations:
   - "abrtd"
   - "kdump"
   - "limits"
+  - "tmpfiles"
 ... 
