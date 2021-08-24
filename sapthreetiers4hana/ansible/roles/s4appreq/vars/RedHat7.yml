@@ -18,4 +18,5 @@ s4app_required_configurations:
   - "firewalld"
   - "uuidd"
   - "SELinux"
+  - "kernel_RedHat7"
 ...
