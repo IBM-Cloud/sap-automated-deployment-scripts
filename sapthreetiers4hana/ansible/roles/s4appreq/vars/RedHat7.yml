@@ -17,4 +17,5 @@ s4app_required_configurations:
   - "hostname"
   - "firewalld"
   - "uuidd"
+  - "SELinux"
 ...
