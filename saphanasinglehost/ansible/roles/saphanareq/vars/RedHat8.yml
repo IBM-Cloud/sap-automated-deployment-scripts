@@ -33,16 +33,16 @@ saphana_required_packages:
   - chrony 
 
 saphana_required_configurations:
+  - "hostname"
+  - "kernel_RedHat8"
   - "update_os"
   - "reqpkg"
-  - "hostname"
   - "filesystems"
   - "tuned"
   - "SELinux"
-  - "symlinks"
   - "firewalld"
+  - "uuidd"
   - "abrtd"
   - "kdump"
   - "limits"
-  - "kernel_RedHat7"
 ... 
