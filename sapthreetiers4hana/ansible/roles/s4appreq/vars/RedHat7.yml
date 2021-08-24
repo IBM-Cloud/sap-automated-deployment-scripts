@@ -16,4 +16,5 @@ s4app_required_configurations:
   #- "update_os"
   - "hostname"
   - "firewalld"
+  - "uuidd"
 ...
