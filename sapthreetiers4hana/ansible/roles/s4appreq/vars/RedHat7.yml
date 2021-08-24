@@ -15,4 +15,5 @@ s4app_required_configurations:
   #- "reqpkg"
   #- "update_os"
   - "hostname"
+  - "firewalld"
 ...
