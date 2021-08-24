@@ -11,7 +11,8 @@ s4app_required_package_groups:
   - "@performance"
   - "@compat-libraries"
 s4app_required_configurations:
-  - "reqpkggroups"
-  - "reqpkg"
-  - "update_os"
+  #- "reqpkggroups"
+  #- "reqpkg"
+  #- "update_os"
+  - "hostname"
 ...
