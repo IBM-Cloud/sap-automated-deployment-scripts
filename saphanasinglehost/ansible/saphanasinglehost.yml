@@ -6,5 +6,5 @@
       include_vars: "saphanasinglehost-vars.yml"
   roles:
     - saphanareq
-    - saphanainst
+#    - saphanainst
 ...
