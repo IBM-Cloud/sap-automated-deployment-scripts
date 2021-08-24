@@ -1,0 +1,17 @@
+---
+- name: Set recommended kernel parameters for SAP HANA DB on RedHat 8
+  sysctl:
+    sysctl_file: /etc/sysctl.d/sap.conf
+    name: "{{ kernel_param.name }}"
+    value: "{{ kernel_param.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  loop:
+    - { name: net.core.somaxconn, value: 4096 }
+    - { name: net.ipv4.tcp_max_syn_backlog, value: 8192 }
+    - { name: net.ipv4.tcp_slow_start_after_idle, value: 0 }
+    - { name: net.ipv4.tcp_syn_retries, value: 8 } 
+  loop_control:
+    loop_var: kernel_param  
+...
