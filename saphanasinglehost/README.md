@@ -28,7 +28,7 @@ ZONE			= "eu-de-2"
 VPC				= "ic4sap"
 SECURITYGROUP	= "ic4sap-securitygroup"
 SUBNET			= "ic4sap-subnet"
-HOSTNAME		= "saphanamr1"
+HOSTNAME		= "saphanahost"
 PROFILE			= "mx2-16x128"
 IMAGE			= "ibm-redhat-7-6-amd64-sap-hana-1"
 SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
@@ -53,7 +53,7 @@ Edit your SAP system configuration variables that will be passed to the ansible 
 
 ```shell
 #HANA DB configuration
-hana_sid = "MR1"
+hana_sid = "HDB"
 hana_sysno = "00"
 hana_master_password = ""
 hana_system_usage = "custom"  # default	value is: "custom"
@@ -67,21 +67,12 @@ kit_saphana_file = "/storage/HANADB/51054623.ZIP"
 
 Parameter | Description | Requirements
 ----------|-------------|-------------
-sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>|
-sap_ci_instance_number | Technical identifier for internal processes of CI| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
-sap_ascs_instance_number | Technical identifier for internal processes of ASCS| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
+hana_sid | The SAP system ID identifies the SAP HANA system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>|
+hana_sysno | Specifies the instance number of the SAP HANA system| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
 sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
-kit_sapcar_file  | Path to sapcar binary | As downloaded from SAP Support Portal
-kit_swpm_file | Path to SWPM archive (SAR) | As downloaded from SAP Support Portal
-kit_saphostagent_file | Path to SAP Host Agent archive (SAR) | As downloaded from SAP Support Portal
-kit_sapexe_file | Path to SAP Kernel OS archive (SAR) | As downloaded from SAP Support Portal
-kit_sapexedb_file | Path to SAP Kernel DB archive (SAR) | As downloaded from SAP Support Portal
-kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Portal
-kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
-kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
-kit_db2_dir | Path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
-kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
-
+hana_system_usage  | System Usage | Default: custom; Valid values: production, test, development, custom
+hana_components | SAP HANA Components | Default: server; Valid values: all, client, es, ets, lcapps, server, smartda, streaming, rdsync, xs, studio, afl, sca, sop, eml, rme, rtl, trp
+kit_saphana_file | Path to SAP HANA ZIP file | As downloaded from SAP Support Portal
 
 ## VPC Configuration
 
