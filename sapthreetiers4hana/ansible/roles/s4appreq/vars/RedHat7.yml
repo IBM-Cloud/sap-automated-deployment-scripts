@@ -11,14 +11,14 @@ s4app_required_package_groups:
   - "@performance"
   - "@compat-libraries"
 s4app_required_configurations:
+  - "hostname"
+  - "kernel_RedHat7"
+  - "update_os"
   - "reqpkggroups"
   - "reqpkg"
-  - "update_os"
-  - "hostname"
   - "firewalld"
   - "uuidd"
   - "SELinux"
-  - "kernel_RedHat7"
   - "limits"
   - "tmpfiles"
 ...
