@@ -1,2 +1,13 @@
 ---
+- name: Get available storage devices for swap
+  set_fact: 
+    swap_disk: "{{ swap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == swap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
 ...
