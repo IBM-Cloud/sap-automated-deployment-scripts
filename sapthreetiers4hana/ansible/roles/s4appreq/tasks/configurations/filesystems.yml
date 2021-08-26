@@ -84,4 +84,9 @@
   filesystem:
     fstype: ext4
     dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+
+- name: Create filesystem for /usr/sap/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
 ...
