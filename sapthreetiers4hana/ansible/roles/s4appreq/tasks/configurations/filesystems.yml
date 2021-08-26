@@ -38,4 +38,10 @@
   fail:
     msg: "Could not find a free {{ sap_disk_size }} storage device for SAP instance"
   when:  sap_disk is not defined
+
+- name: Create a volume group for SAP instance
+  lvg:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    pvs: "/dev/{{ sap_disk[0] }}"
+    pesize: "32"
 ...
