@@ -122,4 +122,11 @@
     src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
     fstype: ext4
     state: mounted
+
+- name: Mount /sapmnt/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/sapmnt/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+    fstype: ext4
+    state: mounted
 ...
