@@ -21,4 +21,16 @@
     vg: "{{ sap_sid|lower }}_swap_vg"
     pvs: "/dev/{{ swap_disk[0] }}"
     pesize: "32"
+
+- name: Get available storage devices for SAP instance
+  set_fact: 
+    sap_disk: "{{ sap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == sap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
 ...
