@@ -44,4 +44,10 @@
     vg: "{{ sap_sid|lower }}_app_vg"
     pvs: "/dev/{{ sap_disk[0] }}"
     pesize: "32"
+
+- name: Create a logical volume for swap
+  lvol:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    lv: "{{ sap_sid|lower }}_swap_lv"
+    size: "{{ swap_lv_size }}"
 ...
