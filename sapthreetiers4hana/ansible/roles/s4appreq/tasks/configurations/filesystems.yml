@@ -129,4 +129,11 @@
     src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
     fstype: ext4
     state: mounted
+
+- name: Mount /usr/sap/trans and add it to /etc/fstab
+  mount:
+    path: "/usr/sap/trans"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
+    fstype: ext4
+    state: mounted
 ...
