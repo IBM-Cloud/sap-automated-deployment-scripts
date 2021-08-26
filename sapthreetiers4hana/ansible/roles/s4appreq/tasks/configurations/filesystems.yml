@@ -105,4 +105,7 @@
     path: /etc/fstab
     regexp: "^/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
     line: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+
+- name: Mount swap volume
+  command: swapon -a
 ...
