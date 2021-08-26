@@ -68,4 +68,10 @@
     vg: "{{ sap_sid|lower }}_app_vg"
     lv: "{{ sap_sid|lower }}_sapmnt_lv"
     size: "{{ sapmnt_lv_size }}"
+
+- name: Create a logical volume for /usr/sap/trans
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_saptrans_lv"
+    size: "{{ saptrans_lv_size }}" 
 ...
