@@ -62,4 +62,10 @@
     vg: "{{ sap_sid|lower }}_app_vg"
     lv: "{{ sap_sid|lower }}_sap_lv"
     size: "{{ sap_lv_size }}"
+
+- name: Create a logical volume for /sapmnt/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_sapmnt_lv"
+    size: "{{ sapmnt_lv_size }}"
 ...
