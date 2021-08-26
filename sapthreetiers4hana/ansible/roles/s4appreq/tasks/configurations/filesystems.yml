@@ -74,4 +74,9 @@
     vg: "{{ sap_sid|lower }}_app_vg"
     lv: "{{ sap_sid|lower }}_saptrans_lv"
     size: "{{ saptrans_lv_size }}" 
+
+- name: Create a swap filesystem
+  filesystem:
+    fstype: swap
+    dev: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
 ...
