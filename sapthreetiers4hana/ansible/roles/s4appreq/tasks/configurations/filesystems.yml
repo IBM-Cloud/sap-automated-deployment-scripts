@@ -108,4 +108,11 @@
 
 - name: Mount swap volume
   command: swapon -a
+
+- name: Mount /usr/sap and add it to /etc/fstab
+  mount:
+    path: "/usr/sap"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+    fstype: ext4
+    state: mounted
 ...
