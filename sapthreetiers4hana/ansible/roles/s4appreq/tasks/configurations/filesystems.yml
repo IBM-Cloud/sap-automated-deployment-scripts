@@ -50,4 +50,10 @@
     vg: "{{ sap_sid|lower }}_swap_vg"
     lv: "{{ sap_sid|lower }}_swap_lv"
     size: "{{ swap_lv_size }}"
+
+- name: Create a logical volume for /usr/sap
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_usrsap_lv"
+    size: "{{ usrsap_lv_size }}"
 ...
