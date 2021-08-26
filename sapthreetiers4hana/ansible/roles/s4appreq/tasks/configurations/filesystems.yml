@@ -79,4 +79,9 @@
   filesystem:
     fstype: swap
     dev: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+
+- name: Create filesystem for /usr/sap
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
 ...
