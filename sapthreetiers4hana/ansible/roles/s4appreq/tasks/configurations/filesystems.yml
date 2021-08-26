@@ -15,4 +15,10 @@
   fail:
     msg: "Could not find a free {{ swap_disk_size }} storage device for swap"
   when:  swap_disk is not defined
+
+- name: Create a volume group for swap
+  lvg:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    pvs: "/dev/{{ swap_disk[0] }}"
+    pesize: "32"
 ...
