@@ -33,4 +33,9 @@
   loop: "{{ ansible_devices | dict2items }}"
   loop_control:
     loop_var: device
+
+- name: Check if the required storage device for SAP instance is found
+  fail:
+    msg: "Could not find a free {{ sap_disk_size }} storage device for SAP instance"
+  when:  sap_disk is not defined
 ...
