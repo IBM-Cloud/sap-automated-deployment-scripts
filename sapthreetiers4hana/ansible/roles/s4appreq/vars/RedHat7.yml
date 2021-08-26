@@ -16,6 +16,7 @@ s4app_required_configurations:
   - "update_os"
   - "reqpkggroups"
   - "reqpkg"
+  - "filesystems"
   - "firewalld"
   - "uuidd"
   - "SELinux"
