@@ -10,4 +10,9 @@
   loop: "{{ ansible_devices | dict2items }}"
   loop_control:
     loop_var: device
+
+- name: Check if the required storage device for swap is found
+  fail:
+    msg: "Could not find a free {{ swap_disk_size }} storage device for swap"
+  when:  swap_disk is not defined
 ...
