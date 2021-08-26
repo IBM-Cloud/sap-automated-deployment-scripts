@@ -94,4 +94,9 @@
   filesystem:
     fstype: ext4
     dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+
+- name: Create filesystem for /usr/sap/trans
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
 ...
