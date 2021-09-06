@@ -1,4 +1,9 @@
 ---
+- name: Enable repository for compat-sap-c++-9
+  rhsm_repository:
+    name: rhel-sap-for-rhel-7-server-e4s-rpms
+    state: enabled
+
 - name: Update all packages
   yum:
     name: '*'
