@@ -1,3 +1,7 @@
 ---
-
+- name: Create /usr/sap/kit directory
+  file:
+    path: "{{ s4app_kit }}"
+    state: directory
+    mode: 0777
 ...
