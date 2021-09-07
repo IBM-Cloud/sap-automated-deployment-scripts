@@ -4,4 +4,7 @@
 
 #SAP system configuration
 sap_sid: "S4A"
+
+#SAP S4HANA APP Installation kit path
+kit_s4hana_path: "/storage/S4HANA"
 ...
