@@ -8,5 +8,5 @@ swap_lv_size: "30g"
 usrsap_lv_size: "5g"
 sap_lv_size: "20g"
 sapmnt_lv_size: "20g"
-saptrans_lv_size: "20g"
+saptrans_lv_size: "50g"
 ...

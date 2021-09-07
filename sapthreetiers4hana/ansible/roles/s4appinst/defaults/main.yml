@@ -1,4 +1,4 @@
 ---
 #Target files location
-s4app_kit: "/usr/sap/kit"
+s4app_kit: "/usr/sap/trans/kit"
 ...
