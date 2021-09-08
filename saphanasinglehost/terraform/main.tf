@@ -1,12 +1,12 @@
-/*
 module "vpc" {
-  source		= "./modules/vpc"
+# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
+  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
+
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
   SUBNET		= var.SUBNET
 }
-*/
 
 module "volumes" {
   source		= "./modules/volumes"
@@ -33,4 +33,10 @@ module "vsi" {
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS
   VOLUMES_LIST	= module.volumes.volumes_list
+}
+
+module "ansible-exec" {
+  source		= "./modules/ansible-exec"
+  depends_on	= [ module.vsi ]
+  IP			= module.vsi.PRIVATE-IP
 }
