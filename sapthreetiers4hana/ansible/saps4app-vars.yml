@@ -4,6 +4,10 @@
 
 #SAP system configuration
 sap_sid: "S4A"
+hdb_schema_password: ""
+sap_ascs_instance_number: "01"
+sap_ci_instance_number: "00"
+sap_master_password: ""
 
 #SAP S4HANA APP Installation kit path
 kit_sapcar_file: "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
