@@ -1,0 +1,8 @@
+---
+#2560024 - /lib64/libstdc++.so.6: version `GLIBCXX_3.4.22' not found
+- name: Create link to compat-sap-c++-6 lib
+  file:
+    src: /opt/rh/SAP/lib64/compat-sap-c++-6.so
+    dest: /usr/sap/lib/libstdc++.so.6
+    state: link
+...

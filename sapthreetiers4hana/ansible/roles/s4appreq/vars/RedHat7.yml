@@ -23,4 +23,5 @@ s4app_required_configurations:
   - "SELinux"
   - "limits"
   - "tmpfiles"
+  - "compatlibs"
 ...
