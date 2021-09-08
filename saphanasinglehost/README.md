@@ -87,7 +87,8 @@ module "vpc" {
  ```
 
 The Security Rules are the following:
-- Allow all outbound traffic from the VSI
+- Allow all traffic in the Security group
+- Allow all outbound traffic
 - Allow inbound DNS traffic (UDP port 53)
 - Allow inbound SSH traffic (TCP port 22)
 
