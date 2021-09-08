@@ -77,44 +77,14 @@ kit_saphana_file | Path to SAP HANA ZIP file | As downloaded from SAP Support Po
 ## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
-If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapsingletierdb2/terraform/main.tf` file as below and add the names to `input.auto.tfvars`
+If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/main.tf` file as below and add the names to `input.auto.tfvars`
 
 ```shell
-/*module "vpc" {
-  source		= "./modules/vpc"
-  ZONE			= var.ZONE
-  VPC			= var.VPC
-  SECURITYGROUP 	= var.SECURITYGROUP
-  SUBNET		= var.SUBNET
-}
-*/
+module "vpc" {
+# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
+  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
 
-module "volumes" {
-  source		= "./modules/volumes"
-  ZONE			= var.ZONE
-  HOSTNAME		= var.HOSTNAME
-  VOL1			= var.VOL1
-  VOL2			= var.VOL2
-  VOL3			= var.VOL3
-}
-
-
-module "vsi" {
-  source		= "./modules/vsi"
-#  depends_on		= [ module.vpc , module.volumes ]
-  depends_on		= [ module.volumes ]
-  ZONE			= var.ZONE
-  VPC			= var.VPC
-  SECURITYGROUP 	= var.SECURITYGROUP
-  SUBNET		= var.SUBNET
-  HOSTNAME		= var.HOSTNAME
-  PROFILE		= var.PROFILE
-  IMAGE			= var.IMAGE
-  SSH_KEYS		= var.SSH_KEYS
-  VOLUMES_LIST		= module.volumes.volumes_list
-}
-
-```
+ ```
 
 The Security Rules are the following:
 - Allow all outbound traffic from the VSI
