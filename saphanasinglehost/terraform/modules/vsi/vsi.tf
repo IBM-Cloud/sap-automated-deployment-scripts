@@ -32,7 +32,4 @@ resource "ibm_is_instance" "vsi" {
 resource "ibm_is_floating_ip" "fip" {
   name		= "${var.HOSTNAME}-fip"
   target	= ibm_is_instance.vsi.primary_network_interface[0].id
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${ibm_is_instance.vsi.primary_network_interface[0].primary_ipv4_address}, ../ansible/saphanasinglehost.yml"
-  }
 }
