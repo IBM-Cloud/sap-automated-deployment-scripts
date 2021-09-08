@@ -41,3 +41,9 @@ resource "ibm_is_security_group_rule" "inbound_ssh_all" {
     port_max	= 22
   }
 }
+
+resource "ibm_is_security_group_rule" "inbound_sg_all" {
+  group		= ibm_is_security_group.securitygroup.id
+  direction	= "inbound"
+  remote	= ibm_is_security_group.securitygroup.id
+}
