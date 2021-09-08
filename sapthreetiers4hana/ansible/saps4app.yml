@@ -5,6 +5,6 @@
     - name: Import playbook variables
       include_vars: "saps4app-vars.yml"
   roles:
-    #- s4appreq
-    - s4appinst
+    - s4appreq
+    #- s4appinst
 ...
