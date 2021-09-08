@@ -4,7 +4,7 @@
   file:
     path: /usr/sap/lib
     state: directory
-    mode: 0777
+    mode: 0755
 
 - name: Create link to compat-sap-c++-6 lib
   file:
