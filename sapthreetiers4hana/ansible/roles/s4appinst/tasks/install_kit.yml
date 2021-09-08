@@ -5,11 +5,17 @@
     state: directory
     mode: 0777
 
-- name: Copy "{{ kit_s4hana_path }}" kit to target
-  copy:
-    src: "{{ kit_s4hana_path }}"
-    dest: "{{ s4app_kit }}"
-    owner: root
-    group: root
+- name: Create /usr/sap/trans/kit/swpm directory
+  file:
+    path: "{{ s4app_kit }}/swpm"
+    state: directory
     mode: 0777
+
+# - name: Copy "{{ kit_s4hana_path }}" kit to target
+#   copy:
+#     src: "{{ kit_s4hana_path }}"
+#     dest: "{{ s4app_kit }}"
+#     owner: root
+#     group: root
+#     mode: 0777
 ...
