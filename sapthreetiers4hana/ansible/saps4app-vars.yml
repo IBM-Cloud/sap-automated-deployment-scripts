@@ -8,5 +8,6 @@ sap_sid: "S4A"
 #SAP S4HANA APP Installation kit path
 kit_sapcar_file: "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
 kit_swpm_file: "/storage/S4HANA/SWPM20SP09_4-80003424.SAR"
+kit_hdbclient_dir: "/storage/HANADB/DATA_UNITS/HDB_CLIENT_LINUX_X86_64"
 kit_s4hana_path: "/storage/S4HANA/EXPORT"
 ...

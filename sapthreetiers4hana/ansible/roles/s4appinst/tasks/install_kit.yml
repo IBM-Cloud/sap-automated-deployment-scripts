@@ -17,6 +17,12 @@
     state: directory
     mode: 0777
 
+- name: Create /usr/sap/trans/kit/hdbclient directory
+  file:
+    path: "{{ s4app_kit }}/hdbclient"
+    state: directory
+    mode: 0777
+
 - name: Copy "{{ kit_sapcar_file }}" kit to target
   copy:
     src: "{{ kit_sapcar_file }}"
@@ -29,6 +35,14 @@
   copy:
     src: "{{ kit_swpm_file }}"
     dest: "{{ s4app_kit }}/swpm.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_hdbclient_dir }}" kit to target
+  copy:
+    src: "{{ kit_hdbclient_dir }}/"
+    dest: "{{ s4app_kit }}/hdbclient/"
     owner: root
     group: root
     mode: 0777
