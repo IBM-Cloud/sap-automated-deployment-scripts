@@ -11,6 +11,12 @@
     state: directory
     mode: 0777
 
+- name: Create /usr/sap/trans/kit/export directory
+  file:
+    path: "{{ s4app_kit }}/export"
+    state: directory
+    mode: 0777
+
 # - name: Copy "{{ kit_s4hana_path }}" kit to target
 #   copy:
 #     src: "{{ kit_s4hana_path }}"
