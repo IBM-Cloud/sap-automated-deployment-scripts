@@ -25,6 +25,14 @@
     group: root
     mode: 0777
 
+- name: Copy "{{ kit_swpm_file }}" kit to target
+  copy:
+    src: "{{ kit_swpm_file }}"
+    dest: "{{ s4app_kit }}/swpm.sar"
+    owner: root
+    group: root
+    mode: 0777
+
 # - name: Copy "{{ kit_s4hana_path }}" kit to target
 #   copy:
 #     src: "{{ kit_s4hana_path }}"
