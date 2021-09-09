@@ -33,15 +33,31 @@
     group: root
     mode: 0777
 
-- name: Copy "{{ kit_s4hana_basket }}" kit to target
+- name: Copy "{{ kit_sapexe_file }}" kit to target
   copy:
-    src: "{{ kit_s4hana_basket }}/"
-    dest: "{{ s4app_kit }}/basket"
+    src: "{{ kit_sapexe_file }}"
+    dest: "{{ s4app_kit }}/sapexe.sar"
     owner: root
     group: root
     mode: 0777
 
-- name: Extract SWPM archive
-  command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
+- name: Copy "{{ kit_sapexedb_file }}" kit to target
+  copy:
+    src: "{{ kit_sapexedb_file }}"
+    dest: "{{ s4app_kit }}/sapexedb.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+# - name: Copy "{{ kit_s4hana_basket }}" kit to target
+#   copy:
+#     src: "{{ kit_s4hana_basket }}/"
+#     dest: "{{ s4app_kit }}/basket"
+#     owner: root
+#     group: root
+#     mode: 0777
+
+# - name: Extract SWPM archive
+#   command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
 
 ...
