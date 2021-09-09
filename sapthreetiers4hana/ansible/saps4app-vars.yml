@@ -8,11 +8,14 @@ sap_ascs_instance_number: "01"
 sap_ci_instance_number: "00"
 sap_master_password: ""
 
+
 #HANA config
 hdb_host: ""
-hdb_sid: ""
-hdb_instance_number: ""
+hdb_sid: "HDB"
+hdb_instance_number: "00"
 hdb_master_password: ""
+# Number of concurrent jobs used to load and/or extract archives to HANA Host
+hdb_concurrent_jobs: "23"
 
 #SAP S4HANA APP Installation kit path
 kit_sapcar_file: "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
