@@ -6,6 +6,7 @@
 sap_sid: "S4A"
 sap_ascs_instance_number: "01"
 sap_ci_instance_number: "00"
+sap_abap_schema_name: "SAPHANADB"
 sap_master_password: ""
 
 
