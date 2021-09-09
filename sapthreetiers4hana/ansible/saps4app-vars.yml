@@ -26,5 +26,6 @@ kit_sapexedb_file: "/storage/S4HANA/SAPEXEDB_100-70005282.SAR"
 kit_igsexe_file: "/storage/S4HANA/igsexe_1-70005417.sar"
 kit_igshelper_file: "/storage/S4HANA/igshelper_17-10010245.sar"
 kit_saphotagent_file: "/storage/S4HANA/SAPHOSTAGENT51_51-20009394.SAR"
+kit_hdbclient_file: "/storage/S4HANA/IMDB_CLIENT20_009_28-80002082.SAR"
 kit_s4hana_basket: "/storage/S4HANA/basket/"
 ...

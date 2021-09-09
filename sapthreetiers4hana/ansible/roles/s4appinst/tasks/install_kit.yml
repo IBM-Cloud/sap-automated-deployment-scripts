@@ -73,6 +73,14 @@
     group: root
     mode: 0777
 
+- name: Copy "{{ kit_hdbclient_file }}" kit to target
+  copy:
+    src: "{{ kit_hdbclient_file }}"
+    dest: "{{ s4app_kit }}/hdbclient.sar"
+    owner: root
+    group: root
+    mode: 0777
+
 # - name: Copy "{{ kit_s4hana_basket }}" kit to target
 #   copy:
 #     src: "{{ kit_s4hana_basket }}/"
