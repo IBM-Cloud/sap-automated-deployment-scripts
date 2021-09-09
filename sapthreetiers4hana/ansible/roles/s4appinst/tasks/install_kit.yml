@@ -11,9 +11,9 @@
     state: directory
     mode: 0777
 
-- name: Create /usr/sap/trans/kit/export directory
+- name: Create /usr/sap/trans/kit/basket directory
   file:
-    path: "{{ s4app_kit }}/export"
+    path: "{{ s4app_kit }}/basket"
     state: directory
     mode: 0777
 
@@ -33,10 +33,10 @@
     group: root
     mode: 0777
 
-- name: Copy "{{ kit_hdbclient_file }}" kit to target
+- name: Copy "{{ kit_s4hana_basket }}" kit to target
   copy:
-    src: "{{ kit_hdbclient_file }}"
-    dest: "{{ s4app_kit }}/hdbclient.sar"
+    src: "{{ kit_s4hana_basket }}/"
+    dest: "{{ s4app_kit }}/basket"
     owner: root
     group: root
     mode: 0777
@@ -44,11 +44,4 @@
 - name: Extract SWPM archive
   command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
 
-# - name: Copy "{{ kit_s4hana_path }}" kit to target
-#   copy:
-#     src: "{{ kit_s4hana_path }}"
-#     dest: "{{ s4app_kit }}"
-#     owner: root
-#     group: root
-#     mode: 0777
 ...
