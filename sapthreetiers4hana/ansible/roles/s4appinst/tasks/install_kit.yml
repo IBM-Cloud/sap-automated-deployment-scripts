@@ -81,15 +81,15 @@
     group: root
     mode: 0777
 
-- name: Copy "{{ kit_s4hana_export }}" kit to target
-  copy:
-    src: "{{ kit_s4hana_export }}/"
-    dest: "{{ s4app_kit }}/export"
-    owner: root
-    group: root
-    mode: 0777
+# - name: Copy "{{ kit_s4hana_export }}" kit to target
+#   copy:
+#     src: "{{ kit_s4hana_export }}/"
+#     dest: "{{ s4app_kit }}/export"
+#     owner: root
+#     group: root
+#     mode: 0777
 
-# - name: Extract SWPM archive
-#   command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
+- name: Extract SWPM archive
+  command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
 
 ...
