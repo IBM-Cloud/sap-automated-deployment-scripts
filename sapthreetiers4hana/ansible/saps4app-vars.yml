@@ -21,5 +21,5 @@ hdb_concurrent_jobs: "23"
 #SAP S4HANA APP Installation kit path
 kit_sapcar_file: "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
 kit_swpm_file: "/storage/S4HANA/SWPM20SP09_4-80003424.SAR"
-kit_s4hana_basket: "/storage/S4HANA/basket"
+kit_s4hana_basket: "/storage/S4HANA/basket/"
 ...
