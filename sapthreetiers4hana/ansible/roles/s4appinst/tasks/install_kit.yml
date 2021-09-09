@@ -49,6 +49,22 @@
     group: root
     mode: 0777
 
+- name: Copy "{{ kit_igsexe_file }}" kit to target
+  copy:
+    src: "{{ kit_igsexe_file }}"
+    dest: "{{ s4app_kit }}/igsexe.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_igshelper_file }}" kit to target
+  copy:
+    src: "{{ kit_igshelper_file }}"
+    dest: "{{ s4app_kit }}/igshelper.sar"
+    owner: root
+    group: root
+    mode: 0777
+
 # - name: Copy "{{ kit_s4hana_basket }}" kit to target
 #   copy:
 #     src: "{{ kit_s4hana_basket }}/"
