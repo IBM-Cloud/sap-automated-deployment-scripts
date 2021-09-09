@@ -2,4 +2,8 @@
 - name: Import install kit
   include_tasks: "install_kit.yml"
 
+- name: Generate parameter file for sapinst
+  template:
+      src: sapinst.cfg
+      dest: "{{ s4app_kit }}/inifile.params"
 ...
