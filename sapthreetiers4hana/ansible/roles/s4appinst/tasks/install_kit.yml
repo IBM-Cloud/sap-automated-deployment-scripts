@@ -11,9 +11,9 @@
     state: directory
     mode: 0777
 
-- name: Create /usr/sap/trans/kit/basket directory
+- name: Create /usr/sap/trans/kit/export directory
   file:
-    path: "{{ s4app_kit }}/basket"
+    path: "{{ s4app_kit }}/export"
     state: directory
     mode: 0777
 
@@ -81,13 +81,13 @@
     group: root
     mode: 0777
 
-# - name: Copy "{{ kit_s4hana_basket }}" kit to target
-#   copy:
-#     src: "{{ kit_s4hana_basket }}/"
-#     dest: "{{ s4app_kit }}/basket"
-#     owner: root
-#     group: root
-#     mode: 0777
+- name: Copy "{{ kit_s4hana_export }}" kit to target
+  copy:
+    src: "{{ kit_s4hana_export }}/"
+    dest: "{{ s4app_kit }}/export"
+    owner: root
+    group: root
+    mode: 0777
 
 # - name: Extract SWPM archive
 #   command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
