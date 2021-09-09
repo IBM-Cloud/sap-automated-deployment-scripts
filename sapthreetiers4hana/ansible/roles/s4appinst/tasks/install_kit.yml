@@ -65,6 +65,14 @@
     group: root
     mode: 0777
 
+- name: Copy "{{ kit_saphotagent_file }}" kit to target
+  copy:
+    src: "{{ kit_saphotagent_file }}"
+    dest: "{{ s4app_kit }}/saphotagent.sar"
+    owner: root
+    group: root
+    mode: 0777
+
 # - name: Copy "{{ kit_s4hana_basket }}" kit to target
 #   copy:
 #     src: "{{ kit_s4hana_basket }}/"
