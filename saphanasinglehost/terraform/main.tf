@@ -22,8 +22,7 @@ module "volumes" {
 
 module "vsi" {
   source		= "./modules/vsi"
-#  depends_on	= [ module.vpc , module.volumes ]
-  depends_on	= [ module.volumes ]
+  depends_on	= [ module.vpc , module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
