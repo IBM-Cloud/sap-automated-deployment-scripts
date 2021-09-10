@@ -63,7 +63,7 @@ SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can 
 ## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
-If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/terraform/main.tf` file as below and add the names to `input.auto.tfvars`
+If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/main.tf` file as below and add the names to `input.auto.tfvars`
 
 ```shell
 module "vpc" {
