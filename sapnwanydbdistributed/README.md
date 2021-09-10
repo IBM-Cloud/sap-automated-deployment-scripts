@@ -43,7 +43,6 @@ SSH_KEYS      = [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d
 # SAP Database VSI variables:
 DB-HOSTNAME   = "ep12db"
 
-
 # SAP APPs VSI variables:
 APP-HOSTNAME  = "ep12app" # default value
 ......
