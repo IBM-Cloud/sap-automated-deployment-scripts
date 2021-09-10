@@ -79,7 +79,7 @@ kit_saphana_file | Path to SAP HANA ZIP file | As downloaded from SAP Support Po
 ## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
-If you want to use an existing VPC with Subnet, Security Group and Security rules use the `saphanasinglehost/main.tf` file as below and add the names to `input.auto.tfvars`
+If you want to use an existing VPC with Subnet, Security Group and Security rules use the `saphanasinglehost/terraform/main.tf` file as below and add the names to `input.auto.tfvars`
 
 ```shell
 module "vpc" {
