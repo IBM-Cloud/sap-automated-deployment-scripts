@@ -79,7 +79,7 @@ kit_saphana_file | Path to SAP HANA ZIP file | As downloaded from SAP Support Po
 ## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
-If you want to use an existing VPC with Subnet, Security Group and Security rules use the `sapnwanydbdistributed/main.tf` file as below and add the names to `input.auto.tfvars`
+If you want to use an existing VPC with Subnet, Security Group and Security rules use the `saphanasinglehost/main.tf` file as below and add the names to `input.auto.tfvars`
 
 ```shell
 module "vpc" {
@@ -101,6 +101,7 @@ The Security Rules are the following:
  - `input.auto.tfvars` - contains the variables that will need to be edited by the user to customize the solution
  - `integration.tf` - contains the integration code that brings the SAP variabiles from Terraform to Ansible.
  - `main.tf` - contains the configuration of the VSI for SAP single tier deployment.
+ - `output.tf` - contains the code for the information to be displayed after the VSI is created (Hostname, Private IP, Public IP)
  - `provider.tf` - contains the IBM Cloud Provider data in order to run `terraform init` command.
  - `terraform.tfvars` - contains the IBM Cloud API key referenced in `provider.tf`
  - `variables.tf` - contains variables for the VPC and VSI
