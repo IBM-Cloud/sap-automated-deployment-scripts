@@ -13,7 +13,7 @@ Please note that Ansible is started by Terraform and must be available on the sa
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
 ## VSI Configuration
-The VSIs are configured with Red Hat Enterprise Linux 7.x for SAP Applications (amd64) and they have: at least two SSH keys configured to access as root user and the following storage volumes created for DB and SAP APP VSI:
+The VSIs are configured with Red Hat Enterprise Linux 7.6 for SAP HANA (amd64) for DB server and Red Hat Enterprise Linux 7.x for SAP Applications (amd64) for APP server and they have: at least two SSH keys configured to access as root user and the following storage volumes created for DB and SAP APP VSI:
 
 DB VSI Disks:
 - 1x 40 GB disk with 10 IOPS / GB - SWAP
