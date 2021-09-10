@@ -1,7 +1,8 @@
-#Infra VPC variables
+# General VPC variables:
+REGION			= "eu-gb"
 ZONE			= "eu-gb-1"
-VPC				= "ic4sap"
-SECURITYGROUP	= "elitism-headgear-wince-overstep"
+VPC			= "ic4sap"
+SECURITYGROUP		= "elitism-headgear-wince-overstep"
 SUBNET			= "ic4sap-subnet"
 HOSTNAME		= "saphanadb"
 PROFILE			= "mx2-16x128"
