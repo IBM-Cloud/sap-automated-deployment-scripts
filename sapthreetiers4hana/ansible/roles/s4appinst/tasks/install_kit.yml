@@ -84,7 +84,7 @@
 - name: Copy "{{ kit_s4hana_export }}" kit to target
   copy:
     src: "{{ kit_s4hana_export }}/"
-    dest: "{{ s4app_kit }}/export"
+    dest: "{{ s4app_kit }}"
     owner: root
     group: root
     mode: 0777
