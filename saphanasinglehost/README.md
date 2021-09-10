@@ -23,7 +23,8 @@ the file `input.auto.tfvars`
 The solution is configured by editing your variables in the file `input.auto.tfvars`
 Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes like so:
 ```shell
-#Infra VPC variables
+# General VPC variables:
+REGION			= "eu-de"
 ZONE			= "eu-de-2"
 VPC				= "ic4sap"
 SECURITYGROUP	= "ic4sap-securitygroup"
@@ -39,7 +40,8 @@ VOL3			= "500"
 
 Parameter | Description
 ----------|------------
-ZONE | The cloud zone where to deploy the solution. Must match the Region defined in `provider.tf`. The zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+REGION | The cloud region where to deploy the solution. The regions and zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+ZONE | The cloud zone where to deploy the solution
 VPC | The name of the VPC
 SECURITYGROUP | The name of the Security Group
 SUBNET | The name of the Subnet
