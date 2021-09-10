@@ -6,4 +6,7 @@
   template:
       src: sapinst.cfg
       dest: "{{ s4app_kit }}/inifile.params"
+
+- name: Start SAP S4HANA Application Server installation
+  shell: "{{ s4app_kit }}/swpm/sapinst SAPINST_INPUT_PARAMETERS_URL={{ s4app_kit }}/inifile.params SAPINST_EXECUTE_PRODUCT_ID={{ sap_product_id }} SAPINST_SKIP_DIALOGS=true SAPINST_START_GUISERVER=false"
 ...
