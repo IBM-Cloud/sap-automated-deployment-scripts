@@ -1,0 +1,13 @@
+---
+- name: Create link to ssl lib
+  file:
+    src: /usr/lib64/libssl.so.10
+    dest: /usr/lib64/libssl.so.1.0.1
+    state: link
+
+- name: Create link to crypto lib
+  file:
+    src: /usr/lib64/libcrypto.so.10
+    dest: /usr/lib64/libcrypto.so.1.0.1
+    state: link
+...
