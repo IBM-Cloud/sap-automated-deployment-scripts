@@ -40,3 +40,10 @@ module "app-vsi" {
   VOLUME_SIZES	= [ "40" , "128" ]
   VOL_PROFILE	= "10iops-tier"
 }
+
+module "ansible-exec" {
+  source		= "./modules/ansible-exec"
+  depends_on	= [ module.app-vsi ]
+  IP			= module.app-vsi.PRIVATE-IP
+  PLAYBOOK_PATH = "../ansible/saphanasinglehost.yml"
+}
