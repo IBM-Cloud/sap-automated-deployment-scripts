@@ -45,3 +45,11 @@ module "db-ansible-exec" {
   IP			= module.db-vsi.PRIVATE-IP
   PLAYBOOK_PATH = "../ansible/saphana.yml"
 }
+
+module "app-ansible-exec" {
+  source		= "./modules/ansible-exec"
+  depends_on	= [ local_file.db_ansible_saphana-vars ]
+  IP			= module.app-vsi.PRIVATE-IP
+  PLAYBOOK_PATH = "../ansible/saps4app.yml"
+}
+

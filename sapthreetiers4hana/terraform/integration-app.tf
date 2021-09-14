@@ -1,5 +1,5 @@
 # Export Terraform variable values to an Ansible var_file
-resource "local_file" "tf_ansible_saps4app-vars" {
+resource "local_file" "app_ansible_saps4app-vars" {
   content = <<-DOC
 ---
 #Ansible vars_file containing variable values passed from Terraform.
