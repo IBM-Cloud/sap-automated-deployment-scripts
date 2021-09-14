@@ -16,3 +16,33 @@ APP-HOSTNAME	= "is110apps"
 APP-PROFILE		= "bx2-4x16"
 APP-IMAGE		= "ibm-redhat-7-6-amd64-sap-applications-1"
 
+#HANA DB configuration
+hana_sid = "HDB"
+hana_sysno = "00"
+hana_master_password = ""
+hana_system_usage = "custom"
+hana_components = "server"
+
+#SAP HANA Installation kit path
+kit_saphana_file = "/storage/HANADB/51054623.ZIP"
+
+#SAP system configuration
+sap_sid = "S4A"
+sap_ascs_instance_number = "01"
+sap_ci_instance_number = "00"
+sap_master_password = ""
+
+# Number of concurrent jobs used to load and/or extract archives to HANA Host
+hdb_concurrent_jobs = "23"
+
+#SAP S4HANA APP Installation kit path
+kit_sapcar_file = "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
+kit_swpm_file = "/storage/S4HANA/SWPM20SP09_4-80003424.SAR"
+kit_sapexe_file = "/storage/S4HANA/SAPEXE_100-70005283.SAR"
+kit_sapexedb_file = "/storage/S4HANA/SAPEXEDB_100-70005282.SAR"
+kit_igsexe_file = "/storage/S4HANA/igsexe_1-70005417.sar"
+kit_igshelper_file = "/storage/S4HANA/igshelper_17-10010245.sar"
+kit_saphotagent_file = "/storage/S4HANA/SAPHOSTAGENT51_51-20009394.SAR"
+kit_hdbclient_file = "/storage/S4HANA/IMDB_CLIENT20_009_28-80002082.SAR"
+kit_s4hana_export = "/storage/S4HANA/export"
+
