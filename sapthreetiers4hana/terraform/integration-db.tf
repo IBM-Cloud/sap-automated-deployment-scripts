@@ -1,5 +1,6 @@
 # Export Terraform variable values to an Ansible var_file
 resource "local_file" "db_ansible_saphana-vars" {
+  depends_on = [ module.db-vsi ]
   content = <<-DOC
 ---
 #Ansible vars_file containing variable values passed from Terraform.
