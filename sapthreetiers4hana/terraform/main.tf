@@ -41,7 +41,7 @@ module "app-vsi" {
 
 module "db-ansible-exec" {
   source		= "./modules/ansible-exec"
-  depends_on	= [ module.app-vsi ]
-  IP			= module.app-vsi.PRIVATE-IP
-  PLAYBOOK_PATH = "../ansible/saphanasinglehost.yml"
+  depends_on	= [ module.db-vsi ]
+  IP			= module.db-vsi.PRIVATE-IP
+  PLAYBOOK_PATH = "../ansible/saphana.yml"
 }
