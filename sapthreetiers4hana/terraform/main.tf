@@ -48,7 +48,7 @@ module "db-ansible-exec" {
 
 module "app-ansible-exec" {
   source		= "./modules/ansible-exec"
-  depends_on	= [ module.db-vsi , module.app-vsi , local_file.app_ansible_saps4app-vars ]
+  depends_on	= [ db-ansible-exec , module.app-vsi , local_file.app_ansible_saps4app-vars ]
   IP			= module.app-vsi.PRIVATE-IP
   PLAYBOOK_PATH = "../ansible/saps4app.yml"
 }
