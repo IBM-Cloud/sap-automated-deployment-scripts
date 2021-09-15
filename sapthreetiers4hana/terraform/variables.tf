@@ -1,26 +1,46 @@
 variable "REGION" {
 	type		= string
 	description	= "Cloud Region"
+	validation {
+		condition     = contains(["au-syd", "jp-osa", "jp-tok", "eu-de", "eu-gb", "ca-tor", "us-south", "us-east", "br-sao"], var.REGION ) 
+		error_message = "The REGION must be one of: au-syd, jp-osa, jp-tok, eu-de, eu-gb, ca-tor, us-south, us-east, br-sao."
+	}
 }
 
 variable "ZONE" {
 	type		= string
 	description	= "Cloud Zone"
+	validation {
+		condition     = length(regexall("(au-syd|jp-osa|jp-tok|eu-de|eu-gb|ca-tor|us-south|us-east|br-sao)-(1|2|3)", var.ZONE)) > 0
+		error_message = "The ZONE is not valid."
+	}
 }
 
 variable "VPC" {
 	type		= string
 	description = "VPC name"
+	validation {
+		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.VPC)) > 0
+		error_message = "The VPC name is not valid."
+	}
 }
 
 variable "SUBNET" {
 	type		= string
 	description = "Subnet name"
+	validation {
+		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SUBNET)) > 0
+		error_message = "The SUBNET name is not valid."
+	}
 }
 
 variable "SECURITYGROUP" {
 	type		= string
 	description = "Security group name"
+	validation {
+		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SECURITYGROUP)) > 0
+		error_message = "The SECURITYGROUP name is not valid."
+	}
 }
 
 variable "SSH_KEYS" {
@@ -31,6 +51,10 @@ variable "SSH_KEYS" {
 variable "DB-HOSTNAME" {
 	type		= string
 	description = "DB VSI Hostname"
+	validation {
+		condition     = length(var.DB-HOSTNAME) <= 13 && length(regexall("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$", var.DB-HOSTNAME)) > 0
+		error_message = "The DB-HOSTNAME is not valid."
+	}
 }
 
 variable "DB-PROFILE" {
@@ -48,6 +72,10 @@ variable "DB-IMAGE" {
 variable "APP-HOSTNAME" {
 	type		= string
 	description = "APP VSI Hostname"
+	validation {
+		condition     = length(var.APP-HOSTNAME) <= 13 && length(regexall("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$", var.APP-HOSTNAME)) > 0
+		error_message = "The APP-HOSTNAME is not valid."
+	}
 }
 
 variable "APP-PROFILE" {
@@ -77,6 +105,10 @@ variable "hana_sysno" {
 variable "hana_master_password" {
 	type		= string
 	description = "hana_master_password"
+	validation {
+		condition     = length(var.hana_master_password) >= 8 && length(var.hana_master_password) <= 14
+		error_message = "The hana_master_password must be 8 to 14 characters long."
+	}
 }
 
 variable "hana_system_usage" {
@@ -118,6 +150,10 @@ variable "sap_ci_instance_number" {
 variable "sap_master_password" {
 	type		= string
 	description = "sap_master_password"
+	validation {
+		condition     = length(var.sap_master_password) >= 8 && length(var.sap_master_password) <= 14
+		error_message = "The sap_master_password must be 8 to 14 characters long."
+	}
 }
 
 variable "hdb_concurrent_jobs" {
