@@ -109,6 +109,11 @@ variable "sap_ascs_instance_number" {
 	default		= "01"
 }
 
+variable "sap_master_password" {
+	type		= string
+	description = "sap_master_password"
+}
+
 variable "sap_ci_instance_number" {
 	type		= string
 	description = "sap_ci_instance_number"

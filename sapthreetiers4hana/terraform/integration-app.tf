@@ -10,7 +10,7 @@ resource "local_file" "app_ansible_saps4app-vars" {
 sap_sid: "${var.sap_sid}"
 sap_ascs_instance_number: "${var.sap_ascs_instance_number}"
 sap_ci_instance_number: "${var.sap_ci_instance_number}"
-sap_master_password: ""
+sap_master_password: "${var.sap_master_password}"
 
 #HANA config
 hdb_host: "${module.db-vsi.PRIVATE-IP}"
