@@ -11,7 +11,7 @@ variable "ZONE" {
 	type		= string
 	description	= "Cloud Zone"
 	validation {
-		condition     = length(regexall("(au-syd|jp-osa|jp-tok|eu-de|eu-gb|ca-tor|us-south|us-east|br-sao)-(1|2|3)", var.ZONE)) > 0
+		condition     = length(regexall("^(au-syd|jp-osa|jp-tok|eu-de|eu-gb|ca-tor|us-south|us-east|br-sao)-(1|2|3)$", var.ZONE)) > 0
 		error_message = "The ZONE is not valid."
 	}
 }
