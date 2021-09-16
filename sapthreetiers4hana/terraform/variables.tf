@@ -192,6 +192,10 @@ variable "hdb_concurrent_jobs" {
 	type		= string
 	description = "hdb_concurrent_jobs"
 	default		= "23"
+	validation {
+		condition     = var.hdb_concurrent_jobs >= 1 && var.hdb_concurrent_jobs <=25
+		error_message = "The hdb_concurrent_jobs is not valid."
+	}
 }
 
 variable "kit_sapcar_file" {
