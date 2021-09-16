@@ -46,6 +46,10 @@ variable "SECURITYGROUP" {
 variable "SSH_KEYS" {
 	type		= list(string)
 	description = "SSH Keys ID list to access the VSI"
+	validation {
+		condition     = var.SSH_KEYS == [] ? false : true && var.SSH_KEYS == [""] ? false : true
+		error_message = "At least one SSH KEY is needed to be able to access the VSI."
+	}
 }
 
 variable "DB-HOSTNAME" {
@@ -94,20 +98,28 @@ variable "hana_sid" {
 	type		= string
 	description = "hana_sid"
 	default		= "HDB"
+	validation {
+		condition     = length(regexall("^[a-zA-Z][a-zA-Z0-9][a-zA-Z0-9]$", var.hana_sid)) > 0
+		error_message = "The hana_sid is not valid."
+	}
 }
 
 variable "hana_sysno" {
 	type		= string
 	description = "hana_sysno"
 	default		= "00"
+	validation {
+		condition     = var.hana_sysno >= 0 && var.hana_sysno <=97
+		error_message = "The hana_sysno is not valid."
+	}
 }
 
 variable "hana_master_password" {
 	type		= string
 	description = "hana_master_password"
 	validation {
-		condition     = length(var.hana_master_password) >= 8 && length(var.hana_master_password) <= 14
-		error_message = "The hana_master_password must be 8 to 14 characters long."
+		condition     = length(regexall("^(.{0,7}|[^0-9]*|[^A-Z]*)$", var.hana_master_password)) == 0 && length(regexall("^(.{15,}|\\\\|\")$", var.hana_master_password)) == 0
+		error_message = "The hana_master_password is not valid."
 	}
 }
 
@@ -115,12 +127,20 @@ variable "hana_system_usage" {
 	type		= string
 	description = "hana_system_usage"
 	default		= "custom"
+	validation {
+		condition     = contains(["production", "test", "development", "custom" ], var.hana_system_usage ) 
+		error_message = "The hana_system_usage must be one of: production, test, development, custom."
+	}
 }
 
 variable "hana_components" {
 	type		= string
 	description = "hana_components"
 	default		= "server"
+	validation {
+		condition     = contains(["all", "client", "es", "ets", "lcapps", "server", "smartda", "streaming", "rdsync", "xs", "studio", "afl", "sca", "sop", "eml", "rme", "rtl", "trp" ], var.hana_components ) 
+		error_message = "The hana_components must be one of: all, client, es, ets, lcapps, server, smartda, streaming, rdsync, xs, studio, afl, sca, sop, eml, rme, rtl, trp."
+	}
 }
 
 variable "kit_saphana_file" {
@@ -133,26 +153,38 @@ variable "sap_sid" {
 	type		= string
 	description = "sap_sid"
 	default		= "S4A"
+	validation {
+		condition     = length(regexall("^[a-zA-Z][a-zA-Z0-9][a-zA-Z0-9]$", var.sap_sid)) > 0
+		error_message = "The sap_sid is not valid."
+	}
 }
 
 variable "sap_ascs_instance_number" {
 	type		= string
 	description = "sap_ascs_instance_number"
 	default		= "01"
+	validation {
+		condition     = var.sap_ascs_instance_number >= 0 && var.sap_ascs_instance_number <=97
+		error_message = "The sap_ascs_instance_number is not valid."
+	}
 }
 
 variable "sap_ci_instance_number" {
 	type		= string
 	description = "sap_ci_instance_number"
 	default		= "00"
+	validation {
+		condition     = var.sap_ci_instance_number >= 0 && var.sap_ci_instance_number <=97
+		error_message = "The sap_ci_instance_number is not valid."
+	}
 }
 
 variable "sap_master_password" {
 	type		= string
 	description = "sap_master_password"
 	validation {
-		condition     = length(var.sap_master_password) >= 8 && length(var.sap_master_password) <= 14
-		error_message = "The sap_master_password must be 8 to 14 characters long."
+		condition     = length(regexall("^(.{0,7}|[^0-9]*|[^A-Z]*)$", var.sap_master_password)) == 0 && length(regexall("^(.{15,}|\\\\|\")$", var.sap_master_password)) == 0
+		error_message = "The sap_master_password is not valid."
 	}
 }
 
