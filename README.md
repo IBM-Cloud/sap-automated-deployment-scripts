@@ -9,8 +9,9 @@ The templates in this repo are used to deploy different SAP scenarios like:
 
 The main repo contains different directories with examples of using various SAP IBM Cloud services based on  Terraform&Ansible deployment tools. Each of the examples has their own README containing more details on what the example does.
 
-To run any example, clone the repository and run terraform commands within the example's own directory.
-# git clone --branch <branchname> <remote-repo-url>
+To run any example, clone the repository for the targeted branch (the default one is master)  and run terraform commands within the example's own directory.
+
+`git clone --branch <branchname> <remote-repo-url>`
  
 For example:
 ```
