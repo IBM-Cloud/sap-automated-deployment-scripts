@@ -119,6 +119,8 @@ kit_sapexedb_file | Path to SAP Kernel DB archive (SAR) | As downloaded from SAP
 kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Portal
 kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
 kit_saphostagent_file | Path to SAP Host Agent archive (SAR) | As downloaded from SAP Support Portal
+kit_hdbclient_file | Path to HANA client archive (SAR) | As downloaded from SAP Support Portal
+
 
 ## VPC Configuration
 
