@@ -63,6 +63,51 @@ SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can 
 [DB/APP]-PROFILE | The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles)
 [DB/APP]-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images)
 
+Edit your SAP system configuration variables that will be passed to the ansible automated deployment:
+
+```shell
+#HANA DB configuration
+hana_sid = "HDB"
+hana_sysno = "00"
+hana_master_password = ""
+hana_system_usage = "custom"
+hana_components = "server"
+
+#SAP HANA Installation kit path
+kit_saphana_file = "/storage/HANADB/51054623.ZIP"
+
+#SAP system configuration
+sap_sid = "S4A"
+sap_ascs_instance_number = "01"
+sap_ci_instance_number = "00"
+sap_master_password = ""
+
+# Number of concurrent jobs used to load and/or extract archives to HANA Host
+hdb_concurrent_jobs = "23"
+
+#SAP S4HANA APP Installation kit path
+kit_sapcar_file = "/storage/S4HANA/SAPCAR_1010-70006178.EXE"
+kit_swpm_file = "/storage/S4HANA/SWPM20SP09_4-80003424.SAR"
+kit_sapexe_file = "/storage/S4HANA/SAPEXE_100-70005283.SAR"
+kit_sapexedb_file = "/storage/S4HANA/SAPEXEDB_100-70005282.SAR"
+kit_igsexe_file = "/storage/S4HANA/igsexe_1-70005417.sar"
+kit_igshelper_file = "/storage/S4HANA/igshelper_17-10010245.sar"
+kit_saphotagent_file = "/storage/S4HANA/SAPHOSTAGENT51_51-20009394.SAR"
+kit_hdbclient_file = "/storage/S4HANA/IMDB_CLIENT20_009_28-80002082.SAR"
+kit_s4hana_export = "/storage/S4HANA/export"
+
+```
+**SAP input parameters:**
+
+Parameter | Description | Requirements
+----------|-------------|-------------
+hana_sid | The SAP system ID identifies the SAP HANA system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>|
+hana_sysno | Specifies the instance number of the SAP HANA system| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
+hana_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li><li>Master Password must contain at least one upper-case character</li></ul>
+hana_system_usage  | System Usage | Default: custom<br> Valid values: production, test, development, custom
+hana_components | SAP HANA Components | Default: server<br> Valid values: all, client, es, ets, lcapps, server, smartda, streaming, rdsync, xs, studio, afl, sca, sop, eml, rme, rtl, trp
+kit_saphana_file | Path to SAP HANA ZIP file | As downloaded from SAP Support Portal
+
 ## VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
