@@ -111,7 +111,14 @@ sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system | <ul><li>
 sap_ascs_instance_number | Technical identifier for internal processes of ASCS| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
 sap_ci_instance_number | Technical identifier for internal processes of CI| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
 sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
-hdb_concurrent_jobs | Number of concurrent jobs used to load and/or extract archives to HANA Host | 
+hdb_concurrent_jobs | Number of concurrent jobs used to load and/or extract archives to HANA Host | Default: 23
+kit_sapcar_file  | Path to sapcar binary | As downloaded from SAP Support Portal
+kit_swpm_file | Path to SWPM archive (SAR) | As downloaded from SAP Support Portal
+kit_sapexe_file | Path to SAP Kernel OS archive (SAR) | As downloaded from SAP Support Portal
+kit_sapexedb_file | Path to SAP Kernel DB archive (SAR) | As downloaded from SAP Support Portal
+kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Portal
+kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
+kit_saphostagent_file | Path to SAP Host Agent archive (SAR) | As downloaded from SAP Support Portal
 
 ## VPC Configuration
 
