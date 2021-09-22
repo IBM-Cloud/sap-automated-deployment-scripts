@@ -12,6 +12,8 @@ Please note that Ansible is started by Terraform and must be available on the sa
 ## Installation media
 SAP HANA installation media used for this deployment is the default one for **SAP HANA, platform edition 2.0 SPS05** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
+SAP S/4HANA installation media used for this deployment is the default one for **SAP S/4HANA 2020** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
+
 ## IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
