@@ -120,7 +120,7 @@ kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Por
 kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
 kit_saphostagent_file | Path to SAP Host Agent archive (SAR) | As downloaded from SAP Support Portal
 kit_hdbclient_file | Path to HANA client archive (SAR) | As downloaded from SAP Support Portal
-
+kit_s4hana_export | Path to S/4HANA Installation Export dir | The archives downloaded from SAP Support Portal should be present in this path
 
 ## VPC Configuration
 
