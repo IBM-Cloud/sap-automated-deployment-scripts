@@ -25,7 +25,7 @@ SAP APPs S/4 VSI Disks:
 - 1 x 128 GB disk with 10 IOPS / GB - DATA
 
 ## IBM Cloud API Key
-For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
+For the script configuration add your IBM Cloud API Key in `terraform.tfvars`. You can create an API Key [here](https://cloud.ibm.com/iam/apikeys)
 
 ## Input parameter file
 The solution is configured by editing your variables in the file `input.auto.tfvars`
