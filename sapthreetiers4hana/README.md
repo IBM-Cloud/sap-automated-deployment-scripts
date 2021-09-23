@@ -14,9 +14,6 @@ SAP HANA installation media used for this deployment is the default one for **SA
 
 SAP S/4HANA installation media used for this deployment is the default one for **SAP S/4HANA 2020** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
-## IBM Cloud API Key
-For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
-
 ## VSI Configuration
 The VSIs are configured with Red Hat Enterprise Linux 7.6 for SAP HANA (amd64) for DB server and Red Hat Enterprise Linux 7.x for SAP Applications (amd64) for APP server and they have: at least two SSH keys configured to access as root user and the following storage volumes created for DB and SAP APP VSI:
 
@@ -26,6 +23,9 @@ HANA DB VSI Disks:
 SAP APPs S/4 VSI Disks:
 - 1x 40 GB disk with 10 IOPS / GB - SWAP
 - 1 x 128 GB disk with 10 IOPS / GB - DATA
+
+## IBM Cloud API Key
+For the script configuration add your IBM Cloud API Key in `terraform.tfvars`.
 
 ## Input parameter file
 The solution is configured by editing your variables in the file `input.auto.tfvars`
