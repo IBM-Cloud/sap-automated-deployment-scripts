@@ -118,7 +118,7 @@ variable "hana_master_password" {
 	type		= string
 	description = "hana_master_password"
 	validation {
-		condition     = length(regexall("^(.{0,7}|[^0-9]*|[^A-Z]*)$", var.hana_master_password)) == 0 && length(regexall("^(.{15,}|\\\\|\")$", var.hana_master_password)) == 0
+		condition     = length(regexall("^(.{0,7}|.{15,}|[^0-9a-zA-Z]*)$", var.hana_master_password)) == 0 && length(regexall("^[^0-9_][0-9a-zA-Z!@#$_]+$", var.hana_master_password)) > 0
 		error_message = "The hana_master_password is not valid."
 	}
 }
@@ -183,7 +183,7 @@ variable "sap_master_password" {
 	type		= string
 	description = "sap_master_password"
 	validation {
-		condition     = length(regexall("^(.{0,7}|[^0-9]*|[^A-Z]*)$", var.sap_master_password)) == 0 && length(regexall("^(.{15,}|\\\\|\")$", var.sap_master_password)) == 0
+		condition     = length(regexall("^(.{0,9}|.{15,}|[^0-9]*)$", var.sap_master_password)) == 0 && length(regexall("^[^0-9_][0-9a-zA-Z@#$_]+$", var.sap_master_password)) > 0
 		error_message = "The sap_master_password is not valid."
 	}
 }
