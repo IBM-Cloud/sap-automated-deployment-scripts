@@ -1,0 +1,7 @@
+---
+- name: Configuring uuidd
+  systemd:
+    name: uuidd
+    state: started
+    enabled: yes
+...

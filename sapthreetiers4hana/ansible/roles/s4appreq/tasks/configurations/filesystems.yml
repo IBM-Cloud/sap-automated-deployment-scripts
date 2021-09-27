@@ -1,0 +1,139 @@
+---
+- name: Get available storage devices for swap
+  set_fact: 
+    swap_disk: "{{ swap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == swap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for swap is found
+  fail:
+    msg: "Could not find a free {{ swap_disk_size }} storage device for swap"
+  when:  swap_disk is not defined
+
+- name: Create a volume group for swap
+  lvg:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    pvs: "/dev/{{ swap_disk[0] }}"
+    pesize: "32"
+
+- name: Get available storage devices for SAP instance
+  set_fact: 
+    sap_disk: "{{ sap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == sap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for SAP instance is found
+  fail:
+    msg: "Could not find a free {{ sap_disk_size }} storage device for SAP instance"
+  when:  sap_disk is not defined
+
+- name: Create a volume group for SAP instance
+  lvg:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    pvs: "/dev/{{ sap_disk[0] }}"
+    pesize: "32"
+
+- name: Create a logical volume for swap
+  lvol:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    lv: "{{ sap_sid|lower }}_swap_lv"
+    size: "{{ swap_lv_size }}"
+
+- name: Create a logical volume for /usr/sap
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_usrsap_lv"
+    size: "{{ usrsap_lv_size }}"
+
+- name: Create a logical volume for /usr/sap/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_sap_lv"
+    size: "{{ sap_lv_size }}"
+
+- name: Create a logical volume for /sapmnt/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_sapmnt_lv"
+    size: "{{ sapmnt_lv_size }}"
+
+- name: Create a logical volume for /usr/sap/trans
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_saptrans_lv"
+    size: "{{ saptrans_lv_size }}" 
+
+- name: Create a swap filesystem
+  filesystem:
+    fstype: swap
+    dev: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+
+- name: Create filesystem for /usr/sap
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+
+- name: Create filesystem for /usr/sap/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
+
+- name: Create filesystem for /sapmnt/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+
+- name: Create filesystem for /usr/sap/trans
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
+
+- name: Add swap device to /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: "^/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+    line: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+
+- name: Mount swap volume
+  command: swapon -a
+
+- name: Mount /usr/sap and add it to /etc/fstab
+  mount:
+    path: "/usr/sap"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /usr/sap/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/usr/sap/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sapmnt/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/sapmnt/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /usr/sap/trans and add it to /etc/fstab
+  mount:
+    path: "/usr/sap/trans"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
+    fstype: ext4
+    state: mounted
+...

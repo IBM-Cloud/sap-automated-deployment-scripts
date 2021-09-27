@@ -1,0 +1,95 @@
+---
+- name: Create /usr/sap/kit directory
+  file:
+    path: "{{ s4app_kit }}"
+    state: directory
+    mode: 0777
+
+- name: Create /usr/sap/trans/kit/swpm directory
+  file:
+    path: "{{ s4app_kit }}/swpm"
+    state: directory
+    mode: 0777
+
+- name: Create /usr/sap/trans/kit/export directory
+  file:
+    path: "{{ s4app_kit }}/export"
+    state: directory
+    mode: 0777
+
+- name: Copy "{{ kit_sapcar_file }}" kit to target
+  copy:
+    src: "{{ kit_sapcar_file }}"
+    dest: "{{ s4app_kit }}/sapcar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_swpm_file }}" kit to target
+  copy:
+    src: "{{ kit_swpm_file }}"
+    dest: "{{ s4app_kit }}/swpm.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_sapexe_file }}" kit to target
+  copy:
+    src: "{{ kit_sapexe_file }}"
+    dest: "{{ s4app_kit }}/sapexe.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_sapexedb_file }}" kit to target
+  copy:
+    src: "{{ kit_sapexedb_file }}"
+    dest: "{{ s4app_kit }}/sapexedb.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_igsexe_file }}" kit to target
+  copy:
+    src: "{{ kit_igsexe_file }}"
+    dest: "{{ s4app_kit }}/igsexe.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_igshelper_file }}" kit to target
+  copy:
+    src: "{{ kit_igshelper_file }}"
+    dest: "{{ s4app_kit }}/igshelper.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_saphotagent_file }}" kit to target
+  copy:
+    src: "{{ kit_saphotagent_file }}"
+    dest: "{{ s4app_kit }}/saphotagent.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_hdbclient_file }}" kit to target
+  copy:
+    src: "{{ kit_hdbclient_file }}"
+    dest: "{{ s4app_kit }}/hdbclient.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_s4hana_export }}" kit to target
+  copy:
+    src: "{{ kit_s4hana_export }}/"
+    dest: "{{ s4app_kit }}"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Extract SWPM archive
+  command: "{{ s4app_kit }}/sapcar -xf {{ s4app_kit }}/swpm.sar -R {{ s4app_kit }}/swpm"
+
+...

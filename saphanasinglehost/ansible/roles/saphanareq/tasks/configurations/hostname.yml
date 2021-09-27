@@ -1,0 +1,29 @@
+---
+#2718300 - Physical and Virtual hostname length limitations
+- name: Get short hostname
+  command: hostname -s
+  register: sap_short_hostname
+
+- name: Check if hostname has 13 or less characters as per SAP requirement
+  fail:
+    msg: "Hostname {{ sap_short_hostname.stdout }} has more than 13 characters"
+  when:  sap_short_hostname.stdout|length > 13
+
+- name: Disable manage_etc_hosts in /etc/cloud/cloud.cfg
+  replace:
+    path: /etc/cloud/cloud.cfg
+    regexp: '(.*manage_etc_hosts.*)'
+    replace: '#\1'
+
+#1054467 - Local host name refers to loopback address
+- name: Disable default hostname resolve to loopback address 
+  replace:
+    path: /etc/hosts
+    regexp: "(.*{{ ansible_hostname }}.*)"
+    replace: '#\1'
+
+- name: Enable hostname resolve to internal IP 
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }}"
+...

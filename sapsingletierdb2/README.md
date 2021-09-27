@@ -133,7 +133,6 @@ module "vsi" {
   IMAGE			= var.IMAGE
   SSH_KEYS		= var.SSH_KEYS
   VOLUMES_LIST		= module.volumes.volumes_list
-  SAP_SID		= var.sap_sid
 }
 
 ```

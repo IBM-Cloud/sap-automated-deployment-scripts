@@ -1,0 +1,26 @@
+---
+- name: Create /usr/sap/kit directory
+  file:
+    path: "{{ hana_kit }}"
+    state: directory
+    mode: 0777
+
+- name: Copy "{{ kit_saphana_file }}" kit to target
+  copy:
+    src: "{{ kit_saphana_file }}"
+    dest: "{{ hana_kit }}"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Extract "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}" to target
+  unarchive:
+    src: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
+    dest: "{{ hana_kit }}"
+    remote_src: yes
+
+- name: Cleanup
+  file:
+    path: "{{ hana_kit }}/{{ kit_saphana_file.split('/')[-1] }}"
+    state: absent
+...
