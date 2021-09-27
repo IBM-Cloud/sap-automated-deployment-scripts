@@ -15,7 +15,7 @@ To run any example, clone the repository for the targeted branch (the default on
  
 For example:
 ```
-$ git clone -b dev https://github.com/IBM-Cloud/sap-automated-deployment-scripts.git
+$ git clone -b master https://github.com/IBM-Cloud/sap-automated-deployment-scripts.git
 $ cd sap-automated-deployment-scripts/sapsingletiervpc
 $ terraform plan
 $ terraform apply
