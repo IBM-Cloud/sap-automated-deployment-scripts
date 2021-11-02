@@ -1,0 +1,11 @@
+---
+- name: Update all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Reboot target host after update
+  reboot:
+    connect_timeout: 5
+    post_reboot_delay: 10
+...

@@ -1,0 +1,22 @@
+---
+- name: Enable repository for compat-sap-c++-9
+  rhsm_repository:
+    name: "{{ repo_name }}"
+    state: enabled
+  loop:
+    - rhel-sap-for-rhel-7-server-e4s-rpms
+    - rhel-7-server-rpms
+    - rhel-sap-hana-for-rhel-7-server-rpms
+  loop_control:
+    loop_var: repo_name
+
+- name: Update all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Reboot target host after update
+  reboot:
+    connect_timeout: 5
+    post_reboot_delay: 10
+...
