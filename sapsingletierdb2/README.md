@@ -58,7 +58,7 @@ Edit your SAP system configuration variables that will be passed to the ansible 
 sap_sid	= "NWS"
 sap_ci_instance_number = "00"
 sap_ascs_instance_number = "01"
-sap_master_password = "Password#1"
+sap_master_password = ""
 
 #Kits paths
 kit_sapcar_file = "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"
