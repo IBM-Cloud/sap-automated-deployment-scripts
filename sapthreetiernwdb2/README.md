@@ -33,12 +33,12 @@ SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-
 # SAP Database VSI variables:
 DB-HOSTNAME		= "sapnwdb2"
 DB-PROFILE		= "bx2-4x16"
-DB-IMAGE		= "ibm-redhat-7-6-amd64-sap-applications-1"
+DB-IMAGE		= "ibm-redhat-7-6-amd64-sap-applications-1" # For any manual change in the terraform code, you have to make sure that you use a certified image based on the SAP NOTE: 2927211.
 
 # SAP APPs VSI variables:
 APP-HOSTNAME	= "sapnwapp"
 APP-PROFILE		= "bx2-4x16"
-APP-IMAGE		= "ibm-redhat-7-6-amd64-sap-applications-1"
+APP-IMAGE		= "ibm-redhat-7-6-amd64-sap-applications-1" # For any manual change in the terraform code, you have to make sure that you use a certified image based on the SAP NOTE: 2927211.
 ```
 
 Parameter | Description
