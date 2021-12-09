@@ -1,0 +1,6 @@
+---
+- name: Enable hostname resolve for the db server 
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ db_host }} {{ db_hostname }}"
+...

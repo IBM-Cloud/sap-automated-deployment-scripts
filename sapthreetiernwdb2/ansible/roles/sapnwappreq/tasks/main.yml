@@ -1,0 +1,8 @@
+---
+- name: Import OS distribution variables
+  include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: Make specific OS configurations as recommended by SAP for Netweaver APP
+  include_tasks: "configurations/{{ item }}.yml"
+  loop: "{{ sapnw_required_configurations }}"
+...

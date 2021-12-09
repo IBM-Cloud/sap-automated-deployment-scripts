@@ -1,0 +1,26 @@
+---
+#2002167 - Red Hat Enterprise Linux 7.x: Installation and Upgrade
+sapnw_required_packages:
+  - uuidd
+  - compat-libstdc++-33
+  - lvm2
+  - tcsh
+  - ksh
+sapnw_required_package_groups:
+  - "@large-systems"
+  - "@network-file-system-client"
+  - "@performance"
+  - "@compat-libraries"
+sapnw_required_configurations:
+  - "hostname"
+  - "kernel_RedHat7"
+  - "update_os"
+  - "reqpkggroups"
+  - "reqpkg"
+  - "filesystems"
+  - "firewalld"
+  - "uuidd"
+  - "SELinux"
+  - "limits"
+  - "tmpfiles"
+...

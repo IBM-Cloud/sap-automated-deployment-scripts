@@ -1,0 +1,13 @@
+---
+- name: Add sapmnt path to nfs exports
+  lineinfile:
+    path: /etc/exports
+    state: present
+    line: "/sapmnt/{{ sap_sid|upper }} *(rw,no_root_squash)"
+
+- name: Enable and start nfs server
+  systemd:
+    name: nfs-server
+    state: started
+    enabled: yes
+...
