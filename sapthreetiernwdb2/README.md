@@ -94,6 +94,10 @@ kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive 
 **SAP Master Password**
 The password for the SAP system will be asked interactively during terraform plan step and will not be available after the deployment.
 
+Parameter | Description | Requirements
+----------|-------------|-------------
+sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
+
 ### VPC Configuration
 
 The scripts create a new VPC with Subnet, Security Group and Security rules.
