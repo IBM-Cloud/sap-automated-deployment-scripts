@@ -21,6 +21,7 @@ resource "ibm_is_instance" "vsi" {
   name		= var.HOSTNAME
   profile	= var.PROFILE
   image		= data.ibm_is_image.image.id
+  user_data  = file("cloudinit.yml")s
 
   primary_network_interface {
     subnet          = data.ibm_is_subnet.subnet.id
