@@ -1,0 +1,29 @@
+---
+- name: Enable hostname resolve for the standby node 
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ dbstandby_host }} {{ dbstandby_hostname }}"
+
+- name: Get PKI from primary node
+  fetch:
+    src: "{{ pki_key }}"
+    dest: /tmp/
+    flat: yes
+  loop:
+    - /usr/sap/{{ hana_sid | upper }}/SYS/global/security/rsecssfs/data/SSFS_{{ hana_sid | upper }}.DAT
+    - /usr/sap/{{ hana_sid | upper }}/SYS/global/security/rsecssfs/key/SSFS_{{ hana_sid | upper }}.KEY
+  loop_control:
+    loop_var: pki_key
+
+- name: Enable HSR on primary node
+  shell: |
+      source /usr/sap/{{ hana_sid | upper }}/home/.sapenv.sh && \
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/exe/hdbnsutil \
+      -sr_enable --name=primarydb
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: hsrconfig
+  changed_when: "'successfully enabled system as system replication' in hsrconfig.stdout"
+...

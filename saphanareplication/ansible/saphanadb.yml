@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+  pre_tasks:
+    - name: Import playbook variables
+      include_vars: "saphanadb-vars.yml"
+  roles:
+    - saphanareq
+    - saphanainst
+    - saphanabkp
+    - saphsrprimary  
+...

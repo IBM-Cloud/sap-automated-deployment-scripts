@@ -1,0 +1,52 @@
+---
+- name: Enable hostname resolve for the primary node 
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ db_host }} {{ db_hostname }}"
+
+- name: Copy primary node PKI to standby
+  copy:
+    src: "/tmp/{{ pki_key.file }}"
+    dest: "{{ pki_key.path }}{{ pki_key.file }}"
+    owner: "{{ hana_sid | lower }}adm"
+    group: sapsys
+    mode: "{{ pki_key.mode }}"
+  loop:
+    - { path: '/usr/sap/{{ hana_sid | upper }}/SYS/global/security/rsecssfs/data/', file: 'SSFS_{{ hana_sid | upper }}.DAT', mode: '0600' }
+    - { path: '/usr/sap/{{ hana_sid | upper }}/SYS/global/security/rsecssfs/key/', file: 'SSFS_{{ hana_sid | upper }}.KEY', mode: '0640' }
+  loop_control:
+    loop_var: pki_key
+
+- name: Stop HANADB on standby node
+  shell: |
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/HDB stop
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: standbystop
+  changed_when: "'StopSystem' in standbystop.stdout"
+
+- name: Enable HSR on standby node
+  shell: |
+      source /usr/sap/{{ hana_sid | upper }}/home/.sapenv.sh && \
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/exe/hdbnsutil \
+      -sr_register --name=standbydb --remoteHost={{ db_hostname }} --remoteInstance={{ hana_sysno }} \
+      --replicationMode={{ replication_mode }} --operationMode={{ operation_mode }}
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: hsrconfig
+  changed_when: "'adding site' in hsrconfig.stdout"
+
+- name: Start HANADB on standby node
+  shell: |
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/HDB start
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: standbystart
+  changed_when: "'StartSystem' in standbystart.stdout"
+...

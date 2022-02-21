@@ -1,0 +1,7 @@
+---
+- name: Stop and disable abrtd
+  systemd:
+    name: abrtd
+    state: stopped
+    enabled: no
+...

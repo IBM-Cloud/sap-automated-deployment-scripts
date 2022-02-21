@@ -1,0 +1,29 @@
+---
+- name: Start SAP HANA DB backup for SYSTEMDB
+  shell: |
+      source /usr/sap/{{ hana_sid | upper }}/home/.sapenv.sh && \
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/exe/hdbsql \
+      -i {{ hana_sysno }} -u SYSTEM -p {{ sap_master_password }} -d SYSTEMDB -m <<EOF
+      BACKUP DATA USING FILE ('full_system_backup');
+      EOF
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: full_backup
+  changed_when: "'0 rows affected' in full_backup.stdout"
+
+- name: Start SAP HANA DB backup for {{ hana_sid | upper }}
+  shell: |
+      source /usr/sap/{{ hana_sid | upper }}/home/.sapenv.sh && \
+      /usr/sap/{{ hana_sid | upper }}/HDB{{ hana_sysno }}/exe/hdbsql \
+      -i {{ hana_sysno }} -u SYSTEM -p {{ sap_master_password }} -d SYSTEMDB -m <<EOF
+      BACKUP DATA FOR {{ hana_sid | upper }} USING FILE ('full_{{ hana_sid | upper }}_backup');
+      EOF
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: "{{ hana_sid | lower }}adm"
+  register: full_backup
+  changed_when: "'0 rows affected' in full_backup.stdout"  
+...
