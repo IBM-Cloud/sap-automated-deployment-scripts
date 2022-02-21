@@ -1,0 +1,12 @@
+---
+- name: Import install kit
+  include_tasks: "install_kit.yml"
+
+- name: Generate parameter file for sapinst
+  template:
+      src: sapinst.cfg
+      dest: "{{ sap_kit }}/inifile.params"
+
+- name: Working at SAP installation...
+  shell: "{{ sap_kit }}/swpm/sapinst SAPINST_INPUT_PARAMETERS_URL={{ sap_kit }}/inifile.params SAPINST_EXECUTE_PRODUCT_ID={{ sap_product_id }} SAPINST_SKIP_DIALOGS=true SAPINST_START_GUISERVER=false"
+...

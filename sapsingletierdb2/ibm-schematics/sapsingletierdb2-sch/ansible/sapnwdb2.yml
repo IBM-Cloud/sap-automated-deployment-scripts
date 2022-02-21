@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: yes
+  pre_tasks:
+    - name: Import playbook variables
+      include_vars: "sapnwdb2-vars.yml"
+  roles:
+    - sapnwdb2req
+    - sapnwdb2inst
+...
