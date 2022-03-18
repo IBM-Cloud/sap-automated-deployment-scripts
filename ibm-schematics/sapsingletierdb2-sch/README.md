@@ -11,81 +11,65 @@ This example and the terraform modules only seek to implement a 'reasonable' set
 **It contains:**
 
 - Terraform scripts for deploying in an **existing  VPC** the  Subnet, Security Group with rules, SAP volumes and a VSI.
-- Bash scripts to install the prerequisites for the SAP VSI deployment and the integration toward to **SAP Netweaver 7.5** with **DB2 10.5FP7** deployment using IBM Schematics GUI in a single step.
+- Bash scripts to install the prerequisites for the SAP VSI deployment and the integration toward to **SAP Netweaver 7.5** with **DB2 10.5FP7** installation using IBM Schematics GUI in a single step.
 - Ansible scripts to configure SAP Netweaver and DB2 installation.
 
 ## Installation media
-SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
+The SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **DB2 10.5FP7** available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually in the input parameter file.
 
 ## IBM Cloud API Key
 For the script configuration add your IBM Cloud API Key variable under IBM SCHEMATICS,  "SETTINGS" menu, editing the variable "ibmcloud_api_key" and  using sensitive option.
 
 ## VSI Configuration
-The VSI is configured with  Red Hat Enterprise Linux 7.x for SAP Applications (amd64)), has a minimal of two SSH keys configured to be accessed by the root user and five storage volumes as described below  thate need to be filled in, under the "SETTINGS" menu, variables fields in IBM Schematics.
+The VSI is configured with  Red Hat Enterprise Linux 7.x for SAP Applications (amd64), it has a minimal of two SSH keys configured to be accessed by the root user and five storage volumes as described below  that need to be filled in under the "SETTINGS" menu, variables fields in IBM Schematics.
 
 
 ## Input parameter file
-The solution is configured by editing your variables in the file `input.auto.tfvars`
-Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and starting with minimal recommended disk sizes like so:
-```shell
-#Infra VPC variables
-ZONE			= "eu-de-2"
-VPC			= "sap"
-SECURITYGROUP		= "sap-securitygroup"
-SUBNET			= "sap-subnet"
-HOSTNAME		= "db2saps1"
-PROFILE			= "bx2-4x16"
-IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-1"
-SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
-VOL1			= "32"
-VOL2			= "32"
-VOL3			= "64"
-VOL4			= "128"
-VOL5			= "256"
-```
+
+The solution is configured by editing the variables in your Schematics workspace.
+Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys and your SAP system configuration variables, starting with minimal recommended disk sizes like so:
+
+
+**VSI input parameters:**
 
 Parameter | Description
 ----------|------------
-ZONE | The cloud zone where to deploy the solution. Must match the Region defined in `provider.tf`. The zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc)
-VPC | The name of the VPC
-SECURITYGROUP | The name of the Security Group
-SUBNET | The name of the Subnet
+ibmcloud_api_key | IBM Cloud API key (Sensitive* value).
+private_ssh_key | Input id_rsa private key content (Sensitive* value).
+SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can contain one or more IDs. The list of SSH Keys is available [here](https://cloud.ibm.com/vpc-ext/compute/sshKeys). <br /> Sample input (use your own SSH IDS from IBM Cloud):<br /> [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
+BASTION_FLOATING_IP | Input the FLOATING IP from the Bastion Server.
+REGION | The cloud region where to deploy the solution. <br /> The regions and zones for VPC are listed [here](https://cloud.ibm.com/docs/containers?topic=containers-regions-and-zones#zones-vpc). <br /> Review supported locations in IBM Cloud Schematics [here](https://cloud.ibm.com/docs/schematics?topic=schematics-locations).<br /> Sample value: eu-de.
+ZONE | The cloud zone where to deploy the solution. <br /> Sample value: eu-de-2.
+VPC | EXISTING VPC name. The list of VPCs is available [here](https://cloud.ibm.com/vpc-ext/network/vpcs)
+SUBNET | EXISTING Subnet name. The list of Subnets is available [here](https://cloud.ibm.com/vpc-ext/network/subnets). 
+SECURITYGROUP | EXISTING Security group name. The list of Security Groups is available [here](https://cloud.ibm.com/vpc-ext/network/securityGroups). 
+ADD_OPEN_PORTS | To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options.
+OPEN_PORT_MINIMUM | (Required, Integer) The TCP port range that includes the minimum bound. Valid values are from 1 to 65535.<br /> Default value: 3200
+OPEN_PORT_MAXIMUM | (Required, Integer) The TCP port range that includes the maximum bound. Valid values are from 1 to 65535.<br /> Default value: 3200.
 HOSTNAME | The Hostname for the VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
-PROFILE | The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles)
-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images)
-SSH_KEYS | List of SSH Keys IDs that are allowed to SSH as root to the VSI. Can contain one or more IDs. The Keys added to IBM Cloud can be found [here](https://cloud.ibm.com/vpc-ext/compute/sshKeys)
-VOL[number] | The sizes for the disks in GB to be attached to the VSI and used by SAP
+PROFILE |  The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles) <br /> Default value: "bx2-4x16"
+IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Default value: ibm-redhat-7-6-amd64-sap-applications-2
+VOL1 [number] | Volume 1 Size*. <br /> Default value: 32 GB.
+VOL2 [number] | Volume 2 Size*. <br /> Default value: 32 GB.
+VOL3 [number] | Volume 3 Size*. <br /> Default value: 64 GB.
+VOL4 [number] | Volume 4 Size*. <br /> Default value: 128 GB.
+VOL5 [number] | Volume 5 Size*. <br /> Default value: 256 GB.
 
-Edit your SAP system configuration variables that will be passed to the ansible automated deployment:
 
-```shell
-##SAP system configuration
-sap_sid	= "NWS"
-sap_ci_instance_number = "00"
-sap_ascs_instance_number = "01"
-sap_master_password = "Password#1"
+**Obs***: <br />
+- Sensitive - The variable value is not displayed in your workspace details after it is stored.<br />
+- VOL[number] | The sizes for the disks in GB that are to be attached to the VSI and used by SAP.<br />
+- The following variables should be the same like the bastion ones: REGION, ZONE, VPC, SUBNET, SECURITYGROUP.
 
-#Kits paths
-kit_sapcar_file = "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"
-kit_swpm_file =  "/storage/NW75DB2/SWPM10SP31_7-20009701.SAR"
-kit_saphostagent_file = "/storage/NW75DB2/SAPHOSTAGENT51_51-20009394.SAR"
-kit_sapexe_file = "/storage/NW75DB2/SAPEXE_800-80002573.SAR"
-kit_sapexedb_file = "/storage/NW75DB2/SAPEXEDB_800-80002603.SAR"
-kit_igsexe_file = "/storage/NW75DB2/igsexe_13-80003187.sar"
-kit_igshelper_file = "/storage/NW75DB2/igshelper_17-10010245.sar"
-kit_export_dir = "/storage/NW75DB2/51050829"
-kit_db2_dir = "/storage/NW75DB2/51051007/DB2_FOR_LUW_10.5_FP7SAP2_LINUX_"
-kit_db2client_dir = "/storage/NW75DB2/51051049"
 
-```
 **SAP input parameters:**
 
 Parameter | Description | Requirements
 ----------|-------------|-------------
-sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>| 
-sap_ci_instance_number | Technical identifier for internal processes of CI| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
-sap_ascs_instance_number | Technical identifier for internal processes of ASCS| <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
-sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
+sap_sid | The SAP system ID <SAPSID> identifies the entire SAP system. <br /> Default value: DB1 | <ul><li>Consists of exactly three alphanumeric characters</li><li>Has a letter for the first character</li><li>Does not include any of the reserved IDs listed in SAP Note 1979280</li></ul>| 
+sap_ci_instance_number | Technical identifier for internal processes of CI. <br /> Default value: 00 | <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
+sap_ascs_instance_number | Technical identifier for internal processes of ASCS. <br /> Default value: 01 | <ul><li>Two-digit number from 00 to 97</li><li>Must be unique on a host</li></ul>
+sap_master_password | Common password for all users that are created during the installation. (Sensitive* value). | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
 kit_sapcar_file  | Path to sapcar binary | As downloaded from SAP Support Portal
 kit_swpm_file | Path to SWPM archive (SAR) | As downloaded from SAP Support Portal
 kit_saphostagent_file | Path to SAP Host Agent archive (SAR) | As downloaded from SAP Support Portal
