@@ -30,85 +30,74 @@
     mode: 0777
 
 - name: Copy "{{ kit_sapcar_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_sapcar_file }}"
     dest: "{{ sap_kit }}/sapcar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_swpm_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_swpm_file }}"
     dest: "{{ sap_kit }}/swpm.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_saphotagent_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_saphotagent_file }}"
     dest: "{{ sap_kit }}/saphotagent.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_sapexe_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_sapexe_file }}"
     dest: "{{ sap_kit }}/sapexe.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_sapexedb_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_sapexedb_file }}"
     dest: "{{ sap_kit }}/sapexedb.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_igsexe_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_igsexe_file }}"
     dest: "{{ sap_kit }}/igsexe.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_igshelper_file }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_igshelper_file }}"
     dest: "{{ sap_kit }}/igshelper.sar"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_export_dir }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_export_dir }}/"
     dest: "{{ sap_kit }}/export/"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_db2_dir }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_db2_dir }}/"
     dest: "{{ sap_kit }}/db2/"
-    owner: root
-    group: root
-    mode: 0777
+    checksum: yes
 
 - name: Copy "{{ kit_db2client_dir }}" kit to target
-  copy:
+  synchronize:
     src: "{{ kit_db2client_dir }}/"
     dest: "{{ sap_kit }}/db2client/"
+    checksum: yes
+
+- name: Recursively change ownership of a directory
+  file:
+    path: "{{ sap_kit }}"
+    state: directory
+    mode: 0777
+    recurse: yes
     owner: root
     group: root
-    mode: 0777
 
 - name: Extract SWPM archive
   command: "{{ sap_kit }}/sapcar -xf {{ sap_kit }}/swpm.sar -R {{ sap_kit }}/swpm"
-...   
+...

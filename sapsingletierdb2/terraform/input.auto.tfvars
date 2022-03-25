@@ -1,11 +1,15 @@
 #Infra VPC variables
+REGION			 = "eu-de"
 ZONE			= "eu-de-2"
-VPC			= "sap"
-SECURITYGROUP	= "sap-securitygroup"
-SUBNET			= "sap-subnet"
-HOSTNAME		= "db2saps1"
+VPC			= "sap"                             # EXISTING VPC name
+SECURITYGROUP	= "sap-securitygroup"         # EXISTING Security group name
+SUBNET			= "sap-subnet"                  # EXISTING Subnet name
+ADD_OPEN_PORTS = "no"                       # To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options
+OPEN_PORT_MINIMUM = "3200"                  # This variables will be created only if ADD_OPEN_PORTS = "yes"
+OPEN_PORT_MAXIMUM = "3200"                  # This variables will be created only if ADD_OPEN_PORTS = "yes"
+HOSTNAME		= "db2sapm1"
 PROFILE			= "bx2-4x16"
-IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-1"
+IMAGE			= "ibm-redhat-7-6-amd64-sap-applications-3"
 SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
 VOL1			= "32"
 VOL2			= "32"
@@ -14,10 +18,10 @@ VOL4			= "128"
 VOL5			= "256"
 
 ##SAP system configuration
-sap_sid	= "id1"
+sap_sid	= "DB1"
 sap_ci_instance_number = "00"
 sap_ascs_instance_number = "01"
-sap_master_password = ""
+#sap_master_password = ""
 
 #Kits paths
 kit_sapcar_file = "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"

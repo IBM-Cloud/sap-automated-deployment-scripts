@@ -6,6 +6,9 @@ sapnw_required_packages:
   - lvm2
   - tcsh
   - ksh
+  - device-mapper-multipath
+  - rsync
+
 sapnw_required_package_groups:
   - "@large-systems"
   - "@network-file-system-client"
@@ -18,7 +21,6 @@ sapnw_required_configurations:
   - "reqpkggroups"
   - "reqpkg"
   - "filesystems"
-  - "firewalld"
   - "uuidd"
   - "SELinux"
   - "limits"

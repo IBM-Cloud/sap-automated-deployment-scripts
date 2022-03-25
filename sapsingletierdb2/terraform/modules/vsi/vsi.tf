@@ -21,7 +21,6 @@ resource "ibm_is_instance" "vsi" {
   name		= var.HOSTNAME
   profile	= var.PROFILE
   image		= data.ibm_is_image.image.id
-  user_data  = file("cloudinit.yml")
 
   primary_network_interface {
     subnet          = data.ibm_is_subnet.subnet.id
@@ -33,7 +32,4 @@ resource "ibm_is_instance" "vsi" {
 resource "ibm_is_floating_ip" "fip" {
   name		= "${var.HOSTNAME}-fip"
   target	= ibm_is_instance.vsi.primary_network_interface[0].id
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${ibm_is_instance.vsi.primary_network_interface[0].primary_ipv4_address}, ../ansible/sapnwdb2.yml"
-  }
 }

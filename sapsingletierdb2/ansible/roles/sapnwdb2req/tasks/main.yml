@@ -2,15 +2,25 @@
 - name: Import OS distribution variables
   include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
 
-- name: Import requierd package groups
-  dnf:
-    state: present
-    name: "{{ sapnw_required_package_groups }}" 
+- name: Enable additional repositories
+  rhsm_repository:
+    name: "{{ repo_name }}"
+    state: enabled
+  loop:
+    - rhel-7-server-eus-rpms
+    - rhel-7-server-rpms
+  loop_control:
+    loop_var: repo_name
 
 - name: Import required packages
   package:
     state: present
     name: "{{ sapnw_required_packages }}"
+
+- name: Import required package groups
+  yum:
+    state: present
+    name: "{{ sapnw_required_package_groups }}"
 
 - name: Make specific OS configurations as recommended by SAP
   include_tasks: "configurations/{{ item }}.yml"

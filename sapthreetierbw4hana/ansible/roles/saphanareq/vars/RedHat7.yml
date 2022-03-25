@@ -27,7 +27,7 @@ saphana_required_packages:
   - net-tools
   - compat-sap-c++-9
   - libatomic
-  - chrony 
+  - chrony
 
 saphana_required_package_groups:
   - "@base"
@@ -41,9 +41,8 @@ saphana_required_configurations:
   - "tuned"
   - "SELinux"
   - "symlinks"
-  - "firewalld"
   - "abrtd"
   - "kdump"
   - "limits"
   - "kernel_RedHat7"
-... 
+...

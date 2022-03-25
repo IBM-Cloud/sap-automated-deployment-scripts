@@ -1,16 +1,17 @@
-module "vpc" {
-# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
-  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
-
+module "vpc-subnet" {
+  source		= "./modules/vpc/subnet"
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
+  ADD_OPEN_PORTS = var.ADD_OPEN_PORTS
+  OPEN_PORT_MINIMUM = var.OPEN_PORT_MINIMUM
+  OPEN_PORT_MAXIMUM = var.OPEN_PORT_MAXIMUM
   SUBNET		= var.SUBNET
+  count = (var.ADD_OPEN_PORTS == "yes" ? 1: 0)
 }
 
 module "db-vsi" {
   source		= "./modules/db-vsi"
-  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
@@ -25,7 +26,6 @@ module "db-vsi" {
 
 module "app-vsi" {
   source		= "./modules/app-vsi"
-  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP

@@ -2,7 +2,7 @@ variable "REGION" {
 	type		= string
 	description	= "Cloud Region"
 	validation {
-		condition     = contains(["au-syd", "jp-osa", "jp-tok", "eu-de", "eu-gb", "ca-tor", "us-south", "us-east", "br-sao"], var.REGION ) 
+		condition     = contains(["au-syd", "jp-osa", "jp-tok", "eu-de", "eu-gb", "ca-tor", "us-south", "us-east", "br-sao"], var.REGION )
 		error_message = "The REGION must be one of: au-syd, jp-osa, jp-tok, eu-de, eu-gb, ca-tor, us-south, us-east, br-sao."
 	}
 }
@@ -18,7 +18,7 @@ variable "ZONE" {
 
 variable "VPC" {
 	type		= string
-	description = "VPC name"
+	description = "EXISTING VPC name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.VPC)) > 0
 		error_message = "The VPC name is not valid."
@@ -27,7 +27,7 @@ variable "VPC" {
 
 variable "SUBNET" {
 	type		= string
-	description = "Subnet name"
+	description = "EXISTING Subnet name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SUBNET)) > 0
 		error_message = "The SUBNET name is not valid."
@@ -36,10 +36,40 @@ variable "SUBNET" {
 
 variable "SECURITYGROUP" {
 	type		= string
-	description = "Security group name"
+	description = "EXISTING Security group name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SECURITYGROUP)) > 0
 		error_message = "The SECURITYGROUP name is not valid."
+	}
+}
+
+variable "ADD_OPEN_PORTS" {
+	type		= string
+	description = "To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options."
+	default		= "no"
+	validation {
+		condition = var.ADD_OPEN_PORTS == "yes" || var.ADD_OPEN_PORTS =="no"
+		error_message = "The value for this parameter can only be yes or no."
+	}
+}
+
+variable "OPEN_PORT_MINIMUM" {
+	type		= number
+	description = "(Required, Integer) The TCP port range that includes the minimum bound. Valid values are from 1 to 65535."
+	default		= "3200"
+	validation {
+		condition = var.OPEN_PORT_MINIMUM <= 65535 && var.OPEN_PORT_MINIMUM >= 1
+		error_message = "Valid values are from 1 to 65535."
+	}
+}
+
+variable "OPEN_PORT_MAXIMUM" {
+	type		= number
+	description = "(Required, Integer) The TCP port range that includes the maximum bound. Valid values are from 1 to 65535."
+	default		= "3200"
+	validation {
+		condition = var.OPEN_PORT_MAXIMUM <= 65535 && var.OPEN_PORT_MAXIMUM >= 1
+		error_message = "Valid values are from 1 to 65535."
 	}
 }
 
@@ -70,7 +100,7 @@ variable "DB-PROFILE" {
 variable "DB-IMAGE" {
 	type		= string
 	description = "DB VSI OS Image"
-	default		= "ibm-redhat-7-6-amd64-sap-hana-1"
+	default		= "ibm-redhat-7-6-amd64-sap-hana-3"
 }
 
 variable "APP-HOSTNAME" {
@@ -91,7 +121,7 @@ variable "APP-PROFILE" {
 variable "APP-IMAGE" {
 	type		= string
 	description = "VSI OS Image"
-	default		= "ibm-redhat-7-6-amd64-sap-applications-1"
+	default		= "ibm-redhat-7-6-amd64-sap-applications-3"
 }
 
 variable "hana_sid" {
@@ -116,6 +146,7 @@ variable "hana_sysno" {
 
 variable "hana_master_password" {
 	type		= string
+	sensitive = true
 	description = "hana_master_password"
 	validation {
 		condition     = length(regexall("^(.{0,7}|.{15,}|[^0-9a-zA-Z]*)$", var.hana_master_password)) == 0 && length(regexall("^[^0-9_][0-9a-zA-Z!@#$_]+$", var.hana_master_password)) > 0
@@ -128,7 +159,7 @@ variable "hana_system_usage" {
 	description = "hana_system_usage"
 	default		= "custom"
 	validation {
-		condition     = contains(["production", "test", "development", "custom" ], var.hana_system_usage ) 
+		condition     = contains(["production", "test", "development", "custom" ], var.hana_system_usage )
 		error_message = "The hana_system_usage must be one of: production, test, development, custom."
 	}
 }
@@ -138,7 +169,7 @@ variable "hana_components" {
 	description = "hana_components"
 	default		= "server"
 	validation {
-		condition     = contains(["all", "client", "es", "ets", "lcapps", "server", "smartda", "streaming", "rdsync", "xs", "studio", "afl", "sca", "sop", "eml", "rme", "rtl", "trp" ], var.hana_components ) 
+		condition     = contains(["all", "client", "es", "ets", "lcapps", "server", "smartda", "streaming", "rdsync", "xs", "studio", "afl", "sca", "sop", "eml", "rme", "rtl", "trp" ], var.hana_components )
 		error_message = "The hana_components must be one of: all, client, es, ets, lcapps, server, smartda, streaming, rdsync, xs, studio, afl, sca, sop, eml, rme, rtl, trp."
 	}
 }
@@ -181,6 +212,7 @@ variable "sap_ci_instance_number" {
 
 variable "sap_master_password" {
 	type		= string
+	sensitive = true
 	description = "sap_master_password"
 	validation {
 		condition     = length(regexall("^(.{0,9}|.{15,}|[^0-9]*)$", var.sap_master_password)) == 0 && length(regexall("^[^0-9_][0-9a-zA-Z@#$_]+$", var.sap_master_password)) > 0
@@ -251,4 +283,3 @@ variable "kit_bw4hana_export" {
 	description = "kit_bw4hana_export"
 	default		= "/BW4HANA/export"
 }
-

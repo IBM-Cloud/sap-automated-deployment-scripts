@@ -1,16 +1,17 @@
-module "vpc" {
-# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
-  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
-
+module "vpc-subnet" {
+  source		= "./modules/vpc/subnet"
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
+  ADD_OPEN_PORTS = var.ADD_OPEN_PORTS
+  OPEN_PORT_MINIMUM = var.OPEN_PORT_MINIMUM
+  OPEN_PORT_MAXIMUM = var.OPEN_PORT_MAXIMUM
   SUBNET		= var.SUBNET
+  count = (var.ADD_OPEN_PORTS == "yes" ? 1: 0)
 }
 
 module "db-vsi" {
   source		= "./modules/db-vsi"
-  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
@@ -22,11 +23,11 @@ module "db-vsi" {
   VOLUME_SIZES	= [ "500" , "500" , "500" ]
   VOL_PROFILE	= "custom"
   VOL_IOPS		= "10000"
+
 }
 
 module "app-vsi" {
   source		= "./modules/app-vsi"
-  depends_on	= [ module.vpc ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
@@ -37,6 +38,7 @@ module "app-vsi" {
   SSH_KEYS		= var.SSH_KEYS
   VOLUME_SIZES	= [ "40" , "128" ]
   VOL_PROFILE	= "10iops-tier"
+
 }
 
 module "db-ansible-exec" {
@@ -53,3 +55,10 @@ module "app-ansible-exec" {
   PLAYBOOK_PATH = "../ansible/bw4app.yml"
 }
 
+module "sec-exec" {
+  source		= "./modules/sec-exec"
+  depends_on	= [ module.app-ansible-exec ]
+  IP			= module.app-vsi.PRIVATE-IP
+  sap_master_password = var.sap_master_password
+  hana_master_password = var.hana_master_password
+}

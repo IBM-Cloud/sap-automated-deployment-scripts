@@ -1,11 +1,13 @@
-module "vpc" {
-# source		= "./modules/vpc"   		# Uncomment only this line for creating a NEW VPC #
-  source		= "./modules/vpc/existing"	# Uncomment only this line to use an EXISTING VPC #
-
+module "vpc-subnet" {
+  source		= "./modules/vpc/subnet"
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
+  ADD_OPEN_PORTS = var.ADD_OPEN_PORTS
+  OPEN_PORT_MINIMUM = var.OPEN_PORT_MINIMUM
+  OPEN_PORT_MAXIMUM = var.OPEN_PORT_MAXIMUM
   SUBNET		= var.SUBNET
+  count = (var.ADD_OPEN_PORTS == "yes" ? 1: 0)
 }
 
 module "volumes" {
@@ -19,10 +21,9 @@ module "volumes" {
   VOL3			= var.VOL3
 }
 
-
 module "vsi" {
   source		= "./modules/vsi"
-  depends_on	= [ module.vpc , module.volumes ]
+  depends_on	= [ module.volumes ]
   ZONE			= var.ZONE
   VPC			= var.VPC
   SECURITYGROUP = var.SECURITYGROUP
@@ -38,4 +39,5 @@ module "ansible-exec" {
   source		= "./modules/ansible-exec"
   depends_on	= [ module.vsi ]
   IP			= module.vsi.PRIVATE-IP
+  hana_master_password = var.hana_master_password
 }

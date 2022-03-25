@@ -1,11 +1,14 @@
 ---
 #2002167 - Red Hat Enterprise Linux 7.x: Installation and Upgrade
 sapnw_required_packages:
+  - firewalld
   - uuidd
   - compat-libstdc++-33
   - lvm2
   - tcsh
   - ksh
+  - device-mapper-multipath
+  - rsync
 
 sapnw_required_package_groups:
   - "@large-systems"
@@ -23,4 +26,4 @@ sapnw_required_configurations:
   - "limits"
   - "tmpfiles"
   - "services"
-...  
+...

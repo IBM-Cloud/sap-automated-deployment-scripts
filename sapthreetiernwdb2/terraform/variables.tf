@@ -18,7 +18,7 @@ variable "ZONE" {
 
 variable "VPC" {
 	type		= string
-	description = "VPC name"
+	description = "EXISTING VPC name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.VPC)) > 0
 		error_message = "The VPC name is not valid."
@@ -27,7 +27,7 @@ variable "VPC" {
 
 variable "SUBNET" {
 	type		= string
-	description = "Subnet name"
+	description = "EXISTING Subnet name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SUBNET)) > 0
 		error_message = "The SUBNET name is not valid."
@@ -36,10 +36,40 @@ variable "SUBNET" {
 
 variable "SECURITYGROUP" {
 	type		= string
-	description = "Security group name"
+	description = "EXISTING Security group name"
 	validation {
 		condition     = length(regexall("^([a-z]|[a-z][-a-z0-9]*[a-z0-9]|[0-9][-a-z0-9]*([a-z]|[-a-z][-a-z0-9]*[a-z0-9]))$", var.SECURITYGROUP)) > 0
 		error_message = "The SECURITYGROUP name is not valid."
+	}
+}
+
+variable "ADD_OPEN_PORTS" {
+	type		= string
+	description = "To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options."
+	default		= "no"
+	validation {
+		condition = var.ADD_OPEN_PORTS == "yes" || var.ADD_OPEN_PORTS =="no"
+		error_message = "The value for this parameter can only be yes or no."
+	}
+}
+
+variable "OPEN_PORT_MINIMUM" {
+	type		= number
+	description = "(Required, Integer) The TCP port range that includes the minimum bound. Valid values are from 1 to 65535."
+	default		= "3200"
+	validation {
+		condition = var.OPEN_PORT_MINIMUM <= 65535 && var.OPEN_PORT_MINIMUM >= 1
+		error_message = "Valid values are from 1 to 65535."
+	}
+}
+
+variable "OPEN_PORT_MAXIMUM" {
+	type		= number
+	description = "(Required, Integer) The TCP port range that includes the maximum bound. Valid values are from 1 to 65535."
+	default		= "3200"
+	validation {
+		condition = var.OPEN_PORT_MAXIMUM <= 65535 && var.OPEN_PORT_MAXIMUM >= 1
+		error_message = "Valid values are from 1 to 65535."
 	}
 }
 
