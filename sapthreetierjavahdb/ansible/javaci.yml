@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: yes
+  pre_tasks:
+    - name: Import playbook variables
+      include_vars: "javaci-vars.yml"
+  roles:
+    - javacireq
+    - javaciinst
+...

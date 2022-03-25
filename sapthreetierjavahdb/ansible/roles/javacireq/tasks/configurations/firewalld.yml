@@ -1,0 +1,11 @@
+---
+- name: Get the list of services
+  service_facts:
+
+- name: Stop and disable firewalld
+  systemd:
+    name: firewalld
+    state: stopped
+    enabled: no
+  when: "'firewalld.service' in services"
+...

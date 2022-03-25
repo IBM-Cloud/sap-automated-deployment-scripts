@@ -1,0 +1,121 @@
+---
+- name: Get available storage devices for HANA VG
+  set_fact: 
+    data_disk: "{{ data_disk|default([]) + ['/dev/' + device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == hana_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for HANA VG is found
+  fail:
+    msg: "Could not find the required free {{ hana_disk_size }} storage devices for HANA VG"
+  when:  data_disk|length < 3
+
+- name: Create a volume group for HANA DB
+  lvg:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    pvs: "{{ data_disk }}"
+    pesize: "32"
+
+- name: Create a logical volume for swap
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_swap_lv"
+    size: "{{ swap_lv_size }}"
+    opts: -i3
+
+- name: Create a logical volume for HANA data
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_hana_data_lv"
+    size: "{{ hana_data_lv_size }}"
+    opts: -i3 -I256
+
+- name: Create a logical volume for HANA log 
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_hana_log_lv"
+    size: "{{ hana_log_lv_size }}"
+    opts: -i3 -I64
+
+- name: Create a logical volume for HANA shared 
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_hana_shared_lv"
+    size: "{{ hana_shared_lv_size }}"
+    opts: -i3
+
+- name: Create a logical volume for /usr/sap 
+  lvol:
+    vg: "{{ hana_sid|lower }}_hana_vg"
+    lv: "{{ hana_sid|lower }}_sap_lv"
+    size: "{{ sap_lv_size }}"
+    opts: -i3    
+
+- name: Create a swap filesystem
+  filesystem:
+    fstype: swap
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
+
+- name: Create filesystem for /hana/data
+  filesystem:
+    fstype: xfs
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_data_lv"
+
+- name: Create filesystem for /hana/log
+  filesystem:
+    fstype: xfs
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
+
+- name: Create filesystem for /hana/shared
+  filesystem:
+    fstype: xfs
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+
+- name: Create filesystem for /usr/sap
+  filesystem:
+    fstype: xfs
+    dev: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
+
+- name: Add swap device to /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: "^/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv"
+    line: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+
+- name: Mount swap volume
+  command: swapon -a
+
+- name: Mount /hana/data and add it to /etc/fstab
+  mount:
+    path: "/hana/data"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_data_lv"
+    fstype: xfs
+    state: mounted
+
+- name: Mount /hana/log and add it to /etc/fstab
+  mount:
+    path: "/hana/log"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_log_lv"
+    fstype: xfs
+    state: mounted
+
+- name: Mount /hana/shared and add it to /etc/fstab
+  mount:
+    path: "/hana/shared"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_hana_shared_lv"
+    fstype: xfs
+    state: mounted
+
+- name: Mount /usr/sap and add it to /etc/fstab
+  mount:
+    path: "/usr/sap"
+    src: "/dev/{{ hana_sid|lower }}_hana_vg/{{ hana_sid|lower }}_sap_lv"
+    fstype: xfs
+    state: mounted
+...

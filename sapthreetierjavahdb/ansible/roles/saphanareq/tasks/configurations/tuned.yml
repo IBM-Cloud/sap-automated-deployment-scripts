@@ -1,0 +1,15 @@
+---
+- name: Import tuned-profiles-sap-hana package
+  package:
+    state: present
+    name: tuned-profiles-sap-hana
+
+- name: Start and enable tuned service
+  service:
+    name: tuned
+    state: started
+    enabled: yes
+
+- name: Select sap-hana profile for tuned
+  command: /usr/sbin/tuned-adm profile sap-hana
+...

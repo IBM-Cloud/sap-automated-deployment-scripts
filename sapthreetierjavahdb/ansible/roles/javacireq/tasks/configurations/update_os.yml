@@ -1,0 +1,21 @@
+---
+- name: Enable repositories
+  rhsm_repository:
+    name: "{{ repo_name }}"
+    state: enabled
+  loop:
+    - rhel-7-server-eus-rpms
+    - rhel-7-server-rpms
+  loop_control:
+    loop_var: repo_name
+
+- name: Update all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Reboot target host after update
+  reboot:
+    connect_timeout: 5
+    post_reboot_delay: 10
+...

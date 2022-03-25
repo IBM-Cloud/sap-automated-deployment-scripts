@@ -1,0 +1,36 @@
+---
+- name: Set timezone to the same as DB server
+  timezone:
+    name: US/Central
+
+- name: Import install kit
+  include_tasks: "install_kit.yml"
+
+- name: Generate parameter file for sapinst
+  template:
+      src: sapinst.cfg
+      dest: "{{ javaci_kit }}/inifile.params"
+
+- name: Start SAP JAVA Application Server installation
+  shell: "{{ javaci_kit }}/swpm/sapinst SAPINST_INPUT_PARAMETERS_URL={{ javaci_kit }}/inifile.params SAPINST_EXECUTE_PRODUCT_ID={{ sap_product_id }} SAPINST_SKIP_DIALOGS=true SAPINST_START_GUISERVER=false"
+
+- name: Enable remote access to the NetWeaver Administrator
+  replace:
+    path: /sapmnt/{{ sap_sid|upper }}/profile/DEFAULT.PFL
+    regexp: '(.*icm/HTTP/mod_0.*)'
+    replace: '#\1'
+
+- name: Restart ICM process
+  shell: |
+      source /home/{{ sap_sid|lower }}adm/.sapenv.sh && \
+      sapcontrol -nr {{ sap_ci_instance_number }} -function J2EEControlProcess icm RestartProcess
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: "{{ sap_sid|lower }}adm"
+
+- name: Cleanup
+  file:
+    path: "{{ javaci_kit }}"
+    state: absent
+...

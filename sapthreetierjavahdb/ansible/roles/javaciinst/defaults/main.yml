@@ -1,0 +1,7 @@
+---
+#Sapinst product-id
+sap_product_id: "NW_Java_OneHost:NW750.HDB.PD"
+
+#Target files location
+javaci_kit: "/usr/sap/trans/kit"
+...

@@ -1,0 +1,27 @@
+---
+javaci_required_packages:
+  - uuidd
+  - compat-libstdc++-33
+  - compat-sap-c++-6
+  - lvm2
+  - tcsh
+  - ksh
+javaci_required_package_groups:
+  - "@large-systems"
+  - "@network-file-system-client"
+  - "@performance"
+  - "@compat-libraries"
+javaci_required_configurations:
+  - "hostname"
+  - "kernel_RedHat7"
+  - "update_os"
+  - "reqpkggroups"
+  - "reqpkg"
+  - "filesystems"
+  - "firewalld"
+  - "uuidd"
+  - "SELinux"
+  - "limits"
+  - "tmpfiles"
+  - "compatlibs"
+...

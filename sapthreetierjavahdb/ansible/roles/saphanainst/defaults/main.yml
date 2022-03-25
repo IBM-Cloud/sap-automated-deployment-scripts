@@ -1,0 +1,4 @@
+---
+#Target files location
+hana_kit: "/usr/sap/kit"
+...
