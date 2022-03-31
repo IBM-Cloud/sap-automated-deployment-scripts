@@ -1,0 +1,48 @@
+---
+saphana_required_packages:
+  - expect
+  - krb5-workstation
+  - krb5-libs
+  - libaio
+  - libcanberra-gtk2
+  - libicu
+  - libssh2
+  - libtool-ltdl
+  - numactl
+  - openssl
+  - PackageKit-gtk3-module
+  - rsyslog
+  - sudo
+  - tcsh
+  - rsyslog
+  - xorg-x11-xauth
+  - xulrunner
+  - gtk2
+  - cairo
+  - graphviz
+  - iptraf-ng
+  - lm_sensors
+  - nfs-utils
+  - bind-utils
+  - net-tools
+  - compat-sap-c++-9
+  - libatomic
+  - chrony
+
+saphana_required_package_groups:
+  - "@base"
+
+saphana_required_configurations:
+  - "update_os"
+  - "reqpkggroups"
+  - "reqpkg"
+  - "hostname"
+  - "filesystems"
+  - "tuned"
+  - "SELinux"
+  - "symlinks"
+  - "abrtd"
+  - "kdump"
+  - "limits"
+  - "kernel_RedHat7"
+...

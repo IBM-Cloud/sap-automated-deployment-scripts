@@ -1,0 +1,9 @@
+---
+- name: Configure tmpfiles exceptions
+  copy:
+    src: sap.conf
+    dest: /etc/tmpfiles.d/sap.conf
+    owner: root
+    group: root
+    mode: 0644
+...

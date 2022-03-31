@@ -150,4 +150,4 @@ of the VSI host, the hostname and the VPC.
 
 ### Related links:
 
-- [See how to create a BASTION/STORAGE VSI for SAP in IBM Schematics](https://github.com/IBM-Cloud/sap-automated-deployment-scripts/tree/master/ibm-schematics/sapbastionsetup-sch)
+- [See how to create a BASTION/STORAGE VSI for SAP in IBM Schematics](https://github.ibm.com/workload-eng-services/SAP/tree/dev/ibm-schematics/sapbastionsetup-sch)

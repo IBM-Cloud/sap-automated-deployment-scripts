@@ -1,0 +1,6 @@
+---
+- name: Import requierd package groups
+  dnf:
+    state: present
+    name: "{{ s4app_required_package_groups }}" 
+...

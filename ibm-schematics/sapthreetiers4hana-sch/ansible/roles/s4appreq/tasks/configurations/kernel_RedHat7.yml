@@ -1,0 +1,15 @@
+---
+- name: Set recommended kernel parameters for RedHat 7
+  sysctl:
+    sysctl_file: /etc/sysctl.d/sap.conf
+    name: "{{ kernel_param.name }}"
+    value: "{{ kernel_param.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  loop:
+    - { name: kernel.sem, value: "1250 256000 100 1024" }
+    - { name: vm.max_map_count, value: 2147483647 } #900929 - Linux: STORAGE_PARAMETERS_WRONG_SET and "mmap() failed"
+  loop_control:
+    loop_var: kernel_param  
+...

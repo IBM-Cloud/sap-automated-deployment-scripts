@@ -1,0 +1,18 @@
+---
+- name: Import OS distribution variables
+  include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: Enable additional repositories
+  rhsm_repository:
+    name: "{{ repo_name }}"
+    state: enabled
+  loop:
+    - rhel-7-server-eus-rpms
+    - rhel-7-server-rpms
+  loop_control:
+    loop_var: repo_name
+
+- name: Make specific OS configurations as recommended by SAP for S4HANA APP
+  include_tasks: "configurations/{{ item }}.yml"
+  loop: "{{ s4app_required_configurations }}"
+...
