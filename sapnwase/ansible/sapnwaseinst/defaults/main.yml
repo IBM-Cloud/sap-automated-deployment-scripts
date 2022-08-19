@@ -1,0 +1,7 @@
+---
+#Sapinst product-id
+sap_product_id: "NW_ABAP_OneHost:NW750.SYB.ABAP"
+
+#Target files location
+nwapp_kit: "/usr/sap/trans/kit"
+...

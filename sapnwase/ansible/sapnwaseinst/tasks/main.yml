@@ -1,0 +1,17 @@
+---
+- name: Import install kit
+  include_tasks: "install_kit.yml"
+
+- name: Generate parameter file for sapinst
+  template:
+      src: sapinst.cfg
+      dest: "{{ nwapp_kit }}/inifile.params"
+
+- name: Start SAP NW Application Server installation
+  shell: "{{ nwapp_kit }}/swpm/sapinst SAPINST_INPUT_PARAMETERS_URL={{ nwapp_kit }}/inifile.params SAPINST_EXECUTE_PRODUCT_ID={{ sap_product_id }} SAPINST_SKIP_DIALOGS=true SAPINST_START_GUISERVER=false"
+
+- name: Cleanup
+  file:
+    path: "{{ nwapp_kit }}"
+    state: absent
+...

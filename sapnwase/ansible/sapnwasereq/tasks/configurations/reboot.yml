@@ -1,0 +1,6 @@
+---
+- name: Reboot target host
+  reboot:
+    connect_timeout: 5
+    post_reboot_delay: 10
+...

@@ -1,0 +1,10 @@
+---
+- name: Select NETWEAVER profile for saptune
+  command: /usr/sbin/saptune solution apply NETWEAVER
+
+- name: Start and enable saptune service
+  service:
+    name: saptune
+    state: started
+    enabled: yes
+...

@@ -1,0 +1,5 @@
+---
+- name: Wait for SLES repo configurations
+  wait_for:
+    path: /etc/SUSEConnect
+...

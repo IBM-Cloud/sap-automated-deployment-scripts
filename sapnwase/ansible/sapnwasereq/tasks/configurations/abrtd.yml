@@ -1,0 +1,11 @@
+---
+- name: Get the list of services
+  service_facts:
+
+- name: Stop and disable abrtd
+  systemd:
+    name: abrtd
+    state: stopped
+    enabled: no
+  when: "'abrtd.service' in services"  
+...

@@ -1,0 +1,18 @@
+---
+nwapp_required_packages:
+  - lvm2
+  - uuidd
+
+nwapp_required_configurations:
+  - "repository_SLES"  
+  - "update_SLES_SAP"
+  - "reqpkg"
+  - "umask_SLES"
+  - "hostname"
+  - "reboot"
+  - "filesystems"
+  - "limits"
+  - "tmpfiles"
+  - "uuidd"
+  - "saptune"
+... 

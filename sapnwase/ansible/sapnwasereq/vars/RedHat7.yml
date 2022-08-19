@@ -1,0 +1,29 @@
+---
+nwapp_required_packages:
+  - uuidd
+  - compat-libstdc++-33
+  - compat-sap-c++-6
+  - lvm2
+  - tcsh
+  - ksh
+nwapp_required_package_groups:
+  - "@large-systems"
+  - "@network-file-system-client"
+  - "@performance"
+  - "@compat-libraries"
+nwapp_required_configurations:
+  - "update_RedHat7"
+  - "reqpkg"
+  - "reqpkggroups_RedHat"
+  - "hostname_fix_RedHat"
+  - "hostname"
+  - "filesystems"
+  - "firewalld"
+  - "uuidd"
+  - "SELinux"
+  - "limits"
+  - "tmpfiles"
+  - "compatlibs"
+  - "kernel_RedHat7"
+  - "reboot"
+...

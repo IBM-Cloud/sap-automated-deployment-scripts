@@ -1,0 +1,12 @@
+---
+- name: Configure default umask
+  replace:
+    path: "{{ file }}"
+    regexp: '(.*umask 077.*)'
+    replace: 'umask 022'
+  loop:
+    - /etc/profile
+    - /etc/bashrc 
+  loop_control:
+    loop_var: file
+...

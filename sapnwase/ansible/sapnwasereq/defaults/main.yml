@@ -1,0 +1,29 @@
+---
+#Disk size config
+data_disk_size: "256.00 GB"
+log_disk_size: "32.00 GB"
+syb_disk_size: "64.00 GB"
+sap_disk_size: "128.00 GB"
+swap_disk_size: "32.00 GB"
+
+#Logical volume size config
+swap_lv_size: "30g"
+sybsoftware_lv_size: "8g"
+sybsystem_lv_size: "10g"
+sybtemp_lv_size: "8g"
+sybsecurity_lv_size: "8g"
+saptemp_lv_size: "12g"
+sapdiag_lv_size: "8g"
+sapdata1_lv_size: "30g"
+sapdata2_lv_size: "30g"
+sapdata3_lv_size: "30g"
+sapdata4_lv_size: "30g"
+saplog1_lv_size: "7g"
+saplog2_lv_size: "7g"
+saplog3_lv_size: "7g"
+saplog4_lv_size: "7g"
+usrsap_lv_size: "5g"
+sap_lv_size: "20g"
+sapmnt_lv_size: "20g"
+saptrans_lv_size: "20g"
+...

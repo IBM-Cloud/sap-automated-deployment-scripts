@@ -1,0 +1,460 @@
+---
+- name: Get available storage devices for swap
+  set_fact: 
+    swap_disk: "{{ swap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == swap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for swap is found
+  fail:
+    msg: "Could not find a free {{ swap_disk_size }} storage device for swap"
+  when:  swap_disk is not defined
+
+- name: Create a volume group for swap
+  lvg:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    pvs: "/dev/{{ swap_disk[0] }}"
+    pesize: "32"
+
+- name: Get available storage devices for SYB data
+  set_fact: 
+    data_disk: "{{ data_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == data_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for SYB data is found
+  fail:
+    msg: "Could not find a free {{ data_disk_size }} storage device for SYB data"
+  when:  data_disk is not defined
+
+- name: Create a volume group for SYB data
+  lvg:
+    vg: "{{ sap_sid|lower }}_data_vg"
+    pvs: "/dev/{{ data_disk[0] }}"
+    pesize: "32"
+
+- name: Get available storage devices for SYB logs
+  set_fact: 
+    log_disk: "{{ log_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == log_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for SYB logs is found
+  fail:
+    msg: "Could not find a free {{ log_disk_size }} storage device for SYB logs"
+  when:  log_disk is not defined
+
+- name: Create a volume group for SYB logs
+  lvg:
+    vg: "{{ sap_sid|lower }}_log_vg"
+    pvs: "/dev/{{ log_disk[1] }}"
+    pesize: "32"
+
+- name: Get available storage devices for SYB software
+  set_fact: 
+    syb_disk: "{{ syb_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == syb_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for SYB software is found
+  fail:
+    msg: "Could not find a free {{ syb_disk_size }} storage device for SYB software"
+  when:  syb_disk is not defined
+
+- name: Create a volume group for SYB software
+  lvg:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    pvs: "/dev/{{ syb_disk[0] }}"
+    pesize: "32"
+
+- name: Get available storage devices for SAP instance
+  set_fact: 
+    sap_disk: "{{ sap_disk|default([]) + [device.key] }}"
+  when:
+     - not device.value.partitions
+     - not device.value.holders
+     - device.key is search('vd')
+     - device.value.size == sap_disk_size
+  loop: "{{ ansible_devices | dict2items }}"
+  loop_control:
+    loop_var: device
+
+- name: Check if the required storage device for SAP instance is found
+  fail:
+    msg: "Could not find a free {{ sap_disk_size }} storage device for SAP instance"
+  when:  sap_disk is not defined
+
+- name: Create a volume group for SAP instance
+  lvg:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    pvs: "/dev/{{ sap_disk[0] }}"
+    pesize: "32"
+
+- name: Create a logical volume for swap
+  lvol:
+    vg: "{{ sap_sid|lower }}_swap_vg"
+    lv: "{{ sap_sid|lower }}_swap_lv"
+    size: "{{ swap_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_sybsoftware_lv"
+    size: "{{ sybsoftware_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sybsystem
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_sybsystem_lv"
+    size: "{{ sybsystem_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sybtemp
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_sybtemp_lv"
+    size: "{{ sybtemp_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/saptemp
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_saptemp_lv"
+    size: "{{ saptemp_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sapdiag
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_sapdiag_lv"
+    size: "{{ sapdiag_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sybsecurity
+  lvol:
+    vg: "{{ sap_sid|lower }}_syb_vg"
+    lv: "{{ sap_sid|lower }}_sybsecurity_lv"
+    size: "{{ sybsecurity_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sapdata_1
+  lvol:
+    vg: "{{ sap_sid|lower }}_data_vg"
+    lv: "{{ sap_sid|lower }}_sapdata1_lv"
+    size: "{{ sapdata1_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sapdata_2
+  lvol:
+    vg: "{{ sap_sid|lower }}_data_vg"
+    lv: "{{ sap_sid|lower }}_sapdata2_lv"
+    size: "{{ sapdata2_lv_size }}"         
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sapdata_3
+  lvol:
+    vg: "{{ sap_sid|lower }}_data_vg"
+    lv: "{{ sap_sid|lower }}_sapdata3_lv"
+    size: "{{ sapdata3_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/sapdata_4
+  lvol:
+    vg: "{{ sap_sid|lower }}_data_vg"
+    lv: "{{ sap_sid|lower }}_sapdata4_lv"
+    size: "{{ sapdata4_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/saplog_1
+  lvol:
+    vg: "{{ sap_sid|lower }}_log_vg"
+    lv: "{{ sap_sid|lower }}_saplog1_lv"
+    size: "{{ saplog1_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/saplog_2
+  lvol:
+    vg: "{{ sap_sid|lower }}_log_vg"
+    lv: "{{ sap_sid|lower }}_saplog2_lv"
+    size: "{{ saplog2_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/saplog_3
+  lvol:
+    vg: "{{ sap_sid|lower }}_log_vg"
+    lv: "{{ sap_sid|lower }}_saplog3_lv"
+    size: "{{ saplog3_lv_size }}"
+
+- name: Create a logical volume for /sybase/{{ sap_sid|upper }}/saplog_4
+  lvol:
+    vg: "{{ sap_sid|lower }}_log_vg"
+    lv: "{{ sap_sid|lower }}_saplog4_lv"
+    size: "{{ saplog4_lv_size }}"
+
+- name: Create a logical volume for /usr/sap
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_usrsap_lv"
+    size: "{{ usrsap_lv_size }}"
+
+- name: Create a logical volume for /usr/sap/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_sap_lv"
+    size: "{{ sap_lv_size }}"
+
+- name: Create a logical volume for /sapmnt/{{ sap_sid|upper }}
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_sapmnt_lv"
+    size: "{{ sapmnt_lv_size }}"
+
+- name: Create a logical volume for /usr/sap/trans
+  lvol:
+    vg: "{{ sap_sid|lower }}_app_vg"
+    lv: "{{ sap_sid|lower }}_saptrans_lv"
+    size: "{{ saptrans_lv_size }}"      
+    
+- name: Create a swap filesystem
+  filesystem:
+    fstype: swap
+    dev: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsoftware_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sybsystem
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsystem_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sybtemp
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybtemp_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/saptemp
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_saptemp_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sapdiag
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sapdiag_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sybsecurity
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsecurity_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sapdata_1
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata1_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sapdata_2
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata2_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sapdata_3
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata3_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/sapdata_4
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata4_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/saplog_1
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog1_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/saplog_2
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog2_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/saplog_3
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog3_lv"
+
+- name: Create filesystem for /sybase/{{ sap_sid|upper }}/saplog_4
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog4_lv"
+
+- name: Create filesystem for /usr/sap
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+
+- name: Create filesystem for /usr/sap/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
+
+- name: Create filesystem for /sapmnt/{{ sap_sid|upper }}
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+
+- name: Create filesystem for /usr/sap/trans
+  filesystem:
+    fstype: ext4
+    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
+
+- name: Add swap device to /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    regexp: "^/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+    line: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+
+- name: Mount swap volume
+  command: swapon -a
+
+- name: /sybase/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsoftware_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sybsystem and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sybsystem"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsystem_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sybtemp and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sybtemp"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybtemp_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/saptemp and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/saptemp"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_saptemp_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sapdiag and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sapdiag"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sapdiag_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sybsecurity and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sybsecurity"
+    src: "/dev/{{ sap_sid|lower }}_syb_vg/{{ sap_sid|lower }}_sybsecurity_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sapdata_1 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sapdata_1"
+    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata1_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sapdata_2 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sapdata_2"
+    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata2_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sapdata_3 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sapdata_3"
+    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata3_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/sapdata_4 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/sapdata_4"
+    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata4_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/saplog_1 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/saplog_1"
+    src: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog1_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/saplog_2 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/saplog_2"
+    src: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog2_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/saplog_3 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/saplog_3"
+    src: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog3_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sybase/{{ sap_sid|upper }}/saplog_4 and add it to /etc/fstab
+  mount:
+    path: "/sybase/{{ sap_sid|upper }}/saplog_4"
+    src: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_saplog4_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /usr/sap and add it to /etc/fstab
+  mount:
+    path: "/usr/sap"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /usr/sap/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/usr/sap/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sap_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /sapmnt/{{ sap_sid|upper }} and add it to /etc/fstab
+  mount:
+    path: "/sapmnt/{{ sap_sid|upper }}"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_sapmnt_lv"
+    fstype: ext4
+    state: mounted
+
+- name: Mount /usr/sap/trans and add it to /etc/fstab
+  mount:
+    path: "/usr/sap/trans"
+    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_saptrans_lv"
+    fstype: ext4
+    state: mounted
+...

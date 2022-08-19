@@ -1,0 +1,8 @@
+---
+- name: Import OS distribution variables
+  include_vars: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: Make specific OS configurations as recommended by SAP NW APP
+  include_tasks: "configurations/{{ item }}.yml"
+  loop: "{{ nwapp_required_configurations }}"
+...

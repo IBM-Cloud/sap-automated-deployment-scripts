@@ -1,0 +1,101 @@
+---
+- name: Create /usr/sap/kit directory
+  file:
+    path: "{{ nwapp_kit }}"
+    state: directory
+    mode: 0777
+
+- name: Create /usr/sap/trans/kit/swpm directory
+  file:
+    path: "{{ nwapp_kit }}/swpm"
+    state: directory
+    mode: 0777
+
+- name: Create /usr/sap/trans/kit/export directory
+  file:
+    path: "{{ nwapp_kit }}/export"
+    state: directory
+    mode: 0777
+
+- name: Create /usr/sap/trans/kit/ase directory
+  file:
+    path: "{{ nwapp_kit }}/ase"
+    state: directory
+    mode: 0777
+
+- name: Copy "{{ kit_sapcar_file }}" kit to target
+  copy:
+    src: "{{ kit_sapcar_file }}"
+    dest: "{{ nwapp_kit }}/sapcar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_swpm_file }}" kit to target
+  copy:
+    src: "{{ kit_swpm_file }}"
+    dest: "{{ nwapp_kit }}/swpm.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_sapexe_file }}" kit to target
+  copy:
+    src: "{{ kit_sapexe_file }}"
+    dest: "{{ nwapp_kit }}/sapexe.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_sapexedb_file }}" kit to target
+  copy:
+    src: "{{ kit_sapexedb_file }}"
+    dest: "{{ nwapp_kit }}/sapexedb.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_igsexe_file }}" kit to target
+  copy:
+    src: "{{ kit_igsexe_file }}"
+    dest: "{{ nwapp_kit }}/igsexe.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_igshelper_file }}" kit to target
+  copy:
+    src: "{{ kit_igshelper_file }}"
+    dest: "{{ nwapp_kit }}/igshelper.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_saphotagent_file }}" kit to target
+  copy:
+    src: "{{ kit_saphotagent_file }}"
+    dest: "{{ nwapp_kit }}/saphotagent.sar"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_ase_file }}" kit to target
+  copy:
+    src: "{{ kit_ase_file }}/"
+    dest: "{{ nwapp_kit }}/asedb.zip"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Copy "{{ kit_export_dir }}" kit to target
+  copy:
+    src: "{{ kit_export_dir }}/"
+    dest: "{{ nwapp_kit }}/export"
+    owner: root
+    group: root
+    mode: 0777
+
+- name: Extract SWPM archive
+  command: "{{ nwapp_kit }}/sapcar -xf {{ nwapp_kit }}/swpm.sar -R {{ nwapp_kit }}/swpm"
+
+...

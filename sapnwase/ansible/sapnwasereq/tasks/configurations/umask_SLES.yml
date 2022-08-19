@@ -1,0 +1,7 @@
+---
+- name: Configure default umask
+  replace:
+    path: /etc/login.defs
+    regexp: '(.*UMASK     027.*)'
+    replace: 'UMASK     022'
+...
